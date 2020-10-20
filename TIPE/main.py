@@ -9,7 +9,7 @@ pg.init() #lancement pygame
 #création liste point
 L = []
 
-n=1
+n=6
 for  i in range (n):
     L.append(Player(200+50*i,100))
 
@@ -22,36 +22,22 @@ for  i in range (n):
 
 fleched =[
 
-    [pg.Rect(200, 80, 200, 200), pg.Rect(230, 80, 150, 100)],
-    [pg.Rect(300, 80, 200, 200), pg.Rect(330, 80, 150, 100)],
-    [pg.Rect(400, 80, 200, 200), pg.Rect(430, 80, 150, 100)],
-    [pg.Rect(500, 80, 200, 200), pg.Rect(530, 80, 150, 100)],
+    [pg.Rect(200, 80, 200, 200), pg.Rect(180, 80, 150, 100)],
 
 ]
 flecheg =[
     [pg.Rect(550, 550, 100, 200), pg.Rect(520, 550, 150, 100)],
-    [pg.Rect(450, 550, 100, 200), pg.Rect(420, 550, 150, 100)],
-    [pg.Rect(350, 550, 100, 200), pg.Rect(320, 550, 150, 100)],
-    [pg.Rect(250, 550, 100, 200), pg.Rect(220, 550, 150, 100)],
-
 
 ]
 flecheb =[
 
     [pg.Rect(600, 80, 200, 200), pg.Rect(600, 60, 100, 150)],
-    [pg.Rect(600, 180, 200, 200), pg.Rect(600, 160, 100, 150)],
-    [pg.Rect(600, 280, 200, 200), pg.Rect(600, 260, 100, 150)],
-    [pg.Rect(600, 380, 200, 200), pg.Rect(600, 360, 100, 150)],
-    [pg.Rect(600, 480, 200, 200), pg.Rect(600, 460, 100, 150)]
 
 ]
 flecheh =[
 
-    [pg.Rect(200, 400, 200, 200), pg.Rect(200, 420, 100, 150)],
-    [pg.Rect(200, 500, 200, 200), pg.Rect(200, 520, 100, 150)],
-    [pg.Rect(200, 300, 200, 200), pg.Rect(200, 320, 100, 150)],
-    [pg.Rect(200, 200, 200, 200), pg.Rect(200, 220, 100, 150)],
-    [pg.Rect(200, 100, 200, 200), pg.Rect(200, 120, 100, 150)]
+    [pg.Rect(200, 400, 200, 200), pg.Rect(200, 370, 100, 150)],
+
 ]
 
 #création écran
@@ -107,7 +93,6 @@ while running:
 
 
 
-
     #déplacement flèche
     v =2
     for j in range(len(L)):
@@ -142,16 +127,16 @@ while running:
 
     #affichage de toutes les flèches
     for i in range (len(fleched)):
-        #pg.draw.rect(screen, (255, 0, 0), fleched[i][1])
+        pg.draw.rect(screen, (255, 0, 0), fleched[i][1])
         screen.blit(game.fleched.image, fleched[i][0])
     for i in range (len(flecheg)):
-        #pg.draw.rect(screen, (255, 0, 0), flecheg[i][1])
+        pg.draw.rect(screen, (255, 0, 0), flecheg[i][1])
         screen.blit(game.flecheg.image, flecheg[i][0])
     for i in range (len(flecheb)):
-        #pg.draw.rect(screen, (255, 0, 0), flecheb[i][1])
+        pg.draw.rect(screen, (255, 0, 0), flecheb[i][1])
         screen.blit(game.flecheb.image, flecheb[i][0])
     for i in range (len(flecheh)):
-        #pg.draw.rect(screen, (255, 0, 0), flecheh[i][1])
+        pg.draw.rect(screen, (255, 0, 0), flecheh[i][1])
         screen.blit(game.flecheh.image, flecheh[i][0])
 
 

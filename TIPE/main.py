@@ -6,10 +6,12 @@ from entité import Player
 game = Game() #importation
 pg.init() #lancement pygame
 
+
+
 #création liste point
 L = []
 
-n=1
+n=4
 for  i in range (n):
     L.append(Player(200+50*i,100))
 
@@ -73,7 +75,7 @@ def mouvement ():
             if L[i].rect.colliderect(game.mur.rect):
                 L[i].rect.x = x
                 L[i].rect.y = y
-        elif game.pressed.get(pg.K_LEFT) and L[i].rect.x > 0 and not((game.mur.rect).collidepoint(L[i].rect.x,L[i].rect.y)):
+        elif game.pressed.get(pg.K_LEFT) and L[i].rect.x > 0:
             L[i].move_left()
             if L[i].rect.colliderect(game.mur.rect):
                 L[i].rect.x = x

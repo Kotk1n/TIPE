@@ -1,12 +1,30 @@
 import pygame as pg
 from game import Game
 from entité import Player
-
+from grille import astar
 
 game = Game() #importation
 pg.init() #lancement pygame
 
 
+
+labi = [[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+
+
+start = (0, 0)
+end = (11, 6)
 
 #création liste point
 L = []
@@ -14,6 +32,7 @@ L = []
 n=1
 for  i in range (n):
     L.append(Player(00+50*i,00))
+
 
 
 
@@ -91,7 +110,7 @@ def mouvement ():
                 L[i].rect.x = x
                 L[i].rect.y = y
 
-
+path = astar(labi,start, end)
 
 compteur=0
 M = [(0,0),(11,6)]
@@ -133,9 +152,9 @@ while running:
     screen.blit(background,(0,0))     #affichage du fond blanc
 
 
-    if compteur+1 < len(M):
-        if carré != M[compteur+1]:
-            mouvementauto(M, L[0], compteur)
+    if compteur+1 < len(path):
+        if carré != path[compteur+1]:
+            mouvementauto(path, L[0], compteur)
         else:
             compteur +=1
 

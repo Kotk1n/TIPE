@@ -2,6 +2,7 @@ import pygame as pg
 from game import Game
 from entité import Player
 from grille import astar
+import random
 
 game = Game() #importation
 pg.init() #lancement pygame
@@ -9,16 +10,16 @@ pg.init() #lancement pygame
 
 
 labi = [[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 
@@ -28,52 +29,13 @@ end = (11, 6)
 
 #création liste point
 L = []
-
-n=1
+P=[]
+n=12
+for i in range (n):
+    P.append((random.randint(0,600),random.randint(0,600)))
 for  i in range (n):
-    L.append(Player(00+50*i,00))
+    L.append(Player(0,0,50+50*i,50+50*i))
 
-
-
-
-
-#Position toutes flèches
-
-
-
-fleched =[
-
-    [pg.Rect(200, 80, 200, 200), pg.Rect(230, 80, 150, 100)],
-    [pg.Rect(300, 80, 200, 200), pg.Rect(330, 80, 150, 100)],
-    [pg.Rect(400, 80, 200, 200), pg.Rect(430, 80, 150, 100)],
-    [pg.Rect(500, 80, 200, 200), pg.Rect(530, 80, 150, 100)],
-
-]
-flecheg =[
-    [pg.Rect(550, 550, 100, 200), pg.Rect(520, 550, 150, 100)],
-    [pg.Rect(450, 550, 100, 200), pg.Rect(420, 550, 150, 100)],
-    [pg.Rect(350, 550, 100, 200), pg.Rect(320, 550, 150, 100)],
-    [pg.Rect(250, 550, 100, 200), pg.Rect(220, 550, 150, 100)],
-
-
-]
-flecheb =[
-
-    [pg.Rect(600, 80, 200, 200), pg.Rect(600, 60, 100, 150)],
-    [pg.Rect(600, 180, 200, 200), pg.Rect(600, 160, 100, 150)],
-    [pg.Rect(600, 280, 200, 200), pg.Rect(600, 260, 100, 150)],
-    [pg.Rect(600, 380, 200, 200), pg.Rect(600, 360, 100, 150)],
-    [pg.Rect(600, 480, 200, 200), pg.Rect(600, 460, 100, 150)]
-
-]
-flecheh =[
-
-    [pg.Rect(200, 400, 200, 200), pg.Rect(200, 420, 100, 150)],
-    [pg.Rect(200, 500, 200, 200), pg.Rect(200, 520, 100, 150)],
-    [pg.Rect(200, 300, 200, 200), pg.Rect(200, 320, 100, 150)],
-    [pg.Rect(200, 200, 200, 200), pg.Rect(200, 220, 100, 150)],
-    [pg.Rect(200, 100, 200, 200), pg.Rect(200, 120, 100, 150)]
-]
 
 #création écran
 pg.display.set_caption("Test")
@@ -109,18 +71,20 @@ def mouvement ():
             if L[i].rect.colliderect(game.mur.rect):
                 L[i].rect.x = x
                 L[i].rect.y = y
-
-path = astar(labi,start, end)
+path =[]
+for i in range(len(L)):
+    path =  path + [astar(labi,(L[i].rect.x//60,L[i].rect.y//60), L[i].arrivé)]
 
 compteur=0
-M = [(0,0),(11,6)]
-def mouvementauto (M,point,compteur):
-    point.rect.x += (M[compteur + 1][0]-M[compteur ][0])
-    point.rect.y += (M[compteur + 1][1]-M[compteur ][1])
+
 
 #lancement fenêtre
 running = True
 
+def mouvementauto (M,point,compteur):
+
+    point.rect.x += (M[compteur + 1][0]-M[compteur][0])
+    point.rect.y += (M[compteur + 1][1]-M[compteur][1])
 
 
 #boucle principal
@@ -140,26 +104,12 @@ while running:
 
 
 
-
-
-
-
     mouvement() #execution déplacement clavier
 
 
 
 
     screen.blit(background,(0,0))     #affichage du fond blanc
-
-
-    if compteur+1 < len(path):
-        if carré != path[compteur+1]:
-            mouvementauto(path, L[0], compteur)
-        else:
-            compteur +=1
-
-
-    print(carré)
 
 
 
@@ -171,6 +121,16 @@ while running:
 
     # affichage mur
     screen.blit(game.mur.image,game.mur.rect)
+
+    for i in range(len(L)):
+
+
+        if compteur + 1 < len(path[i]):
+            if carré != path[i][compteur + 1]:
+                mouvementauto(path[i], L[i], compteur)
+            else:
+                compteur += 1
+
 
 
 

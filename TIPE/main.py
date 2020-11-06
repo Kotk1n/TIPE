@@ -11,9 +11,9 @@ pg.init() #lancement pygame
 #création liste point
 L = []
 
-n=4
+n=1
 for  i in range (n):
-    L.append(Player(200+50*i,100))
+    L.append(Player(00+50*i,00))
 
 
 
@@ -93,42 +93,34 @@ def mouvement ():
 
 
 
-
-
+compteur=0
+M = [(0,0),(11,6)]
+def mouvementauto (M,point,compteur):
+    point.rect.x += (M[compteur + 1][0]-M[compteur ][0])
+    point.rect.y += (M[compteur + 1][1]-M[compteur ][1])
 
 #lancement fenêtre
 running = True
 
 
 
-
 #boucle principal
 while running:
 
+    for i in range (len(L)):
+        carréx = L[i].rect.x//60
+        carréy = L[i].rect.y//60
+        carré=(carréx,carréy)
+        print(carré)
+        print("position",L[i].rect.x,L[i].rect.y)
+
+
+    taillecarre = 60
 
 
 
 
 
-    #déplacement flèche
-    v =2
-    for j in range(len(L)):
-        for i in range(len(fleched)):
-            if fleched[i][1].contains(L[j].rect) and not (L[j].rect.colliderect(game.mur.rect)):
-
-                L[j].rect.x += v
-
-        for i in range(len(flecheg)):
-            if flecheg[i][1].contains(L[j].rect) and not (L[j].rect.colliderect(game.mur.rect)):
-                L[j].rect.x -= v
-
-        for i in range(len(flecheb)):
-            if flecheb[i][1].contains(L[j].rect) and not (L[j].rect.colliderect(game.mur.rect)):
-                L[j].rect.y += v
-
-        for i in range(len(flecheh)):
-            if flecheh[i][1].contains(L[j].rect) and not (L[j].rect.colliderect(game.mur.rect)):
-                L[j].rect.y-= v
 
 
 
@@ -141,20 +133,16 @@ while running:
     screen.blit(background,(0,0))     #affichage du fond blanc
 
 
+    if compteur+1 < len(M):
+        if carré != M[compteur+1]:
+            mouvementauto(M, L[0], compteur)
+        else:
+            compteur +=1
 
-    #affichage de toutes les flèches
-    for i in range (len(fleched)):
-        #pg.draw.rect(screen, (255, 0, 0), fleched[i][1])
-        screen.blit(game.fleched.image, fleched[i][0])
-    for i in range (len(flecheg)):
-        #pg.draw.rect(screen, (255, 0, 0), flecheg[i][1])
-        screen.blit(game.flecheg.image, flecheg[i][0])
-    for i in range (len(flecheb)):
-        #pg.draw.rect(screen, (255, 0, 0), flecheb[i][1])
-        screen.blit(game.flecheb.image, flecheb[i][0])
-    for i in range (len(flecheh)):
-        #pg.draw.rect(screen, (255, 0, 0), flecheh[i][1])
-        screen.blit(game.flecheh.image, flecheh[i][0])
+
+    print(carré)
+
+
 
 
     #affichage points
@@ -169,6 +157,7 @@ while running:
 
     #actualisation visuelle écran
     pg.display.flip()
+
 
 
     #détection entrée clavier

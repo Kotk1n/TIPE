@@ -9,32 +9,32 @@ pg.init() #lancement pygame
 
 
 
-labi = [[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+labi = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 
 
 start = (0, 0)
 end = (11, 6)
-
+Ma=[(200,256),(475,547),(532,348),(102,521)]
 #création liste point
 L = []
 P=[]
-n=12
+n=4
 for i in range (n):
     P.append((random.randint(0,600),random.randint(0,600)))
 for  i in range (n):
-    L.append(Player(0,0,50+50*i,50+50*i))
+    L.append(Player(0,0,Ma[i][0],Ma[i][1]))
 
 
 #création écran
@@ -77,7 +77,7 @@ for i in range(len(L)):
 
 compteur=0
 
-
+print("path",path)
 #lancement fenêtre
 running = True
 
@@ -86,7 +86,7 @@ def mouvementauto (M,point,compteur):
     point.rect.x += (M[compteur + 1][0]-M[compteur][0])
     point.rect.y += (M[compteur + 1][1]-M[compteur][1])
 
-
+print (path[1])
 #boucle principal
 while running:
 
@@ -94,9 +94,6 @@ while running:
         carréx = L[i].rect.x//60
         carréy = L[i].rect.y//60
         carré=(carréx,carréy)
-        print(carré)
-        print("position",L[i].rect.x,L[i].rect.y)
-
 
     taillecarre = 60
 
@@ -126,6 +123,11 @@ while running:
 
 
         if compteur + 1 < len(path[i]):
+            if i==1:
+                print("carré", i, carré)
+                print("path1",path[1][compteur+1])
+                print("position", i, L[i].rect.x, L[i].rect.y)
+                print("arrivé", i, L[i].arrivé)
             if carré != path[i][compteur + 1]:
                 mouvementauto(path[i], L[i], compteur)
             else:

@@ -8,7 +8,7 @@ game = Game() #importation
 pg.init() #lancement pygame
 
 
-
+#création labi, obstacle
 labi = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -23,23 +23,26 @@ labi = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
 
-
+#définition départ, fin
 start = (0, 0)
 end = (11, 6)
+
 Ma=[(200,256),(475,547),(532,348),(102,521)]
+
+
 #création liste point
 L = []
 P=[]
-n=4
+n=40
 for i in range (n):
-    P.append((random.randint(0,600),random.randint(0,600)))
+    P.append((random.randint(0,700),random.randint(0,700)))
 for  i in range (n):
-    L.append(Player(0,0,Ma[i][0],Ma[i][1]))
+    L.append(Player(0,0,P[i][0],P[i][1]))
 
 
 #création écran
 pg.display.set_caption("Test")
-screen = pg.display.set_mode((720,720))
+screen = pg.display.set_mode((780,780))
 
 
 background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
@@ -71,11 +74,14 @@ def mouvement ():
             if L[i].rect.colliderect(game.mur.rect):
                 L[i].rect.x = x
                 L[i].rect.y = y
+
+
+#calcul chemin pour chaque point
 path =[]
 for i in range(len(L)):
     path =  path + [astar(labi,(L[i].rect.x//60,L[i].rect.y//60), L[i].arrivé)]
 
-compteur=0
+
 
 print("path",path)
 #lancement fenêtre
@@ -83,8 +89,8 @@ running = True
 
 def mouvementauto (M,point,compteur):
 
-    point.rect.x += (M[compteur + 1][0]-M[compteur][0])
-    point.rect.y += (M[compteur + 1][1]-M[compteur][1])
+    point.rect.x += (M[L[i].compteur][0]-M[L[i].compteur][0])
+    point.rect.y += (M[L[i].compteur][1]-M[L[i].compteur][1])
 
 print (path[1])
 #boucle principal
@@ -109,6 +115,27 @@ while running:
     screen.blit(background,(0,0))     #affichage du fond blanc
 
 
+    for i in range (13):
+        if i%2 ==0:
+
+            for j in range (13):
+                if j%2==0:
+
+                    pg.draw.rect(screen, (255, 255, 255), (i*60, j*60, 60, 60))
+                else:
+                    pg.draw.rect(screen, (0, 255, 255), (i*60, j*60, 60, 60))
+        else:
+            for j in range (13):
+                if j%2==0:
+                    pg.draw.rect(screen, (0, 255, 255), (i*60, j*60, 60, 60))
+
+                else:
+                    pg.draw.rect(screen, (255, 255, 255), (i*60, j*60, 60, 60))
+    for i in range (len(L)):
+        pg.draw.rect(screen, (0, 255, 0), (L[i].arrivé[0]*60, L[i].arrivé[1]*60, 60, 60))
+
+
+
 
 
     #affichage points
@@ -119,20 +146,17 @@ while running:
     # affichage mur
     screen.blit(game.mur.image,game.mur.rect)
 
+
     for i in range(len(L)):
+        if carré!= path[i][L[i].compteur]:
+            mouvementauto(path[i], L[i])
 
-
+'''
         if compteur + 1 < len(path[i]):
-            if i==1:
-                print("carré", i, carré)
-                print("path1",path[1][compteur+1])
-                print("position", i, L[i].rect.x, L[i].rect.y)
-                print("arrivé", i, L[i].arrivé)
             if carré != path[i][compteur + 1]:
                 mouvementauto(path[i], L[i], compteur)
             else:
-                compteur += 1
-
+                compteur += 1'''
 
 
 

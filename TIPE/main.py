@@ -33,7 +33,7 @@ Ma=[(200,256),(475,547),(532,348),(102,521)]
 #création liste point
 L = []
 P=[]
-n=40
+n=1
 for i in range (n):
     P.append((random.randint(0,700),random.randint(0,700)))
 for  i in range (n):
@@ -87,21 +87,21 @@ print("path",path)
 #lancement fenêtre
 running = True
 
-def mouvementauto (M,point,compteur):
+def mouvementauto (M,point):
 
     point.rect.x += (M[L[i].compteur][0]-M[L[i].compteur][0])
     point.rect.y += (M[L[i].compteur][1]-M[L[i].compteur][1])
 
-print (path[1])
+
 #boucle principal
 while running:
-
-    for i in range (len(L)):
-        carréx = L[i].rect.x//60
-        carréy = L[i].rect.y//60
-        carré=(carréx,carréy)
-
     taillecarre = 60
+    for i in range (len(L)):
+        carréx = L[i].rect.x//taillecarre
+        carréy = L[i].rect.y//taillecarre
+        L[i].carré = (carréx,carréy)
+
+
 
 
 
@@ -148,15 +148,12 @@ while running:
 
 
     for i in range(len(L)):
-        if carré!= path[i][L[i].compteur]:
-            mouvementauto(path[i], L[i])
+        if L[i].carré != path[i][L[i].compteur+1]:
+            mouvementauto(path[i],L[i])
+        elif L[i].carré == path[i][L[i].compteur+1] and L[i].compteur+1 < len(path[i]):
+            L[i].compteur +=1
 
-'''
-        if compteur + 1 < len(path[i]):
-            if carré != path[i][compteur + 1]:
-                mouvementauto(path[i], L[i], compteur)
-            else:
-                compteur += 1'''
+
 
 
 

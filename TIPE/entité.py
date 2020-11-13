@@ -10,7 +10,8 @@ class Player(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.arrivé = (a//60,b//60)
-        self.compteur = 1
+        self.compteur = 0
+        self.carré = (0,0)
 
 
     def move_right (self):

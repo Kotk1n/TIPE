@@ -33,7 +33,7 @@ Ma=[(200,256),(475,547),(532,348),(102,521)]
 #création liste point
 L = []
 P=[]
-n=1
+n=20
 for i in range (n):
     P.append((random.randint(0,700),random.randint(0,700)))
 for  i in range (n):
@@ -89,8 +89,8 @@ running = True
 
 def mouvementauto (M,point):
 
-    point.rect.x += (M[L[i].compteur][0]-M[L[i].compteur][0])
-    point.rect.y += (M[L[i].compteur][1]-M[L[i].compteur][1])
+    point.rect.x += (M[L[i].compteur+1][0]-M[L[i].compteur][0])
+    point.rect.y += (M[L[i].compteur+1][1]-M[L[i].compteur][1])
 
 
 #boucle principal
@@ -150,9 +150,9 @@ while running:
     for i in range(len(L)):
         if L[i].carré != path[i][L[i].compteur+1]:
             mouvementauto(path[i],L[i])
-        elif L[i].carré == path[i][L[i].compteur+1] and L[i].compteur+1 < len(path[i]):
-            L[i].compteur +=1
-
+        elif L[i].carré == path[i][L[i].compteur+1] :
+            if  L[i].compteur+2 < len(path[i]):
+                L[i].compteur +=1
 
 
 

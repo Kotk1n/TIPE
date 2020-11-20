@@ -6,7 +6,7 @@ import random
 
 game = Game() #importation
 pg.init() #lancement pygame
-taillecarre = 60
+taillecarre = 50
 
 
 
@@ -23,6 +23,7 @@ background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 #création labi, obstacle
 labi =[]
 labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillecarre)]
+quadri = []
 print(labi)
 
 
@@ -32,13 +33,16 @@ print(labi)
 #création liste point
 L = []
 P=[]
-n=10
+n=60
 for i in range (n):
     P.append((random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx)))
 for  i in range (n):
     L.append(Player(P[i][3],P[i][2],P[i][0],P[i][1]))
 
-
+def actualisation():
+    for i in range(len(L)):
+        L[i].centre[0] = L[i].rect.x + L[i].taille/2
+        L[i].centre[1] = L[i].rect.y + L[i].taille/2
 
 
 
@@ -83,9 +87,9 @@ running = True
 
 def mouvementauto (M,point):
 
-    point.rect.x += 3*(M[L[i].compteur+1][0]-M[L[i].compteur][0])
-    point.rect.y += 3*(M[L[i].compteur+1][1]-M[L[i].compteur][1])
-
+    point.rect.x = (M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2
+    point.rect.y = (M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2
+    actualisation()
 
 #boucle principal
 while running:
@@ -100,7 +104,7 @@ while running:
 
 
 
-
+    print("path",path)
 
 
     mouvement() #execution déplacement clavier
@@ -144,6 +148,8 @@ while running:
     for i in range(len(L)):
         if L[i].carré != path[i][L[i].compteur+1]:
             mouvementauto(path[i],L[i])
+            print(L[i].centre)
+
         elif L[i].carré == path[i][L[i].compteur+1] :
             if  L[i].compteur+2 < len(path[i]):
                 L[i].compteur +=1

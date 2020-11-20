@@ -7,12 +7,12 @@ import random
 game = Game() #importation
 pg.init() #lancement pygame
 taillecarre = 20
-
+screenx =720
 
 
 
 pg.display.set_caption("Test")
-screenx =720
+
 screen = pg.display.set_mode((screenx+taillecarre,screenx+taillecarre))
 background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 

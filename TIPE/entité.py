@@ -2,15 +2,15 @@ import pygame as pg
 
 class Player(pg.sprite.Sprite):
 
-    def __init__(self,x,y,a,b):
+    def __init__(self,x,y,a,b,c):
 
         self.velocity = 1
-        self.taille = 50
+        self.taille = 40
         self.image = pg.transform.scale(pg.image.load("assets/cercle.png"),(self.taille,self.taille))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.arrivé = (a//60,b//60)
+        self.arrivé = (a//c,b//c)
         self.compteur = 0
         self.carré = (0,0)
         self.centre = [self.rect.x + self.taille/2,self.rect.y + self.taille/2]

@@ -6,7 +6,7 @@ import random
 
 game = Game() #importation
 pg.init() #lancement pygame
-taillecarre = 50
+taillecarre = 20
 
 
 
@@ -24,7 +24,7 @@ background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 labi =[]
 labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillecarre)]
 quadri = []
-print(labi)
+
 
 
 
@@ -33,11 +33,11 @@ print(labi)
 #création liste point
 L = []
 P=[]
-n=60
+n=50
 for i in range (n):
     P.append((random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx)))
 for  i in range (n):
-    L.append(Player(P[i][3],P[i][2],P[i][0],P[i][1]))
+    L.append(Player(P[i][3],P[i][2],P[i][0],P[i][1],taillecarre))
 
 def actualisation():
     for i in range(len(L)):
@@ -87,8 +87,15 @@ running = True
 
 def mouvementauto (M,point):
 
-    point.rect.x = (M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2
-    point.rect.y = (M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2
+
+    if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
+        point.rect.x += -1
+    elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
+        point.rect.x += 1
+    if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
+        point.rect.y += -1
+    elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
+        point.rect.y += 1
     actualisation()
 
 #boucle principal
@@ -97,8 +104,8 @@ while running:
     screen.blit(background,(0,0))     #affichage du fond blanc
 
     for i in range (len(L)):
-        carréx = L[i].rect.x//taillecarre
-        carréy = L[i].rect.y//taillecarre
+        carréx = L[i].centre[0]//taillecarre
+        carréy = L[i].centre[1]//taillecarre
         L[i].carré = (carréx,carréy)
 
 
@@ -146,11 +153,11 @@ while running:
 
 
     for i in range(len(L)):
-        if L[i].carré != path[i][L[i].compteur+1]:
+        if L[i].centre != [path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2,path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2]:
             mouvementauto(path[i],L[i])
-            print(L[i].centre)
-
-        elif L[i].carré == path[i][L[i].compteur+1] :
+            print("centre",L[i].centre)
+            print(list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)))
+        elif L[i].centre == list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)):
             if  L[i].compteur+2 < len(path[i]):
                 L[i].compteur +=1
 

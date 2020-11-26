@@ -6,14 +6,14 @@ import random
 
 game = Game() #importation
 pg.init() #lancement pygame
-taillecarre = 20
-screenx =720
+taillecarre = 10
+screenx =900
 
 
 
 pg.display.set_caption("Test")
 
-screen = pg.display.set_mode((screenx+taillecarre,screenx+taillecarre))
+screen = pg.display.set_mode((screenx,screenx))
 background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 
@@ -24,18 +24,25 @@ background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 labi =[]
 labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillecarre)]
 quadri = []
+obstacle =[]
+départ = []
+arrivee =[]
 
 
-
-
-
+for i in range (len(labi)):
+    for j in range (len(labi)):
+        if labi[i][j] ==1:
+            obstacle.append((i,j))
+        if labi[i][j] ==2:
+            départ.append((i,j))
+            arrivee.append((i,j))
 
 #création liste point
 L = []
 P=[]
-n=50
+n=350
 for i in range (n):
-    P.append((random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx)))
+    P.append((random.choice(départ)[0],random.choice(départ)[1],random.choice(arrivee)[0],random.choice(arrivee)[1]))
 for  i in range (n):
     L.append(Player(P[i][3],P[i][2],P[i][0],P[i][1],taillecarre))
 
@@ -111,10 +118,8 @@ while running:
 
 
 
-    print("path",path)
 
 
-    mouvement() #execution déplacement clavier
 
 
 
@@ -130,11 +135,11 @@ while running:
 
                     pg.draw.rect(screen, (255, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
                 else:
-                    pg.draw.rect(screen, (0, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(screen, (100, 100, 100), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
         else:
             for j in range (screenx//taillecarre+taillecarre):
                 if j%2==0:
-                    pg.draw.rect(screen, (0, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(screen, (100, 100, 100), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
 
                 else:
                     pg.draw.rect(screen, (255, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
@@ -155,8 +160,7 @@ while running:
     for i in range(len(L)):
         if L[i].centre != [path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2,path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2]:
             mouvementauto(path[i],L[i])
-            print("centre",L[i].centre)
-            print(list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)))
+
         elif L[i].centre == list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)):
             if  L[i].compteur+2 < len(path[i]):
                 L[i].compteur +=1

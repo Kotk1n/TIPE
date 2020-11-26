@@ -8,8 +8,8 @@ class Player(pg.sprite.Sprite):
         self.taille = 10
         self.image = pg.transform.scale(pg.image.load("assets/cercle.png"),(self.taille,self.taille))
         self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
+        self.rect.x = x*c
+        self.rect.y = y*c
         self.arrivé = (a,b)
         self.compteur = 0
         self.carré = (0,0)

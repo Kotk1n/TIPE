@@ -23,6 +23,9 @@ background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 #création labi, obstacle
 labi =[]
 labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillecarre)]
+labi [4][2] = 2
+
+
 quadri = []
 obstacle =[]
 départ = []
@@ -36,15 +39,19 @@ for i in range (len(labi)):
         if labi[i][j] ==2:
             départ.append((i,j))
             arrivee.append((i,j))
-
+print(départ)
+print(arrivee)
 #création liste point
 L = []
 P=[]
-n=350
+n=4
 for i in range (n):
     P.append((random.choice(départ)[0],random.choice(départ)[1],random.choice(arrivee)[0],random.choice(arrivee)[1]))
 for  i in range (n):
-    L.append(Player(P[i][3],P[i][2],P[i][0],P[i][1],taillecarre))
+    L.append(Player(P[i][0],P[i][1],P[i][2],P[i][3],taillecarre))
+
+print (P)
+
 
 def actualisation():
     for i in range(len(L)):

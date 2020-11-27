@@ -61,26 +61,30 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="611" y="323" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1606469027136">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="611" y="323" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.0.1536.864@0.0.1536.864" timestamp="1606469027136" />
     <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1603222560660">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603222560660" />
-    <state width="1514" height="134" key="GridCell.Tab.0.bottom" timestamp="1606424932130">
+    <state width="1514" height="134" key="GridCell.Tab.0.bottom" timestamp="1606469546519">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="134" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1606424932130" />
-    <state width="1514" height="134" key="GridCell.Tab.0.center" timestamp="1606424932129">
+    <state width="1514" height="134" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1606469546519" />
+    <state width="1514" height="134" key="GridCell.Tab.0.center" timestamp="1606469546518">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="134" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1606424932129" />
-    <state width="1514" height="134" key="GridCell.Tab.0.left" timestamp="1606424932129">
+    <state width="1514" height="134" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1606469546518" />
+    <state width="1514" height="134" key="GridCell.Tab.0.left" timestamp="1606469546518">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="134" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1606424932129" />
-    <state width="1514" height="134" key="GridCell.Tab.0.right" timestamp="1606424932130">
+    <state width="1514" height="134" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1606469546518" />
+    <state width="1514" height="134" key="GridCell.Tab.0.right" timestamp="1606469546518">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="134" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1606424932130" />
+    <state width="1514" height="134" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1606469546518" />
     <state width="1514" height="305" key="GridCell.Tab.1.bottom" timestamp="1605869423512">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -115,6 +119,14 @@
     <state x="331" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.864@0.0.1536.864" timestamp="1605005172356" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/entité.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2" language="Python" />

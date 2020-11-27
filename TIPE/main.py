@@ -6,7 +6,7 @@ import random
 
 game = Game() #importation
 pg.init() #lancement pygame
-taillecarre = 10
+taillecarre = 30
 screenx =900
 
 
@@ -23,8 +23,13 @@ background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 #création labi, obstacle
 labi =[]
 labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillecarre)]
-labi [4][2] = 2
 
+d = random.randint(0,screenx//taillecarre)
+d=6
+for i in range(d):
+    e = random.randint(0,9)
+    f = random.randint(0,9)
+    labi[e][f] = 2
 
 quadri = []
 obstacle =[]
@@ -38,19 +43,22 @@ for i in range (len(labi)):
             obstacle.append((i,j))
         if labi[i][j] ==2:
             départ.append((i,j))
-            arrivee.append((i,j))
-print(départ)
-print(arrivee)
+
+
+print("d",départ)
+
 #création liste point
 L = []
 P=[]
 n=4
 for i in range (n):
-    P.append((random.choice(départ)[0],random.choice(départ)[1],random.choice(arrivee)[0],random.choice(arrivee)[1]))
+    P.append((random.choice(départ)[0],random.choice(départ)[1],random.choice(départ)[0],random.choice(départ)[1]))
+
+print(P)
 for  i in range (n):
     L.append(Player(P[i][0],P[i][1],P[i][2],P[i][3],taillecarre))
 
-print (P)
+
 
 
 def actualisation():

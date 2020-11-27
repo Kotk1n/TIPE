@@ -65,7 +65,7 @@ def astar(labi, debut, fin):
                 continue
 
             # Vérifie que pas un obstacle
-            if labi[case_pos[0]][case_pos[1]] != 0:
+            if labi[case_pos[0]][case_pos[1]] == 1:
                 continue
 
             # crée nouveau noeud

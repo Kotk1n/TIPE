@@ -8,7 +8,7 @@ game = Game() #importation
 pg.init() #lancement pygame
 taillecarre = 20
 screenx =720
-
+couleur = (100, 100, 100)
 
 
 pg.display.set_caption("Test")
@@ -26,6 +26,30 @@ labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillec
 quadri = []
 
 
+d=6
+quadri = []
+obstacle =[]
+depart = []
+fin =[]
+for i in range(d):
+    e = random.randint(0,screenx//taillecarre)
+    f = random.randint(0,screenx//taillecarre)
+    labi[e][f] = 2
+    depart.append((e,f))
+
+
+
+
+for i in range (len(labi)):
+    for j in range (len(labi)):
+        if labi[i][j] ==1:
+            obstacle.append((i,j))
+
+
+
+print("d",depart)
+
+
 
 
 
@@ -33,11 +57,18 @@ quadri = []
 #création liste point
 L = []
 P=[]
-n=10
+n=20
 for i in range (n):
-    P.append((random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx)))
+    x1 = random.choice(depart)
+    x2 = x1
+    while x2 == x1:
+        x2 = random.choice(depart)
+    print("x1",x1)
+    print("x2",x2)
+    P.append((x1[0],x1[1],x2[0],x2[1]))
+print("P",P)
 for  i in range (n):
-    L.append(Player(P[i][3],P[i][2],P[i][0],P[i][1],taillecarre))
+    L.append(Player(P[i][0]*taillecarre,P[i][1]*taillecarre,P[i][2],P[i][3],taillecarre))
 
 def actualisation():
     for i in range(len(L)):
@@ -76,8 +107,10 @@ def mouvement ():
 #calcul chemin pour chaque point
 path =[]
 for i in range(len(L)):
+
     path =  path + [astar(labi,(L[i].rect.x//taillecarre,L[i].rect.y//taillecarre), L[i].arrivé)]
     path[i].insert(0,(0,0))
+
 
 
 
@@ -126,16 +159,16 @@ while running:
 
                     pg.draw.rect(screen, (255, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
                 else:
-                    pg.draw.rect(screen, (0, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(screen, couleur, (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
         else:
             for j in range (screenx//taillecarre+taillecarre):
                 if j%2==0:
-                    pg.draw.rect(screen, (0, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(screen, couleur, (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
 
                 else:
                     pg.draw.rect(screen, (255, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
     for i in range (len(L)):
-        pg.draw.rect(screen, (0, 255, 0), (L[i].arrivé[0]*taillecarre, L[i].arrivé[1]*taillecarre, taillecarre, taillecarre))
+        pg.draw.rect(screen, (0,255,0), (L[i].arrivé[0]*taillecarre, L[i].arrivé[1]*taillecarre, taillecarre, taillecarre))
 
 
 

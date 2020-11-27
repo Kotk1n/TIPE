@@ -10,7 +10,7 @@ class Player(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.arrivé = (a//c,b//c)
+        self.arrivé = (a,b)
         self.compteur = 0
         self.carré = (0,0)
         self.centre = [self.rect.x + self.taille/2,self.rect.y + self.taille/2]

@@ -33,7 +33,7 @@ quadri = []
 #création liste point
 L = []
 P=[]
-n=50
+n=10
 for i in range (n):
     P.append((random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx)))
 for  i in range (n):
@@ -89,13 +89,13 @@ def mouvementauto (M,point):
 
 
     if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
-        point.rect.x += -1
+        point.rect.x += -point.velocity
     elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
-        point.rect.x += 1
+        point.rect.x += point.velocity
     if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
-        point.rect.y += -1
+        point.rect.y += -point.velocity
     elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
-        point.rect.y += 1
+        point.rect.y += point.velocity
     actualisation()
 
 #boucle principal
@@ -111,10 +111,6 @@ while running:
 
 
 
-    print("path",path)
-
-
-    mouvement() #execution déplacement clavier
 
 
 
@@ -155,8 +151,8 @@ while running:
     for i in range(len(L)):
         if L[i].centre != [path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2,path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2]:
             mouvementauto(path[i],L[i])
-            print("centre",L[i].centre)
-            print(list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)))
+
+
         elif L[i].centre == list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)):
             if  L[i].compteur+2 < len(path[i]):
                 L[i].compteur +=1

@@ -5,7 +5,7 @@ class Player(pg.sprite.Sprite):
     def __init__(self,x,y,a,b,c):
 
         self.velocity = 1
-        self.taille = 40
+        self.taille = 10
         self.image = pg.transform.scale(pg.image.load("assets/cercle.png"),(self.taille,self.taille))
         self.rect = self.image.get_rect()
         self.rect.x = x

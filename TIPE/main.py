@@ -6,7 +6,7 @@ import random
 
 game = Game() #importation
 pg.init() #lancement pygame
-taillecarre = 20
+taillecarre = 6
 
 
 
@@ -33,7 +33,7 @@ quadri = []
 #création liste point
 L = []
 P=[]
-n=50
+n=100
 for i in range (n):
     P.append((random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx),random.randint(0,screenx)))
 for  i in range (n):
@@ -111,7 +111,7 @@ while running:
 
 
 
-    print("path",path)
+    #print("path",path)
 
 
     mouvement() #execution déplacement clavier
@@ -155,8 +155,8 @@ while running:
     for i in range(len(L)):
         if L[i].centre != [path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2,path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2]:
             mouvementauto(path[i],L[i])
-            print("centre",L[i].centre)
-            print(list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)))
+            #print("centre",L[i].centre)
+            #print(list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)))
         elif L[i].centre == list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)):
             if  L[i].compteur+2 < len(path[i]):
                 L[i].compteur +=1

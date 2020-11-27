@@ -7,6 +7,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -19,9 +26,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.transfo image">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -43,8 +50,30 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="transfo image" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TIPEcirculation - Copie - Copie" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TIPE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/transfo image.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.transfo image" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
@@ -65,22 +94,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603222560660" />
-    <state width="1514" height="89" key="GridCell.Tab.0.bottom" timestamp="1606474030326">
+    <state width="1514" height="296" key="GridCell.Tab.0.bottom" timestamp="1606477338046">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="89" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1606474030326" />
-    <state width="1514" height="89" key="GridCell.Tab.0.center" timestamp="1606474030326">
+    <state width="1514" height="296" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1606477338046" />
+    <state width="1514" height="296" key="GridCell.Tab.0.center" timestamp="1606477338045">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="89" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1606474030326" />
-    <state width="1514" height="89" key="GridCell.Tab.0.left" timestamp="1606474030326">
+    <state width="1514" height="296" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1606477338045" />
+    <state width="1514" height="296" key="GridCell.Tab.0.left" timestamp="1606477338045">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="89" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1606474030326" />
-    <state width="1514" height="89" key="GridCell.Tab.0.right" timestamp="1606474030326">
+    <state width="1514" height="296" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1606477338045" />
+    <state width="1514" height="296" key="GridCell.Tab.0.right" timestamp="1606477338045">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="89" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1606474030326" />
+    <state width="1514" height="296" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1606477338045" />
     <state width="1514" height="305" key="GridCell.Tab.1.bottom" timestamp="1605869423512">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -97,10 +126,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1514" height="305" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1605869423512" />
-    <state x="277" y="77" key="SettingsEditor" timestamp="1603222190759">
+    <state x="277" y="77" key="SettingsEditor" timestamp="1606476020790">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603222190759" />
+    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1606476020790" />
     <state width="775" height="439" key="XDebugger.FullValuePopup" timestamp="1605867866508">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -113,17 +142,12 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="331" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.864@0.0.1536.864" timestamp="1605005172356" />
+    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1606477273957">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1606477273957" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TIPE/grille.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2" language="Python" />

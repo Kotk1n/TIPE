@@ -6,7 +6,7 @@ import random
 
 game = Game() #importation
 pg.init() #lancement pygame
-taillecarre = 20
+taillecarre = 10
 screenx =720
 couleur = (100, 100, 100)
 
@@ -26,7 +26,7 @@ labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillec
 quadri = []
 
 
-d=6
+d=10
 quadri = []
 obstacle =[]
 depart = []

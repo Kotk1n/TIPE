@@ -1,20 +1,19 @@
 import pygame as pg
-from game import Game
 from entité import Player
 from grille import astar
 import random
 
-game = Game() #importation
+
 pg.init() #lancement pygame
-taillecarre = 10
-screenx =720
-couleur = (100, 100, 100)
+taillecarre = 40
+ecranx =720
+couleurcase = (100, 100, 100)
 
 
 pg.display.set_caption("Test")
 
-screen = pg.display.set_mode((screenx+taillecarre,screenx+taillecarre))
-background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
+ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
+imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 
 
@@ -22,32 +21,35 @@ background = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 #création labi, obstacle
 labi =[]
-labi =[[0 for j in range (screenx//taillecarre)]for i in range (screenx//taillecarre)]
-quadri = []
+labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
 
-
-d=10
+nbrcasedepart=20
 quadri = []
 obstacle =[]
-depart = []
-fin =[]
-for i in range(d):
-    e = random.randint(0,screenx//taillecarre)
-    f = random.randint(0,screenx//taillecarre)
+coorddepart = []
+
+nbrobstacle = 50
+for i in range(nbrcasedepart):
+    e = random.randint(0,len(labi)-1)
+    f = random.randint(0,len(labi)-1)
     labi[e][f] = 2
-    depart.append((e,f))
+    coorddepart.append((e, f))
+
+
+for i in range (nbrobstacle):
+    (murx,mury) = coorddepart[0]
+    while (murx,mury) in coorddepart:
+        murx = random.randint(0,len(labi)-1)
+        mury = random.randint(0,len(labi)-1)
+    labi[murx][mury] = 1
+    obstacle.append((murx,mury))
 
 
 
 
-for i in range (len(labi)):
-    for j in range (len(labi)):
-        if labi[i][j] ==1:
-            obstacle.append((i,j))
 
 
 
-print("d",depart)
 
 
 
@@ -55,60 +57,34 @@ print("d",depart)
 
 
 #création liste point
-L = []
-P=[]
-n=20
-for i in range (n):
-    x1 = random.choice(depart)
+Point = []
+CoordDepArr=[]
+nbrpoint=20
+for i in range (nbrpoint):
+    x1 = random.choice(coorddepart)
     x2 = x1
     while x2 == x1:
-        x2 = random.choice(depart)
-    print("x1",x1)
-    print("x2",x2)
-    P.append((x1[0],x1[1],x2[0],x2[1]))
-print("P",P)
-for  i in range (n):
-    L.append(Player(P[i][0]*taillecarre,P[i][1]*taillecarre,P[i][2],P[i][3],taillecarre))
+        x2 = random.choice(coorddepart)
+
+    CoordDepArr.append((x1[0],x1[1],x2[0],x2[1]))
+
+for  i in range (nbrpoint):
+    Point.append(Player(CoordDepArr[i][0] * taillecarre, CoordDepArr[i][1] * taillecarre, CoordDepArr[i][2], CoordDepArr[i][3], taillecarre))
 
 def actualisation():
-    for i in range(len(L)):
-        L[i].centre[0] = L[i].rect.x + L[i].taille/2
-        L[i].centre[1] = L[i].rect.y + L[i].taille/2
+    for i in range(len(Point)):
+        Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
+        Point[i].centre[1] = Point[i].rect.y + Point[i].taille / 2
 
 
 
-# fonction mouvement clavier + collision mur et écran
-def mouvement ():
-    for i in range(len(L)):
-        x = L[i].rect.x
-        y = L[i].rect.y
-        if game.pressed.get(pg.K_RIGHT) and L[i].rect.x + L[i].rect.width < screen.get_width() :
-            L[i].move_right()
-            if L[i].rect.colliderect(game.mur.rect):
-                L[i].rect.x = x
-                L[i].rect.y = y
-        elif game.pressed.get(pg.K_LEFT) and L[i].rect.x > 0:
-            L[i].move_left()
-            if L[i].rect.colliderect(game.mur.rect):
-                L[i].rect.x = x
-                L[i].rect.y = y
-        elif game.pressed.get(pg.K_UP) and L[i].rect.y > 0:
-            L[i].move_up()
-            if L[i].rect.colliderect(game.mur.rect):
-                L[i].rect.x = x
-                L[i].rect.y = y
-        elif game.pressed.get(pg.K_DOWN) and L[i].rect.y + L[i].rect.height < screen.get_height():
-            L[i].move_down()
-            if L[i].rect.colliderect(game.mur.rect):
-                L[i].rect.x = x
-                L[i].rect.y = y
 
 
 #calcul chemin pour chaque point
 path =[]
-for i in range(len(L)):
+for i in range(len(Point)):
 
-    path =  path + [astar(labi,(L[i].rect.x//taillecarre,L[i].rect.y//taillecarre), L[i].arrivé)]
+    path =  path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), Point[i].arrivé)]
     path[i].insert(0,(0,0))
 
 
@@ -122,26 +98,24 @@ def mouvementauto (M,point):
 
 
     if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
-        point.rect.x += -point.velocity
+        point.rect.x += -1
     elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
-        point.rect.x += point.velocity
+        point.rect.x += 1
     if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
-        point.rect.y += -point.velocity
+        point.rect.y += -1
     elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
-        point.rect.y += point.velocity
+        point.rect.y += 1
     actualisation()
 
 #boucle principal
 while running:
 
-    screen.blit(background,(0,0))     #affichage du fond blanc
+    ecran.blit(imagefond, (0, 0))     #affichage du fond blanc
 
-    for i in range (len(L)):
-        carréx = L[i].centre[0]//taillecarre
-        carréy = L[i].centre[1]//taillecarre
-        L[i].carré = (carréx,carréy)
-
-
+    for i in range (len(Point)):
+        carréx = Point[i].centre[0] // taillecarre
+        carréy = Point[i].centre[1] // taillecarre
+        Point[i].carré = (carréx, carréy)
 
 
 
@@ -151,44 +125,48 @@ while running:
 
 
 
-    for i in range (screenx//taillecarre+taillecarre):
+
+
+    for i in range (ecranx // taillecarre + taillecarre):
         if i%2 ==0:
 
-            for j in range (screenx//taillecarre+taillecarre):
+            for j in range (ecranx // taillecarre + taillecarre):
                 if j%2==0:
 
-                    pg.draw.rect(screen, (255, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
                 else:
-                    pg.draw.rect(screen, couleur, (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
         else:
-            for j in range (screenx//taillecarre+taillecarre):
+            for j in range (ecranx // taillecarre + taillecarre):
                 if j%2==0:
-                    pg.draw.rect(screen, couleur, (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
 
                 else:
-                    pg.draw.rect(screen, (255, 255, 255), (i*taillecarre, j*taillecarre, taillecarre, taillecarre))
-    for i in range (len(L)):
-        pg.draw.rect(screen, (0,255,0), (L[i].arrivé[0]*taillecarre, L[i].arrivé[1]*taillecarre, taillecarre, taillecarre))
+                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
+    for i in range (len(Point)):
+        pg.draw.rect(ecran, (0, 255, 0), (Point[i].arrivé[0] * taillecarre, Point[i].arrivé[1] * taillecarre, taillecarre, taillecarre))
+    for i in range(len(obstacle)):
+        pg.draw.rect(ecran, (0, 0, 0), (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
 
 
 
 
 
     #affichage points
-    for i in range(len(L)):
-         screen.blit(L[i].image,L[i].rect)
+    for i in range(len(Point)):
+         ecran.blit(Point[i].image, Point[i].rect)
 
 
 
 
-    for i in range(len(L)):
-        if L[i].centre != [path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2,path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2]:
-            mouvementauto(path[i],L[i])
+    for i in range(len(Point)):
+        if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
+            mouvementauto(path[i], Point[i])
 
 
-        elif L[i].centre == list((path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2, path[i][L[i].compteur+1][1]*taillecarre +taillecarre/2)):
-            if  L[i].compteur+2 < len(path[i]):
-                L[i].compteur +=1
+        elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
+            if  Point[i].compteur+2 < len(path[i]):
+                Point[i].compteur +=1
 
 
 
@@ -198,16 +176,11 @@ while running:
 
 
 
-    #détection entrée clavier
+
     for event in pg.event.get():
         if event.type == pg.QUIT:
             running = False
             pg.quit()
-        elif  event.type == pg.KEYDOWN:
-            game.pressed[event.key] = True
-
-        elif event.type == pg.KEYUP:
-            game.pressed[event.key] = False
 
 
 

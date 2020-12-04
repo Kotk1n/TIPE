@@ -4,6 +4,7 @@ from grille import astar
 import random
 
 
+
 pg.init() #lancement pygame
 taillecarre = 40
 ecranx =720
@@ -24,7 +25,7 @@ labi =[]
 labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
 
 nbrcasedepart=20
-quadri = []
+
 obstacle =[]
 coorddepart = []
 

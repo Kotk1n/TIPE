@@ -1,0 +1,12 @@
+taillecarre			taille carre
+ecranx				taille coté écran
+couleurcase			couleur damier
+ecran				nom de l'endroit ou on affiche tout
+imagefond			image fond ecran (actuellement blanc)
+labi				matrice case
+nbrcasedepart			nombre point départ et fin des points			
+obstacle			Liste position obstacle
+coorddepart			Liste position depart + fin
+nbrobstacle 			nombre d'obstacles
+Point				Class des points		
+path				Chemin chaque point

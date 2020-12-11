@@ -29,7 +29,28 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.transfo image">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="grille" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TIPEcirculation - Copie - Copie" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TIPE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/grille.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -51,7 +72,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="transfo image" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="transfoimage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -63,7 +84,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/transfo image.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/transfoimage.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -72,10 +93,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.transfoimage" />
+      <item itemvalue="Python.grille" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.transfo image" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.grille" />
+        <item itemvalue="Python.transfoimage" />
       </list>
     </recent_temporary>
   </component>
@@ -91,6 +118,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607076644043">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1607076644043" />
     <state x="528" y="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1607074974621">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -99,60 +130,119 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603222560660" />
-    <state width="1514" height="168" key="GridCell.Tab.0.bottom" timestamp="1607075639505">
+    <state width="1514" height="2" key="GridCell.Tab.0.bottom" timestamp="1607678128361">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="168" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607075639505" />
-    <state width="1514" height="168" key="GridCell.Tab.0.center" timestamp="1607075639505">
+    <state width="1514" height="2" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607678128361" />
+    <state width="1514" height="2" key="GridCell.Tab.0.center" timestamp="1607678128361">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="168" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1607075639505" />
-    <state width="1514" height="168" key="GridCell.Tab.0.left" timestamp="1607075639504">
+    <state width="1514" height="2" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1607678128361" />
+    <state width="1514" height="2" key="GridCell.Tab.0.left" timestamp="1607678128361">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="168" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1607075639504" />
-    <state width="1514" height="168" key="GridCell.Tab.0.right" timestamp="1607075639505">
+    <state width="1514" height="2" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1607678128361" />
+    <state width="1514" height="2" key="GridCell.Tab.0.right" timestamp="1607678128361">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="168" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1607075639505" />
-    <state width="1514" height="305" key="GridCell.Tab.1.bottom" timestamp="1607075010290">
+    <state width="1514" height="2" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1607678128361" />
+    <state width="1514" height="2" key="GridCell.Tab.1.bottom" timestamp="1607678131548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="305" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607075010290" />
-    <state width="1514" height="305" key="GridCell.Tab.1.center" timestamp="1607075010290">
+    <state width="1514" height="2" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1607678131548" />
+    <state width="1514" height="2" key="GridCell.Tab.1.center" timestamp="1607678131548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="305" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1607075010290" />
-    <state width="1514" height="305" key="GridCell.Tab.1.left" timestamp="1607075010290">
+    <state width="1514" height="2" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1607678131548" />
+    <state width="1514" height="2" key="GridCell.Tab.1.left" timestamp="1607678131548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="305" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1607075010290" />
-    <state width="1514" height="305" key="GridCell.Tab.1.right" timestamp="1607075010290">
+    <state width="1514" height="2" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1607678131548" />
+    <state width="1514" height="2" key="GridCell.Tab.1.right" timestamp="1607678131548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="305" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1607075010290" />
+    <state width="1514" height="2" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1607678131548" />
     <state x="277" y="77" key="SettingsEditor" timestamp="1606476020790">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1606476020790" />
-    <state width="775" height="439" key="XDebugger.FullValuePopup" timestamp="1605867866508">
+    <state width="775" height="439" key="XDebugger.FullValuePopup" timestamp="1607678020075">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="775" height="439" key="XDebugger.FullValuePopup/0.0.1536.864@0.0.1536.864" timestamp="1605867866508" />
+    <state width="775" height="439" key="XDebugger.FullValuePopup/0.0.1536.864@0.0.1536.864" timestamp="1607678020075" />
     <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603124787790">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1603124787790" />
-    <state x="331" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605005172356">
+    <state x="331" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1607678090253">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="331" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.864@0.0.1536.864" timestamp="1605005172356" />
+    <state x="331" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.864@0.0.1536.864" timestamp="1607678090253" />
     <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1606477273957">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="430" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1606477273957" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
+          <line>98</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
+          <line>96</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
+          <line>88</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
+          <line>99</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
+          <line>100</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/grille.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/grille.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/grille.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/TIPE/grille.py</url>
+          <line>22</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="path[i][L[i].compteur+1][0]*taillecarre +taillecarre/2" language="Python" />

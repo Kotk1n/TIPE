@@ -1,20 +1,22 @@
 import pygame as pg
 from entité import Player
 from grille import astar
+from transfoimage import transfoimage
 import random
 
 
 
 pg.init() #lancement pygame
-taillecarre = 40
-ecranx =720
+taillecarre = 10
+ecranx =200
+ecrany = 200
 couleurcase = (100, 100, 100)
 
 
 pg.display.set_caption("Test")
 
-ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
-imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
+ecran = pg.display.set_mode((ecranx + taillecarre, ecrany + taillecarre))
+imagefond = pg.image.load("assets/maquettehall2.jpg") # choix image fond d'ecran
 
 
 
@@ -22,7 +24,12 @@ imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 #création labi, obstacle
 labi =[]
-labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
+#labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecrany // taillecarre)]
+labi = transfoimage()
+
+
+
+
 
 nbrcasedepart=20
 
@@ -30,11 +37,17 @@ obstacle =[]
 coorddepart = []
 
 nbrobstacle = 50
-for i in range(nbrcasedepart):
-    e = random.randint(0,len(labi)-1)
-    f = random.randint(0,len(labi)-1)
-    labi[e][f] = 2
-    coorddepart.append((e, f))
+
+
+for i in range (len(labi)):
+    for j in range (len(labi)):
+        if labi[i][j] ==1:
+            obstacle.append((i,j))
+        if labi[i][j] ==2:
+            coorddepart.append((i,j))
+
+
+
 
 
 for i in range (nbrobstacle):
@@ -55,12 +68,10 @@ for i in range (nbrobstacle):
 
 
 
-
-
 #création liste point
 Point = []
 CoordDepArr=[]
-nbrpoint=20
+nbrpoint=1
 for i in range (nbrpoint):
     x1 = random.choice(coorddepart)
     x2 = x1
@@ -87,7 +98,7 @@ for i in range(len(Point)):
 
     path =  path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), Point[i].arrivé)]
     path[i].insert(0,(0,0))
-
+    print("path",path)
 
 
 
@@ -128,27 +139,6 @@ while running:
 
 
 
-    for i in range (ecranx // taillecarre + taillecarre):
-        if i%2 ==0:
-
-            for j in range (ecranx // taillecarre + taillecarre):
-                if j%2==0:
-
-                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-                else:
-                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-        else:
-            for j in range (ecranx // taillecarre + taillecarre):
-                if j%2==0:
-                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-
-                else:
-                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-    for i in range (len(Point)):
-        pg.draw.rect(ecran, (0, 255, 0), (Point[i].arrivé[0] * taillecarre, Point[i].arrivé[1] * taillecarre, taillecarre, taillecarre))
-    for i in range(len(obstacle)):
-        pg.draw.rect(ecran, (0, 0, 0), (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
-
 
 
 
@@ -158,16 +148,14 @@ while running:
          ecran.blit(Point[i].image, Point[i].rect)
 
 
-
-
-    for i in range(len(Point)):
+    '''for i in range(len(Point)):
         if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
             mouvementauto(path[i], Point[i])
 
 
         elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
             if  Point[i].compteur+2 < len(path[i]):
-                Point[i].compteur +=1
+                Point[i].compteur +=1'''
 
 
 

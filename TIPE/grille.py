@@ -1,4 +1,4 @@
-
+from transfoimage import transfoimage
 class Case():
 
     def __init__(self, parent=None, position=None):

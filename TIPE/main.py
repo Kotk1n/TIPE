@@ -2,6 +2,7 @@ import pygame as pg
 from entité import Player
 from grille import astar
 import random
+from transfoimage import transfoimage
 
 
 
@@ -34,7 +35,7 @@ for i in range(nbrcasedepart):
     e = random.randint(0,len(labi)-1)
     f = random.randint(0,len(labi)-1)
     labi[e][f] = 2
-    coorddepart.append((e, f))
+    coorddepart.append((e, f))  
 
 
 for i in range (nbrobstacle):

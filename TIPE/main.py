@@ -115,13 +115,6 @@ def mouvementauto (M,point):
 
 
 
-    for j in range (len(image)):
-        for i in range(len(image[j])):
-            if image[j][i] ==2:
-                pg.draw.rect(ecran, (55, 55, 55), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-            if image[j][i]==0:
-                pg.draw.rect(ecran, (55, 0, 55), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-
 
 
 #boucle principal
@@ -134,23 +127,12 @@ while running:
         carréy = Point[i].centre[1] // taillecarre
         Point[i].carré = (carréx, carréy)
 
-
-
-    for i in range (len(labi)):
-        for j in range(len(labi[i])):
-            if labi[i][j] ==2:
-                pg.draw.rect(ecran, (255, 255, 255), (j * taillecarre, i * taillecarre, taillecarre, taillecarre))
-            if labi[i][j]==0:
-                pg.draw.rect(ecran, (255, 0, 255), (j * taillecarre, i * taillecarre, taillecarre, taillecarre))
-
-
-
-
-
-
-
-
-
+    for j in range(len(labi)):
+        for i in range(len(labi[j])):
+            if labi[i][j] == 2:
+                pg.draw.rect(ecran, (55, 55, 55), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
+            if labi[i][j] == 0:
+                pg.draw.rect(ecran, (55, 0, 55), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
 
     #affichage points
     for i in range(len(Point)):

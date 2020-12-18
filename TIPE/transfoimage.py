@@ -1,14 +1,15 @@
 from PIL import Image
 def transfoimage():
-    global longueur,largeur,petit
+    global width,height,petit
     imageSource=Image.open("assets/maquettehall.jpg")
     #on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     image2=imageSource.convert("L")
-    (longueur,largeur)=image2.size
+    (height, width)=image2.size
+    print(image2.size)
     petitL=[]
     grandL=[]
-    for y in range (largeur):
-        for x in range (longueur):
+    for y in range (width):
+        for x in range (height):
 
             if image2.getpixel((x,y)) > 200:
                 petitL+=[1]
@@ -19,7 +20,21 @@ def transfoimage():
         grandL.append(petitL)
         petitL=[]
 
-    print(len(grandL))
+    return(grandL)
 
-transfoimage()
+grandL=transfoimage()
+print(len(grandL))
+print(height, width)
+img = Image.new('RGB', (height, width), color='white')
 
+for i in range(width):
+    for j in range (height):
+
+        if grandL[i][j]==0:
+            img.putpixel((j,i),(0,0,0,255))
+        elif grandL[i][j]==2:
+            img.putpixel((j, i), (0, 200, 0, 255))
+
+
+
+img.show()  

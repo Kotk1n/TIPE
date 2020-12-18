@@ -7,16 +7,16 @@ import random
 
 
 pg.init() #lancement pygame
-taillecarre = 10
-ecranx =200
-ecrany = 200
+taillecarre = 1
+ecranx =720
+ecrany = 720
 couleurcase = (100, 100, 100)
 
 
 pg.display.set_caption("Test")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecrany + taillecarre))
-imagefond = pg.image.load("assets/maquettehall2.jpg") # choix image fond d'ecran
+imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 
 
@@ -136,8 +136,14 @@ while running:
 
 
 
+    image = transfoimage()
 
-
+    for i in range (len(image)):
+        for j in range(len(image[i])):
+            if image[i][j] ==2:
+                pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
+            if image[i][j]==0:
+                pg.draw.rect(ecran, (255, 0, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
 
 
 

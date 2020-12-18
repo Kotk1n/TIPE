@@ -91,7 +91,7 @@ def actualisation():
 
 
 
-
+'''
 #calcul chemin pour chaque point
 path =[]
 for i in range(len(Point)):
@@ -100,7 +100,7 @@ for i in range(len(Point)):
     path[i].insert(0,(0,0))
     print("path",path)
 
-
+'''
 
 
 #lancement fenêtre

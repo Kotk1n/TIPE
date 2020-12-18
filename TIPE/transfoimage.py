@@ -1,7 +1,7 @@
 from PIL import Image
 def transfoimage():
     global longueur,largeur,petit
-    imageSource=Image.open("assets/maquettehall2.jpg")
+    imageSource=Image.open("assets/maquettehall.jpg")
     #on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     image2=imageSource.convert("L")
     (longueur,largeur)=image2.size
@@ -19,7 +19,7 @@ def transfoimage():
         grandL.append(petitL)
         petitL=[]
 
-    return(grandL)
+    print(len(grandL))
 
 transfoimage()
 

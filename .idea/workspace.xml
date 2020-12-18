@@ -29,7 +29,7 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.transfoimage">
     <configuration name="grille" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,9 +100,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.transfoimage" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.grille" />
-        <item itemvalue="Python.transfoimage" />
       </list>
     </recent_temporary>
   </component>

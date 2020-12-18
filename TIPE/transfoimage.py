@@ -5,21 +5,23 @@ def transfoimage():
     #on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     image2=imageSource.convert("L")
     (height, width)=image2.size
-    print(image2.size)
     petitL=[]
     grandL=[]
+    compteur = []
     for y in range (width):
         for x in range (height):
 
             if image2.getpixel((x,y)) > 200:
                 petitL+=[1]
+
             elif image2.getpixel((x,y)) < 100 :
                 petitL+=[0]
             else :
                 petitL +=  [2]
+                compteur.append(1)
         grandL.append(petitL)
         petitL=[]
-
+        print(len(compteur))
 
     return(grandL)
 '''

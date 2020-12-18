@@ -50,15 +50,6 @@ for i in range (len(labi)):
 
 
 
-for i in range (nbrobstacle):
-    (murx,mury) = coorddepart[0]
-    while (murx,mury) in coorddepart:
-        murx = random.randint(0,len(labi)-1)
-        mury = random.randint(0,len(labi)-1)
-    labi[murx][mury] = 1
-    obstacle.append((murx,mury))
-
-
 
 
 
@@ -71,7 +62,7 @@ for i in range (nbrobstacle):
 #création liste point
 Point = []
 CoordDepArr=[]
-nbrpoint=1
+nbrpoint=100
 for i in range (nbrpoint):
     x1 = random.choice(coorddepart)
     x2 = x1
@@ -81,7 +72,7 @@ for i in range (nbrpoint):
     CoordDepArr.append((x1[0],x1[1],x2[0],x2[1]))
 
 for  i in range (nbrpoint):
-    Point.append(Player(CoordDepArr[i][0] * taillecarre, CoordDepArr[i][1] * taillecarre, CoordDepArr[i][2], CoordDepArr[i][3], taillecarre))
+    Point.append(Player(CoordDepArr[i][0] , CoordDepArr[i][1], CoordDepArr[i][2], CoordDepArr[i][3], taillecarre))
 
 def actualisation():
     for i in range(len(Point)):
@@ -119,6 +110,20 @@ def mouvementauto (M,point):
         point.rect.y += 1
     actualisation()
 
+
+
+
+
+
+    for j in range (len(image)):
+        for i in range(len(image[j])):
+            if image[j][i] ==2:
+                pg.draw.rect(ecran, (55, 55, 55), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
+            if image[j][i]==0:
+                pg.draw.rect(ecran, (55, 0, 55), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
+
+
+
 #boucle principal
 while running:
 
@@ -131,19 +136,17 @@ while running:
 
 
 
+    for i in range (len(labi)):
+        for j in range(len(labi[i])):
+            if labi[i][j] ==2:
+                pg.draw.rect(ecran, (255, 255, 255), (j * taillecarre, i * taillecarre, taillecarre, taillecarre))
+            if labi[i][j]==0:
+                pg.draw.rect(ecran, (255, 0, 255), (j * taillecarre, i * taillecarre, taillecarre, taillecarre))
 
 
 
 
 
-    image = transfoimage()
-
-    for i in range (len(image)):
-        for j in range(len(image[i])):
-            if image[i][j] ==2:
-                pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-            if image[i][j]==0:
-                pg.draw.rect(ecran, (255, 0, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
 
 
 

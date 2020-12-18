@@ -29,7 +29,7 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.transfoimage">
+  <component name="RunManager" selected="Python.main">
     <configuration name="grille" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,8 +100,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.transfoimage" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.transfoimage" />
         <item itemvalue="Python.grille" />
       </list>
     </recent_temporary>
@@ -130,22 +130,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603222560660" />
-    <state width="1514" height="160" key="GridCell.Tab.0.bottom" timestamp="1608287700850">
+    <state width="1514" height="160" key="GridCell.Tab.0.bottom" timestamp="1608288371908">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="160" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1608287700850" />
-    <state width="1514" height="160" key="GridCell.Tab.0.center" timestamp="1608287700850">
+    <state width="1514" height="160" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1608288371908" />
+    <state width="1514" height="160" key="GridCell.Tab.0.center" timestamp="1608288371908">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="160" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1608287700850" />
-    <state width="1514" height="160" key="GridCell.Tab.0.left" timestamp="1608287700850">
+    <state width="1514" height="160" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1608288371908" />
+    <state width="1514" height="160" key="GridCell.Tab.0.left" timestamp="1608288371907">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="160" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1608287700850" />
-    <state width="1514" height="160" key="GridCell.Tab.0.right" timestamp="1608287700850">
+    <state width="1514" height="160" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1608288371907" />
+    <state width="1514" height="160" key="GridCell.Tab.0.right" timestamp="1608288371908">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="160" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1608287700850" />
+    <state width="1514" height="160" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1608288371908" />
     <state width="1514" height="2" key="GridCell.Tab.1.bottom" timestamp="1607678131548">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -188,32 +188,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TIPE/main.py</url>
-          <line>98</line>
+          <line>89</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TIPE/main.py</url>
-          <line>96</line>
+          <line>87</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TIPE/main.py</url>
-          <line>87</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
-          <line>88</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/TIPE/main.py</url>
-          <line>99</line>
+          <line>90</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/TIPE/main.py</url>
-          <line>100</line>
+          <line>91</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

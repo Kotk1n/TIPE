@@ -1,7 +1,7 @@
 from PIL import Image
 def transfoimage():
     global width,height,petit
-    imageSource=Image.open("assets/maquettehall.jpg")
+    imageSource=Image.open("assets/hallcarré.jpg")
     #on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     image2=imageSource.convert("L")
     (height, width)=image2.size
@@ -20,8 +20,9 @@ def transfoimage():
         grandL.append(petitL)
         petitL=[]
 
-    return(grandL)
 
+    return(grandL)
+'''
 grandL=transfoimage()
 print(len(grandL))
 print(height, width)
@@ -29,7 +30,7 @@ img = Image.new('RGB', (height, width), color='white')
 
 for i in range(width):
     for j in range (height):
-
+        print(i,j)
         if grandL[i][j]==0:
             img.putpixel((j,i),(0,0,0,255))
         elif grandL[i][j]==2:
@@ -37,4 +38,5 @@ for i in range(width):
 
 
 
-img.show()  
+img.show()
+'''

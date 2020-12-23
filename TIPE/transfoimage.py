@@ -11,10 +11,10 @@ def transfoimage():
     for y in range (width):
         for x in range (height):
 
-            if image2.getpixel((x,y)) > 200:
+            if image2.getpixel((y,x)) > 200:
                 petitL+=[1]
 
-            elif image2.getpixel((x,y)) < 100 :
+            elif image2.getpixel((y,x)) < 100 :
                 petitL+=[0]
             else :
                 petitL +=  [2]

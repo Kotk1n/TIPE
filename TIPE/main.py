@@ -16,7 +16,7 @@ couleurcase = (100, 100, 100)
 pg.display.set_caption("Test")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecrany + taillecarre))
-imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
+imagefond = pg.image.load("assets/hallcarré.jpg") # choix image fond d'ecran
 
 
 
@@ -62,7 +62,7 @@ for i in range (len(labi)):
 #création liste point
 Point = []
 CoordDepArr=[]
-nbrpoint=100
+nbrpoint=1
 for i in range (nbrpoint):
     x1 = random.choice(coorddepart)
     x2 = x1
@@ -82,50 +82,41 @@ def actualisation():
 
 
 
-'''
+
 #calcul chemin pour chaque point
 path =[]
 for i in range(len(Point)):
 
-    path =  path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), Point[i].arrivé)]
-    path[i].insert(0,(0,0))
+    path =  path + [astar(labi, (Point[i].rect.x, Point[i].rect.y), Point[i].arrivé)]
+
     print("path",path)
-
 '''
+path = []
 
-
-#lancement fenêtre
-running = True
+for i in range(nbrpoint):
+    path += [[(120,400),(600,200),(320,100),(40,600)]]
+print(path)
+'''
 
 def mouvementauto (M,point):
 
-
+    pas = 1
     if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
-        point.rect.x += -1
+        point.rect.x += -pas
     elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
-        point.rect.x += 1
+        point.rect.x += pas
     if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
-        point.rect.y += -1
+        point.rect.y += -pas
     elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
-        point.rect.y += 1
+        point.rect.y += pas
     actualisation()
 
-
-
-
-
-
-
+#lancement fenêtre
+running = True
+ecran.blit(imagefond, (0, 0))  # affichage du fond blanc
 
 #boucle principal
 while running:
-
-    ecran.blit(imagefond, (0, 0))     #affichage du fond blanc
-
-    for i in range (len(Point)):
-        carréx = Point[i].centre[0] // taillecarre
-        carréy = Point[i].centre[1] // taillecarre
-        Point[i].carré = (carréx, carréy)
 
     for j in range(len(labi)):
         for i in range(len(labi[j])):
@@ -134,19 +125,25 @@ while running:
             if labi[i][j] == 0:
                 pg.draw.rect(ecran, (55, 0, 55), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
 
+    for i in range (len(Point)):
+        carréx = Point[i].centre[0] // taillecarre
+        carréy = Point[i].centre[1] // taillecarre
+        Point[i].carré = (carréx, carréy)
+
+
     #affichage points
     for i in range(len(Point)):
          ecran.blit(Point[i].image, Point[i].rect)
 
 
-    '''for i in range(len(Point)):
+    for i in range(len(Point)):
         if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
             mouvementauto(path[i], Point[i])
 
 
         elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
             if  Point[i].compteur+2 < len(path[i]):
-                Point[i].compteur +=1'''
+                Point[i].compteur +=1
 
 
 

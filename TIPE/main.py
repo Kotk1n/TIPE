@@ -60,7 +60,11 @@ for i in range (len(labi)):
 Point = []
 CoordDepArr=[]
 <<<<<<< HEAD
+<<<<<<< HEAD
 nbrpoint=5
+=======
+nbrpoint=100
+>>>>>>> parent of 41b29d3... amélioration
 =======
 nbrpoint=100
 >>>>>>> parent of 41b29d3... amélioration
@@ -88,6 +92,7 @@ def actualisation():
 path =[]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 
@@ -100,8 +105,18 @@ print(path)
     path[i].insert(0,(0,0))
     print("path",path)
 
+=======
+    path =  path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), Point[i].arrivé)]
+    path[i].insert(0,(0,0))
+    print("path",path)
+
+>>>>>>> parent of 41b29d3... amélioration
 '''
 >>>>>>> parent of 41b29d3... amélioration
+
+
+#lancement fenêtre
+running = True
 
 
 #lancement fenêtre
@@ -157,6 +172,10 @@ while running:
         elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
             if  Point[i].compteur+2 < len(path[i]):
                 Point[i].compteur +=1'''
+<<<<<<< HEAD
+=======
+
+>>>>>>> parent of 41b29d3... amélioration
 
 
 '''

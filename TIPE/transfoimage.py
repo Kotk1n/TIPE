@@ -11,10 +11,10 @@ def transfoimage():
     for y in range (width):
         for x in range (height):
 
-            if image2.getpixel((x,y)) > 200:
+            if image2.getpixel((y,x)) > 200:
                 petitL+=[1]
 
-            elif image2.getpixel((x,y)) < 100 :
+            elif image2.getpixel((y,x)) < 100 :
                 petitL+=[0]
             else :
                 petitL +=  [2]
@@ -29,7 +29,6 @@ grandL=transfoimage()
 print(len(grandL))
 print(height, width)
 img = Image.new('RGB', (height, width), color='white')
-
 for i in range(width):
     for j in range (height):
         print(i,j)
@@ -37,8 +36,5 @@ for i in range(width):
             img.putpixel((j,i),(0,0,0,255))
         elif grandL[i][j]==2:
             img.putpixel((j, i), (0, 200, 0, 255))
-
-
-
 img.show()
 '''

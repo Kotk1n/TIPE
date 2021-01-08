@@ -16,7 +16,7 @@ couleurcase = (100, 100, 100)
 pg.display.set_caption("Test")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecrany + taillecarre))
-imagefond = pg.image.load("assets/hallcarré.jpg") # choix image fond d'ecran
+imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 
 
@@ -31,12 +31,9 @@ labi = transfoimage()
 
 
 
-nbrcasedepart=20
 
 obstacle =[]
 coorddepart = []
-
-nbrobstacle = 50
 
 
 for i in range (len(labi)):
@@ -62,7 +59,7 @@ for i in range (len(labi)):
 #création liste point
 Point = []
 CoordDepArr=[]
-nbrpoint=1
+nbrpoint=5
 for i in range (nbrpoint):
     x1 = random.choice(coorddepart)
     x2 = x1
@@ -85,18 +82,14 @@ def actualisation():
 
 #calcul chemin pour chaque point
 path =[]
-for i in range(len(Point)):
 
-    path =  path + [astar(labi, (Point[i].rect.x, Point[i].rect.y), Point[i].arrivé)]
 
-    print("path",path)
-'''
-path = []
+
 
 for i in range(nbrpoint):
     path += [[(120,400),(600,200),(320,100),(40,600)]]
 print(path)
-'''
+
 
 def mouvementauto (M,point):
 
@@ -146,7 +139,7 @@ while running:
                 Point[i].compteur +=1
 
 
-
+'''
 
     #actualisation visuelle écran
     pg.display.flip()
@@ -158,7 +151,7 @@ while running:
         if event.type == pg.QUIT:
             running = False
             pg.quit()
-
+'''
 
 
 

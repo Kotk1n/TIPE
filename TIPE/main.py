@@ -1,186 +1,149 @@
 import pygame as pg
 from entité import Player
 from grille import astar
+from transfoimage import transfoimage
+from transfoimage import fichierimage
 import random
 
+pressed = True
 
-pg.init() #lancement pygame
-taillecarre = 40
-ecranx =720
-couleurcase = (100, 100, 100)
+def creerrect():
+    tempo = []
+    while len(tempo)!=2:
 
+        for event in pg.event.get():
+            if event.type == pg.MOUSEBUTTONUP:
+                tempo.append((pg.mouse.get_pos()))
+    rect = pg.Rect(tempo[0][0],tempo[0][1],tempo[1][0]-tempo[0][0],tempo[1][1]-tempo[0][1])
+    return(rect)
+
+def creation(n):
+    Zonedep=[]
+    for i in range(int(n)):
+        Zonedep.append(creerrect())
+        print(i+1)
+    return (Zonedep)
+
+nbrrect = input("Nombre de rect")
+#lancement pygame
+pg.init()
+# choix image fond d'ecran
+imagefond = pg.image.load(fichierimage)
+#récupère la taille de l'image choisi
+(ecranx, ecrany) = imagefond.get_size()
+#couleurcase = (100, 100, 100)
 
 pg.display.set_caption("Test")
 
-ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
-imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
-
-
+ecran = pg.display.set_mode((ecranx, ecrany))
 
 
 
 #création labi, obstacle
-labi =[]
-labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
+#labi=[]
+#labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecrany // taillecarre)]
+#0
+labi = transfoimage()
 
-nbrcasedepart=20
-quadri = []
-obstacle =[]
+
+#définition à partir de l'image transformé les points de l'image étant des murs et ceux étant des coordonnées d'entrées/sortie
+obstacle = []
 coorddepart = []
 
-nbrobstacle = 50
-for i in range(nbrcasedepart):
-    e = random.randint(0,len(labi)-1)
-    f = random.randint(0,len(labi)-1)
-    labi[e][f] = 2
-    coorddepart.append((e, f))
-
-
-for i in range (nbrobstacle):
-    (murx,mury) = coorddepart[0]
-    while (murx,mury) in coorddepart:
-        murx = random.randint(0,len(labi)-1)
-        mury = random.randint(0,len(labi)-1)
-    labi[murx][mury] = 1
-    obstacle.append((murx,mury))
-
-
-
-
-
-
-
-
-
-
-
+'''
+for i in range(len(labi)):
+    for j in range(len(labi)):
+        if labi[i][j] == 0:
+            obstacle.append((i, j))
+        elif labi[j][i] == 2:
+            coorddepart.append((i, j))'''
+##à vérifier : si la liste donné est propre
 
 
 #création liste point
-Point = []
-CoordDepArr=[]
-nbrpoint=20
-for i in range (nbrpoint):
+
+
+'''Point = []
+
+for i in range(nbrpoint):
     x1 = random.choice(coorddepart)
     x2 = x1
     while x2 == x1:
         x2 = random.choice(coorddepart)
-
-    CoordDepArr.append((x1[0],x1[1],x2[0],x2[1]))
-
-for  i in range (nbrpoint):
-    Point.append(Player(CoordDepArr[i][0] * taillecarre, CoordDepArr[i][1] * taillecarre, CoordDepArr[i][2], CoordDepArr[i][3], taillecarre))
-
-def actualisation():
-    for i in range(len(Point)):
-        Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
-        Point[i].centre[1] = Point[i].rect.y + Point[i].taille / 2
-
-
+    print("départ", "x", x1[0], "y", x1[1], "arrivé x", x2[0], "y", x2[1])
+    ecran.blit(pg.image.load("/home/utilisateur/Bureau/TIPE-Test-fusion-/TIPE/assets/violet.png"), (x1[1], x1[0]))
+    print(labi[x1[0]][x1[1]])
+'''
 
 
 
 #calcul chemin pour chaque point
-path =[]
-for i in range(len(Point)):
 
-    path =  path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), Point[i].arrivé)]
-    path[i].insert(0,(0,0))
-
-
-
-
+#path[i] est le chemin emprunté par le point n°i
 
 #lancement fenêtre
 running = True
+#M:Path du point i et point : i
 
-def mouvementauto (M,point):
+
+def mouvementauto(pathi, i):
+    if Point[i].compteur + 1 < len(path[i]):
+        Point[i].rect.x = pathi[Point[i].compteur + 1][0]
+        Point[i].rect.y = pathi[Point[i].compteur + 1][1]
 
 
-    if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
-        point.rect.x += -1
-    elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
-        point.rect.x += 1
-    if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
-        point.rect.y += -1
-    elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
-        point.rect.y += 1
-    actualisation()
+ecran.blit(imagefond, (0, 0))     #affichage du fond blanc
 
+defrect=False
 #boucle principal
 while running:
+    if defrect==False:
+        ecran.blit(imagefond, (0, 0))
+        pg.display.flip()
+        nbrpoint = 2
+        Point = []
+        Zonedep = creation(nbrrect)
+        for i in range(nbrpoint):
+            rectdep = random.choice(Zonedep)
+            x1 = random.randint(rectdep[0], rectdep[0] + rectdep[2])
+            y1 = random.randint(rectdep[1], rectdep[1] + rectdep[3])
+            rectar = random.choice(Zonedep)
+            while rectar == rectdep:
+                rectar = random.choice(Zonedep)
+            x2 = random.randint(rectar[0], rectar[0] + rectar[2])
+            y2 = random.randint(rectar[1], rectar[1] + rectar[3])
+            Point.append(Player(x1, y1, x2, y2))
+        path = []
+        for i in range(len(Point)):
+            path = path + [astar(labi, (Point[i].rect.x, Point[i].rect.y), Point[i].arrivé)]
+        print("path", path)
+        defrect=True
+    else:
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                running = False
+                pg.quit()
+            if event.type == pg.KEYDOWN:
+                pressed = True
 
-    ecran.blit(imagefond, (0, 0))     #affichage du fond blanc
+            if event.type == pg.KEYUP:
+                pressed= False
 
-    for i in range (len(Point)):
-        carréx = Point[i].centre[0] // taillecarre
-        carréy = Point[i].centre[1] // taillecarre
-        Point[i].carré = (carréx, carréy)
+            if pressed:
+                ecran.blit(imagefond, (0, 0))
 
+                for i in range(len(Point)):
 
+                    mouvementauto(path[i], i)
 
+                    Point[i].compteur += 1
 
-
-
-
-
-
-
-
-    for i in range (ecranx // taillecarre + taillecarre):
-        if i%2 ==0:
-
-            for j in range (ecranx // taillecarre + taillecarre):
-                if j%2==0:
-
-                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-                else:
-                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-        else:
-            for j in range (ecranx // taillecarre + taillecarre):
-                if j%2==0:
-                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-
-                else:
-                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-    for i in range (len(Point)):
-        pg.draw.rect(ecran, (0, 255, 0), (Point[i].arrivé[0] * taillecarre, Point[i].arrivé[1] * taillecarre, taillecarre, taillecarre))
-    for i in range(len(obstacle)):
-        pg.draw.rect(ecran, (0, 0, 0), (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
-
-
-
-
-
-    #affichage points
-    for i in range(len(Point)):
-         ecran.blit(Point[i].image, Point[i].rect)
-
-
-
-
-    for i in range(len(Point)):
-        if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
-            mouvementauto(path[i], Point[i])
-
-
-        elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2, path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
-            if  Point[i].compteur+2 < len(path[i]):
-                Point[i].compteur +=1
-
-
-
-
+                for i in range(len(Point)):
+                    ecran.blit(Point[i].image, Point[i].rect)
+                pg.display.flip()
     #actualisation visuelle écran
     pg.display.flip()
 
-
-
-
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            running = False
-            pg.quit()
 
 
 

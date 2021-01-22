@@ -1,5 +1,5 @@
 from PIL import Image
-fichierimage="/home/utilisateur/Bureau/TIPE-Test-fusion-/TIPE/assets/hallcarré.jpg"
+fichierimage="assets/hallcarré.jpg"
 def transfoimage():
     global width,height,petit
     imageSource=Image.open(fichierimage)

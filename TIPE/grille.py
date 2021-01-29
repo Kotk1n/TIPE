@@ -73,6 +73,7 @@ def astar(labi, debut, fin):
 
             # Vérifie que pas un obstacle
             if labi[case_pos[0]][case_pos[1]] == 0:
+                print("muuuuurrrrr")
 
                 continue
 

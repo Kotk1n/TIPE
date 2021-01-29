@@ -1,8 +1,8 @@
 import pygame as pg
-from entité import Player
-from grille import astar
-from transfoimage import transfoimage
-from transfoimage import fichierimage
+from TIPE.entité import Player
+from TIPE.grille import astar
+from TIPE.transfoimage import transfoimage
+from TIPE.transfoimage import fichierimage
 import random
 
 pressed = True

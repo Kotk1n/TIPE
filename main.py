@@ -35,7 +35,7 @@ imagefond = pg.image.load(fichierimage)
 
 pg.display.set_caption("Test")
 
-ecran = pg.display.set_mode((ecranx, ecrany))
+ecran = pg.display.set_mode((ecranx, ecrany),pg.RESIZABLE)
 
 
 
@@ -100,7 +100,7 @@ while running:
     if defrect==False:
         ecran.blit(imagefond, (0, 0))
         pg.display.flip()
-        nbrpoint = 2
+        nbrpoint = 20
         Point = []
         Zonedep = creation(nbrrect)
         for i in range(nbrpoint):

@@ -1,5 +1,5 @@
 from PIL import Image
-fichierimage="assets/hallcarré.jpg"
+fichierimage="TIPE/assets/hallcarré2.jpg"
 def transfoimage():
     global width,height,petit
     imageSource=Image.open(fichierimage)
@@ -11,9 +11,9 @@ def transfoimage():
     print("taille de l'image=",image2.size)
     petitL=[]
     grandL=[]
+    for x in range(height):
+        for y in range (width):
 
-    for y in range (width):
-        for x in range (height):
 
             if image2.getpixel((x,y)) > 50:
                 petitL+=[1]
@@ -25,7 +25,7 @@ def transfoimage():
 
     return(grandL)
 
-"""
+'''
 
 grandL=transfoimage()
 print(len(grandL))
@@ -41,4 +41,5 @@ for i in range(width):
             img.putpixel((j, i), (255, 0, 0, 255))
 
 
-img.show()"""
+img.show()
+'''

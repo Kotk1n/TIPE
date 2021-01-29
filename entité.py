@@ -6,7 +6,7 @@ class Player(pg.sprite.Sprite):
 
         self.velocity = 1.5
         self.taille = 10
-        self.image = pg.transform.scale(pg.image.load("/home/utilisateur/Bureau/TIPE-Test-fusion-/TIPE/assets/bleu.png"),(self.taille,self.taille))
+        self.image = pg.transform.scale(pg.image.load("bleu.png"),(self.taille,self.taille))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y

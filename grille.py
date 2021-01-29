@@ -62,7 +62,7 @@ def astar(labi, debut, fin):
 
         # génère enfant
         enfant = []
-        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0)]: # cases à coté ,(1,1),(1,-1),(-1,-1),(-1,1)
+        for new_position in [(1,1),(1,-1),(-1,-1),(-1,1),(0, -1), (0, 1), (-1, 0), (1, 0)]: # cases à coté
 
 
             case_pos = (caseactuelle.position[0] + new_position[0], caseactuelle.position[1] + new_position[1])

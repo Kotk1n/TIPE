@@ -29,7 +29,56 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\thiba\PycharmProjects\TIPEcirculation - Copie - Copie" />
+      <recent name="C:\Users\thiba\PycharmProjects\TIPEcirculation - Copie - Copie\TIPE" />
+      <recent name="C:\Users\thiba\PycharmProjects\TIPEcirculation - Copie - Copie\TIPE\assets" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main (1)">
+    <configuration name="astar" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TIPEcirculation - Copie - Copie" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/AppData/Roaming/Microsoft/Windows/Network Shortcuts/astar" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Roaming/Microsoft/Windows/Network Shortcuts/astar/astar.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TIPEcirculation - Copie - Copie" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -72,9 +121,33 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="transfoimage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TIPEcirculation - Copie - Copie" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/transfoimage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.astar" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.transfoimage" />
         <item itemvalue="Python.transfo image" />
       </list>
     </recent_temporary>
@@ -91,30 +164,30 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="611" y="323" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog" timestamp="1611434589292">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="611" y="323" key="#com.jetbrains.python.refactoring.move.PyMoveModuleMembersDialog/0.0.1536.864@0.0.1536.864" timestamp="1611434589292" />
     <state x="528" y="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1607074974621">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="528" y="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.864@0.0.1536.864" timestamp="1607074974621" />
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1603222560660">
+    <state width="1514" height="160" key="GridCell.Tab.0.bottom" timestamp="1611914258514">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603222560660" />
-    <state width="1514" height="224" key="GridCell.Tab.0.bottom" timestamp="1611308374383">
+    <state width="1514" height="160" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1611914258514" />
+    <state width="1514" height="160" key="GridCell.Tab.0.center" timestamp="1611914258514">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="224" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1611308374383" />
-    <state width="1514" height="224" key="GridCell.Tab.0.center" timestamp="1611308374383">
+    <state width="1514" height="160" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1611914258514" />
+    <state width="1514" height="160" key="GridCell.Tab.0.left" timestamp="1611914258514">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="224" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1611308374383" />
-    <state width="1514" height="224" key="GridCell.Tab.0.left" timestamp="1611308374383">
+    <state width="1514" height="160" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1611914258514" />
+    <state width="1514" height="160" key="GridCell.Tab.0.right" timestamp="1611914258514">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="224" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1611308374383" />
-    <state width="1514" height="224" key="GridCell.Tab.0.right" timestamp="1611308374383">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="224" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1611308374383" />
+    <state width="1514" height="160" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1611914258514" />
     <state width="1514" height="305" key="GridCell.Tab.1.bottom" timestamp="1605869423512">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -139,10 +212,6 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="775" height="439" key="XDebugger.FullValuePopup/0.0.1536.864@0.0.1536.864" timestamp="1605867866508" />
-    <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1603124787790">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1603124787790" />
     <state x="331" y="161" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1605005172356">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

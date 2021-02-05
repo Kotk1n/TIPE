@@ -4,10 +4,10 @@ from grille import astar
 import random
 from transfoimage import transfoimage
 
-
+nbrpoint=25
 
 pg.init() #lancement pygame
-taillecarre = 40
+taillecarre = 6
 ecranx =720
 couleurcase = (100, 100, 100)
 
@@ -23,21 +23,22 @@ imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 #création labi, obstacle
 labi =[]
-labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
-
-nbrcasedepart=20
+#labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
+labi = transfoimage()
+nbrcasedepart=nbrpoint
 
 obstacle =[]
 coorddepart = []
 
 nbrobstacle = 50
-for i in range(nbrcasedepart):
-    e = random.randint(0,len(labi)-1)
-    f = random.randint(0,len(labi)-1)
-    labi[e][f] = 2
-    coorddepart.append((e, f))  
+for i in range(len(labi)):
+    for j in range(len(labi)):
+        if labi[i][j] == 2:
+            coorddepart.append((i, j))
+        elif labi[i][j] == 0:
+            obstacle.append((i, j))
 
-
+'''
 for i in range (nbrobstacle):
     (murx,mury) = coorddepart[0]
     while (murx,mury) in coorddepart:
@@ -45,7 +46,7 @@ for i in range (nbrobstacle):
         mury = random.randint(0,len(labi)-1)
     labi[murx][mury] = 1
     obstacle.append((murx,mury))
-
+'''
 
 
 
@@ -61,7 +62,8 @@ for i in range (nbrobstacle):
 #création liste point
 Point = []
 CoordDepArr=[]
-nbrpoint=20
+
+
 for i in range (nbrpoint):
     x1 = random.choice(coorddepart)
     x2 = x1
@@ -121,32 +123,6 @@ while running:
 
 
 
-
-
-
-
-
-
-
-
-    for i in range (ecranx // taillecarre + taillecarre):
-        if i%2 ==0:
-
-            for j in range (ecranx // taillecarre + taillecarre):
-                if j%2==0:
-
-                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-                else:
-                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-        else:
-            for j in range (ecranx // taillecarre + taillecarre):
-                if j%2==0:
-                    pg.draw.rect(ecran, couleurcase, (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-
-                else:
-                    pg.draw.rect(ecran, (255, 255, 255), (i * taillecarre, j * taillecarre, taillecarre, taillecarre))
-    for i in range (len(Point)):
-        pg.draw.rect(ecran, (0, 255, 0), (Point[i].arrivé[0] * taillecarre, Point[i].arrivé[1] * taillecarre, taillecarre, taillecarre))
     for i in range(len(obstacle)):
         pg.draw.rect(ecran, (0, 0, 0), (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
 

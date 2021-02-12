@@ -21,14 +21,12 @@ def transfoimage(imageSource):
     for X in range(taille):
         for Y in range(taille):
             # si c'est blanc
-            if Image.getpixel((X, Y)) > 200:
+            if Image.getpixel((X, Y)) > 50:
                 MatriceImage[X,Y] = 1
             # si c'est noir
-            elif Image.getpixel((X, Y)) < 50:
+            else:
                 MatriceImage[X,Y] = 0
 
-            else:
-                MatriceImage[X,Y] = 2
 
     return (MatriceImage)
 

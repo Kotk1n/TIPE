@@ -3,8 +3,12 @@ from entité import Player
 from grille import astar
 import random
 from transfoimage import transfoimage
+from PIL import Image
+import numpy as np
 
-nbrpoint=25
+fichierimage = "assets/maquettehall1.jpg"
+imageSource = Image.open(fichierimage)
+nbrpoint=10
 
 pg.init() #lancement pygame
 taillecarre = 6
@@ -24,36 +28,19 @@ imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 #création labi, obstacle
 labi =[]
 #labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
-labi = transfoimage()
+labi = transfoimage(imageSource)
 nbrcasedepart=nbrpoint
 
 obstacle =[]
 coorddepart = []
 
-nbrobstacle = 50
+
 for i in range(len(labi)):
     for j in range(len(labi)):
         if labi[i][j] == 2:
             coorddepart.append((i, j))
         elif labi[i][j] == 0:
             obstacle.append((i, j))
-
-'''
-for i in range (nbrobstacle):
-    (murx,mury) = coorddepart[0]
-    while (murx,mury) in coorddepart:
-        murx = random.randint(0,len(labi)-1)
-        mury = random.randint(0,len(labi)-1)
-    labi[murx][mury] = 1
-    obstacle.append((murx,mury))
-'''
-
-
-
-
-
-
-
 
 
 
@@ -121,8 +108,10 @@ while running:
         carréy = Point[i].centre[1] // taillecarre
         Point[i].carré = (carréx, carréy)
 
-
-
+    for i in range(len(labi)):
+        for j in range(len(labi)):
+            if labi[i][j] == 2:
+                pg.draw.rect(ecran, (255, 0, 0),(i * taillecarre, j * taillecarre, taillecarre, taillecarre))
     for i in range(len(obstacle)):
         pg.draw.rect(ecran, (0, 0, 0), (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
 

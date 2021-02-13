@@ -1,5 +1,5 @@
 import pygame as pg
-# test git
+# test git par gatien
 class Player(pg.sprite.Sprite):
 
     def __init__(self,x,y,a,b,c):

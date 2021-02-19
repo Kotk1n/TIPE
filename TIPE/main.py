@@ -108,6 +108,7 @@ while running:
 
     if defrect==False:
         ecran.blit(imagefond, (0, 0))
+
         for i in range(len(obstacle)):
             pg.draw.rect(ecran, (0, 0, 0),(obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
 
@@ -136,8 +137,6 @@ while running:
             path[i].insert(0, (0, 0))
         defrect = True
     else:
-        for i in range(len(obstacle)):
-            pg.draw.rect(ecran, (0, 0, 0),(obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -151,6 +150,10 @@ while running:
 
             if pressed:
                 ecran.blit(imagefond, (0, 0))
+                for i in range(len(obstacle)):
+                    pg.draw.rect(ecran, (0, 0, 0),
+                                 (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
+
                 for i in range(len(Point)):
                     if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,
                                            path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:

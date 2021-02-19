@@ -6,10 +6,10 @@ from transfoimage import transfoimage
 from PIL import Image
 import random
 import numpy as np
-
+test1 = []
 fichierimage = "assets/maquettehall1.jpg"
 imageSource = Image.open(fichierimage)
-nbrpoint=3
+nbrpoint=20
 
 pg.init() #lancement pygame
 taillecarre = 6
@@ -125,16 +125,19 @@ while running:
             x2 = random.randint(rectar[0], rectar[0] + rectar[2])
             y2 = random.randint(rectar[1], rectar[1] + rectar[3])
             Point.append(Player(x1, y1, x2, y2,taillecarre))
-            pg.draw.rect(ecran, (255, 0, 0), (x1 * taillecarre, y1 * taillecarre, taillecarre, taillecarre))
+
         path = []
 
         for i in range(len(Point)):
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
+
         for i in range(len(Point)):
-            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[0]//taillecarre))]
+            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))]
             path[i].insert(0, (0, 0))
+            print(path)
+            test1.append((Point[i].arrivé[0]//taillecarre,Point[i].arrivé[0]//taillecarre))
         defrect = True
     else:
 
@@ -153,6 +156,14 @@ while running:
                 for i in range(len(obstacle)):
                     pg.draw.rect(ecran, (0, 0, 0),
                                  (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
+                for i in range(len(Zonedep)):
+                    pg.draw.rect(ecran,(255,255,0),Zonedep[i])
+                for i in range (len(path)):
+                    for j in range(len(path[i])):
+                        pg.draw.circle(ecran, (255, 0, 255), (path[i][j][0] * taillecarre, path[i][j][1] * taillecarre), 2)
+                for i in range(len(test1)):
+                    pg.draw.circle(ecran,(0,255,0),(Point[i].arrivé[0],Point[i].arrivé[1]),5)
+
 
                 for i in range(len(Point)):
                     if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,

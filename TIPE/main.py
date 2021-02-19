@@ -15,14 +15,14 @@ pg.init() #lancement pygame
 taillecarre = 6
 ecranx =720
 couleurcase = (100, 100, 100)
-
+distancesecu=10
 
 pg.display.set_caption("Test")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
-
+listeposcontact=[]
 def creerrect():
     tempo = []
     while len(tempo)!=2:
@@ -69,12 +69,33 @@ for i in range(len(labi)):
 Point = []
 CoordDepArr=[]
 
+def alertecovid(x1,y1,x2,y2):
+    global distancesecu,taillecarre
+    contact=False
+    if np.sqrt(((x1-x2)**2)+((y1-y2)**2))<(taillecarre)+distancesecu:
+        contact=True
+    return (contact)
+
+matricecontact=np.zeros((nbrpoint,nbrpoint))
+
+
 
 def actualisation():
     for i in range(len(Point)):
         Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
         Point[i].centre[1] = Point[i].rect.y + Point[i].taille / 2
-
+    for i in range(nbrpoint):
+    # cette notation permet d'obtenir la matrice de contact telle que l'on ne calcule pas deux fois la même distance et test entre pts différents
+           for j in range(i + 1, nbrpoint):
+                x1 = Point[i].rect.x
+                y1 = Point[i].rect.y
+                x2 = Point[j].rect.x
+                y2 = Point[j].rect.y
+                if alertecovid(x1, y1, x2, y2):
+                    if matricecontact[i,j]==0:
+                        listeposcontact.append([(x1+x2)/2,(y1+y2)/2])
+                    matricecontact[i, j] = 1
+                    matricecontact[j, i] = 1
 
 
 
@@ -144,6 +165,8 @@ while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
+                print(matricecontact)
+                print(listeposcontact)
                 pg.quit()
             if event.type == pg.KEYDOWN:
                 pressed = True

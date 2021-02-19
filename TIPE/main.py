@@ -6,10 +6,10 @@ from transfoimage import transfoimage
 from PIL import Image
 import random
 import numpy as np
-test1 = []
+
 fichierimage = "assets/maquettehall1.jpg"
 imageSource = Image.open(fichierimage)
-nbrpoint=20
+nbrpoint=5
 
 pg.init() #lancement pygame
 taillecarre = 6
@@ -23,6 +23,7 @@ ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 
 listeposcontact=[]
+#fonction créer rectangle à partir clique souris
 def creerrect():
     tempo = []
     while len(tempo)!=2:
@@ -33,6 +34,7 @@ def creerrect():
     rect = pg.Rect(tempo[0][0],tempo[0][1],tempo[1][0]-tempo[0][0],tempo[1][1]-tempo[0][1])
     return(rect)
 
+#regroupement des zones
 def creation(n):
     Zonedep=[]
     for i in range(int(n)):
@@ -53,12 +55,10 @@ labi = transfoimage(imageSource)
 obstacle =[]
 coorddepart = []
 
-
+#détection obstable labi
 for i in range(len(labi)):
     for j in range(len(labi)):
-        if labi[i][j] == 2:
-            coorddepart.append((i, j))
-        elif labi[i][j] == 0:
+        if labi[i][j] == 0:
             obstacle.append((i, j))
 
 
@@ -79,7 +79,7 @@ def alertecovid(x1,y1,x2,y2):
 matricecontact=np.zeros((nbrpoint,nbrpoint))
 
 
-
+#actualiser position points
 def actualisation():
     for i in range(len(Point)):
         Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
@@ -100,8 +100,8 @@ def actualisation():
 
 
 
-#calcul chemin pour chaque point
-path =[]
+
+
 
 
 
@@ -109,18 +109,18 @@ path =[]
 pressed = True
 #lancement fenêtre
 running = True
-
+#fonction permettant le pouvement de chaque point
 def mouvementauto (M,point):
-
+    pas = 1
 
     if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
-        point.rect.x += -1
+        point.rect.x += -pas
     elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
-        point.rect.x += 1
+        point.rect.x += pas
     if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
-        point.rect.y += -1
+        point.rect.y += -pas
     elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
-        point.rect.y += 1
+        point.rect.y += pas
     actualisation()
 
 #boucle principal
@@ -128,14 +128,17 @@ defrect = False
 while running:
 
     if defrect==False:
-        ecran.blit(imagefond, (0, 0))
+    #partie calcul
+        ecran.blit(imagefond, (0, 0))   #  affichage image blanche fond
 
         for i in range(len(obstacle)):
-            pg.draw.rect(ecran, (0, 0, 0),(obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
+            pg.draw.rect(ecran, (0, 0, 0),(obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre)) # affichage obstacle
 
-        pg.display.flip()
+        pg.display.flip() #actualisation écran
         Point = []
-        Zonedep = creation(nbrrect)
+        Zonedep = creation(nbrrect) #création des rect
+
+        #choix des coordonnées de dep et arr parmi les rects
         for i in range(nbrpoint):
             rectdep = random.choice(Zonedep)
             x1 = random.randint(rectdep[0], rectdep[0] + rectdep[2])
@@ -148,61 +151,51 @@ while running:
             Point.append(Player(x1, y1, x2, y2,taillecarre))
 
         path = []
-
+        # définition du centre des points et on leur associe à tous un path grâce au A*
         for i in range(len(Point)):
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
-
-        for i in range(len(Point)):
             path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))]
-            path[i].insert(0, (0, 0))
-            print(path)
-            test1.append((Point[i].arrivé[0]//taillecarre,Point[i].arrivé[0]//taillecarre))
         defrect = True
     else:
+    #partie affichage
 
-        for event in pg.event.get():
+        ecran.blit(imagefond, (0, 0))
+        for i in range(len(obstacle)):                                                       #affichage obstacle
+            pg.draw.rect(ecran, (0, 0, 0),
+                         (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
+        for i in range(len(Zonedep)):                                                          #affichage Zone de départ
+            pg.draw.rect(ecran,(255,255,0),Zonedep[i])
+        for i in range (len(path)):                                                                   #affichage du chemin
+            for j in range(len(path[i])):
+                pg.draw.circle(ecran, (255, 0, 255), (path[i][j][0] * taillecarre, path[i][j][1] * taillecarre), 2)
+
+
+
+        for i in range(len(Point)):                                                                 #mouvement des points
+            if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
+                mouvementauto(path[i], Point[i])
+
+
+            elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
+                if Point[i].compteur + 2 < len(path[i]):
+                    Point[i].compteur += 1
+            for i in range(len(Point)):
+                ecran.blit(Point[i].image, Point[i].rect)
+            pg.display.flip()
+
+
+
+        for event in pg.event.get():  #détection touche
             if event.type == pg.QUIT:
                 running = False
                 print(matricecontact)
                 print(listeposcontact)
                 pg.quit()
-            if event.type == pg.KEYDOWN:
-                pressed = True
-
-            if event.type == pg.KEYUP:
-                pressed= False
-
-            if pressed:
-                ecran.blit(imagefond, (0, 0))
-                for i in range(len(obstacle)):
-                    pg.draw.rect(ecran, (0, 0, 0),
-                                 (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
-                for i in range(len(Zonedep)):
-                    pg.draw.rect(ecran,(255,255,0),Zonedep[i])
-                for i in range (len(path)):
-                    for j in range(len(path[i])):
-                        pg.draw.circle(ecran, (255, 0, 255), (path[i][j][0] * taillecarre, path[i][j][1] * taillecarre), 2)
-                for i in range(len(test1)):
-                    pg.draw.circle(ecran,(0,255,0),(Point[i].arrivé[0],Point[i].arrivé[1]),5)
 
 
-                for i in range(len(Point)):
-                    if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,
-                                           path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
-                        mouvementauto(path[i], Point[i])
 
-
-                    elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,
-                                                  path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
-                        if Point[i].compteur + 2 < len(path[i]):
-                            Point[i].compteur += 1
-                for i in range(len(Point)):
-                    ecran.blit(Point[i].image, Point[i].rect)
-                pg.display.flip()
-    #actualisation visuelle écran
-    pg.display.flip()
 
 
 

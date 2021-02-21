@@ -170,15 +170,17 @@ while running:
     #partie affichage
 
         ecran.blit(imagefond, (0, 0))
+
         for i in range(len(obstacle)):                                                       #affichage obstacle
             pg.draw.rect(ecran, (0, 0, 0),
                          (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
         for i in range(len(Zonedep)):                                                          #affichage Zone de départ
             pg.draw.rect(ecran,(255,255,0),Zonedep[i])
+        '''
         for i in range (len(path)):                                                                   #affichage du chemin
             for j in range(len(path[i])):
                 pg.draw.circle(ecran, (255, 0, 255), (path[i][j][0] * taillecarre, path[i][j][1] * taillecarre), 2)
-
+        '''
         actif=[]
         for i in range(len(Point)):
             if Point[i].actif ==True:
@@ -204,8 +206,10 @@ while running:
 
         if compteur%frequence==0 and compteur//frequence<len(Point) :
             Point[compteur//frequence].actif= True
+            Point[compteur // frequence].tempsactivite[0]=compteur
         for i in aretirer:
             Point[i].actif = False
+            Point[i].tempsactivite[1]=compteur
 
 
 

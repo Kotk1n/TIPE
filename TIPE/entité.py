@@ -15,6 +15,7 @@ class Player(pg.sprite.Sprite):
         self.carré = (0,0)
         self.centre = [self.rect.x + self.taille/2,self.rect.y + self.taille/2]
         self.actif = (False,-1,-1)
+        self.tempsactivite =[-1,-1]
 
 
     def move_right (self):

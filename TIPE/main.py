@@ -9,8 +9,8 @@ import numpy as np
 
 fichierimage = "assets/maquettehall1.jpg"
 imageSource = Image.open(fichierimage)
-nbrpoint=5
-
+nbrpoint=20
+frequence = 20
 pg.init() #lancement pygame
 taillecarre = 6
 ecranx =720
@@ -21,7 +21,7 @@ pg.display.set_caption("Test")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
-
+Pointactif =[]
 listeposcontact=[]
 #fonction créer rectangle à partir clique souris
 def creerrect():
@@ -64,7 +64,7 @@ for i in range(len(labi)):
 
 
 
-
+compteur =0
 #création liste point
 Point = []
 CoordDepArr=[]
@@ -123,6 +123,10 @@ def mouvementauto (M,point):
         point.rect.y += pas
     actualisation()
 
+
+
+
+
 #boucle principal
 defrect = False
 while running:
@@ -137,6 +141,7 @@ while running:
         pg.display.flip() #actualisation écran
         Point = []
         Zonedep = creation(nbrrect) #création des rect
+
 
         #choix des coordonnées de dep et arr parmi les rects
         for i in range(nbrpoint):
@@ -157,6 +162,10 @@ while running:
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
             path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))]
+
+        Pointactif.append(Point[0])
+
+
         defrect = True
     else:
     #partie affichage
@@ -173,17 +182,21 @@ while running:
 
 
 
-        for i in range(len(Point)):                                                                 #mouvement des points
-            if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
-                mouvementauto(path[i], Point[i])
+        for i in range(len(Pointactif)):                                                                 #mouvement des points
+            if Pointactif[i].centre != [path[i][Pointactif[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Pointactif[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
+                mouvementauto(path[i], Pointactif[i])
 
 
-            elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
-                if Point[i].compteur + 2 < len(path[i]):
-                    Point[i].compteur += 1
-            for i in range(len(Point)):
+            elif Pointactif[i].centre == list((path[i][Pointactif[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Pointactif[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
+                if Pointactif[i].compteur + 2 < len(path[i]):
+                    Pointactif[i].compteur += 1
+            for i in range(len(Pointactif)):
                 ecran.blit(Point[i].image, Point[i].rect)
             pg.display.flip()
+        compteur = compteur + 1
+
+        if compteur%frequence==0 and compteur//frequence<len(Point) :
+            Pointactif.append(Point[compteur//frequence])
 
 
 

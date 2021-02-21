@@ -98,6 +98,14 @@ def astar(labi, debut, fin):
                 open_list.append(i)
 
 
+
+
+
+
+
+
+
+
 def main():
     global path
     path =[]

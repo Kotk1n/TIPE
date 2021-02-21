@@ -13,7 +13,7 @@ nbrpoint=20
 frequence = 20
 pg.init() #lancement pygame
 taillecarre = 6
-ecranx =720
+ecranx = imageSource.size[0] * taillecarre
 couleurcase = (100, 100, 100)
 distancesecu=10
 
@@ -113,13 +113,15 @@ running = True
 def mouvementauto (M,point):
     pas = 1
 
-    if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
-        point.rect.x += -pas
-    elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
+
+
+    if ((M[point.compteur+pas][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
+        point.rect.x -= pas
+    elif ((M[point.compteur+pas][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
         point.rect.x += pas
-    if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
-        point.rect.y += -pas
-    elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
+    if ((M[point.compteur+pas][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
+        point.rect.y -= pas
+    elif ((M[point.compteur+pas ][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
         point.rect.y += pas
     actualisation()
 

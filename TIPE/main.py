@@ -126,7 +126,6 @@ def mouvementauto (M,point):
 
 
 
-
 #boucle principal
 defrect = False
 while running:
@@ -163,7 +162,7 @@ while running:
             Point[i].carré = (carréx, carréy)
             path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))]
 
-        Pointactif.append(Point[0])
+        Point[0].actif = True
 
 
         defrect = True
@@ -180,23 +179,33 @@ while running:
             for j in range(len(path[i])):
                 pg.draw.circle(ecran, (255, 0, 255), (path[i][j][0] * taillecarre, path[i][j][1] * taillecarre), 2)
 
+        actif=[]
+        for i in range(len(Point)):
+            if Point[i].actif ==True:
+                actif.append(i)
+
+        aretirer=[]
+        for i in actif:                                                                 #mouvement des points
+            if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
+                mouvementauto(path[i], Point[i])
+
+            elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
+                if Point[i].compteur + 2 < len(path[i]):
+                    Point[i].compteur += 1
+            if Point[i].centre == [path[i][-1][0] * taillecarre + taillecarre / 2,path[i][-1][1] * taillecarre + taillecarre / 2]:
+                aretirer.append(i)
+
+            ecran.blit(Point[i].image, Point[i].rect)
+        pg.display.flip()
 
 
-        for i in range(len(Pointactif)):                                                                 #mouvement des points
-            if Pointactif[i].centre != [path[i][Pointactif[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Pointactif[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
-                mouvementauto(path[i], Pointactif[i])
 
-
-            elif Pointactif[i].centre == list((path[i][Pointactif[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Pointactif[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
-                if Pointactif[i].compteur + 2 < len(path[i]):
-                    Pointactif[i].compteur += 1
-            for i in range(len(Pointactif)):
-                ecran.blit(Point[i].image, Point[i].rect)
-            pg.display.flip()
         compteur = compteur + 1
 
         if compteur%frequence==0 and compteur//frequence<len(Point) :
-            Pointactif.append(Point[compteur//frequence])
+            Point[compteur//frequence].actif= True
+        for i in aretirer:
+            Point[i].actif = False
 
 
 
@@ -206,8 +215,6 @@ while running:
                 print(matricecontact)
                 print(listeposcontact)
                 pg.quit()
-
-
 
 
 

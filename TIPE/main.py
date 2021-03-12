@@ -9,18 +9,26 @@ import numpy as np
 
 fichierimage = "assets/maquettehall1.jpg"
 imageSource = Image.open(fichierimage)
+$
 nbrpoint=20
 frequence = 20
 pg.init() #lancement pygame
 taillecarre = 6
 ecranx = imageSource.size[0] * taillecarre
+distancesecu=10
+
 couleurcase = (100, 100, 100)
 distancesecu=10
 
-pg.display.set_caption("Test")
 
+
+
+
+pg.init() #lancement pygame
+pg.display.set_caption("Test")
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
+
 Pointactif =[]
 listeposcontact=[]
 #fonction créer rectangle à partir clique souris
@@ -80,24 +88,23 @@ matricecontact=np.zeros((nbrpoint,nbrpoint))
 
 
 #actualiser position points
+
+
 def actualisation():
-    for i in range(len(Point)):
+    for i in range(nbrpoint):
         Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
         Point[i].centre[1] = Point[i].rect.y + Point[i].taille / 2
-    for i in range(nbrpoint):
     # cette notation permet d'obtenir la matrice de contact telle que l'on ne calcule pas deux fois la même distance et test entre pts différents
-           for j in range(i + 1, nbrpoint):
-                x1 = Point[i].rect.x
-                y1 = Point[i].rect.y
-                x2 = Point[j].rect.x
-                y2 = Point[j].rect.y
-                if alertecovid(x1, y1, x2, y2):
-                    if matricecontact[i,j]==0:
-                        listeposcontact.append([(x1+x2)/2,(y1+y2)/2])
-                    matricecontact[i, j] = 1
-                    matricecontact[j, i] = 1
-
-
+	for j in range(i + 1, nbrpoint):
+        x1 = Point[i].rect.x
+        y1 = Point[i].rect.y
+        x2 = Point[j].rect.x
+        y2 = Point[j].rect.y
+        if alertecovid(x1, y1, x2, y2):
+            if matricecontact[i,j]==0:
+                listeposcontact.append([(x1+x2)/2,(y1+y2)/2])
+            matricecontact[i, j] = 1
+            matricecontact[j, i] = 1
 
 
 
@@ -111,10 +118,8 @@ pressed = True
 running = True
 #fonction permettant le pouvement de chaque point
 def mouvementauto (M,point):
-    pas = 1
-
-
-
+    pas =1
+   
     if ((M[point.compteur+pas][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
         point.rect.x -= pas
     elif ((M[point.compteur+pas][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
@@ -123,6 +128,7 @@ def mouvementauto (M,point):
         point.rect.y -= pas
     elif ((M[point.compteur+pas ][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
         point.rect.y += pas
+
     actualisation()
 
 
@@ -162,10 +168,10 @@ while running:
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
+
             path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))]
 
         Point[0].actif = True
-
 
         defrect = True
     else:

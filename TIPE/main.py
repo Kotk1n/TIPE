@@ -2,25 +2,27 @@ import pygame as pg
 from entité import Player
 from grille import astar
 import random
-from transfoimage import transfoimage
+from transfoimage import transfoimage,pixelisation
 from PIL import Image
 import random
 import numpy as np
 
-fichierimage = "assets/maquettehall1.jpg"
+fichierimage = "assets/hallcarré.jpg"
 imageSource = Image.open(fichierimage)
+(ImagePixellisé,MatriceImageP)=pixelisation(imageSource,120)
+print("ok")
 nbrpoint=20
 frequence = 20
 pg.init() #lancement pygame
 taillecarre = 6
-ecranx = imageSource.size[0] * taillecarre
+ecranx = ImagePixellisé.size[0]
 couleurcase = (100, 100, 100)
 distancesecu=10
 
-pg.display.set_caption("Test")
+pg.display.set_caption("Gros Fils de Pute ")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
-imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
+imagefond = pg.image.load("assets/hallcarré.jpg") # choix image fond d'ecran
 Pointactif =[]
 listeposcontact=[]
 #fonction créer rectangle à partir clique souris
@@ -49,7 +51,7 @@ nbrrect = input("Nombre de rect")
 #création labi, obstacle
 labi =[]
 #labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
-labi = transfoimage(imageSource)
+labi = MatriceImageP
 
 
 obstacle =[]

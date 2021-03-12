@@ -34,6 +34,7 @@ def transfoimage(imageSource):
 def pixelisation(image, n):
     # image, et taille des nouveaux "pixels" attention , n doit être un multiple de la taille de l'image.
     ImageP = np.zeros((n, n))
+
     # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     image = image.convert("L")
     # on récupère la taille de l'image
@@ -53,7 +54,27 @@ def pixelisation(image, n):
                 ImageP[X][Y] = 1
             else:
                 ImageP[X][Y] = 0
-    return (ImageP)
+    #pour éviter les diagonales
+    for X in range(1,n-1):
+        for Y in range(1,n-1):
+            if ImageP[X][Y]==0:
+                if ImageP[X + 1][Y - 1] == 0 or ImageP[X - 1][Y - 1] == 0:
+                    ImageP[X][Y-1]=0
+
+    print (ImageP)
+    img = Image.new('RGB', (tailleimage, tailleimage), color='white')
+    for X in range(n):
+        for Y in range(n):
+            for k in range(taillepixel):
+                for l in range(taillepixel):
+                    if ImageP[X][Y] == 0:
+                        img.putpixel((k + X * taillepixel, l + Y * taillepixel), (0, 0, 0, 255))
+
+
+                    elif ImageP[X][Y] == 1:
+                        img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
+    img.show()
+    return (img,ImageP)
 
 '''
 # Imageshow=pixelisation(imageSource,120)

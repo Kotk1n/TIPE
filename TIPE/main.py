@@ -107,7 +107,7 @@ def actualisation():
                     matricecontact[i, j] = 1
                     matricecontact[j, i] = 1
 
-
+    
 
 
 

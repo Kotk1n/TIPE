@@ -136,11 +136,11 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.astar" />
+      <item itemvalue="Python.bdd" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.transfo image" />
       <item itemvalue="Python.transfoimage" />
-      <item itemvalue="Python.astar" />
-      <item itemvalue="Python.bdd" />
     </list>
     <recent_temporary>
       <list>

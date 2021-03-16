@@ -1,14 +1,14 @@
 import sqlite3
-from sqlite3 import Error
+con = sqlite3.connect('test.db')
+def remisea0 ():
+    cur = con.cursor()
+    cur.execute("delete from evenements")
+    con.commit()
 
-def create_connection(path):
-    connection = None
-    try:
-        connection = sqlite3.connect(path)
-        print("Connection to SQLite DB successful")
-    except Error as e:
-        print(f"The error '{e}' occurred")
 
-    return connection
 
-create_connection('test.db')
+def enregistrement(t,p1,p2,x,y):
+    cur=con.cursor()
+    cur.execute("insert into evenements values ({},{},{},{},{})".format(t,p1,p2,x,y))
+    con.commit()
+

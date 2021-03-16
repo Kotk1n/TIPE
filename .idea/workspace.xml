@@ -51,6 +51,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="bdd" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TIPEcirculation - Copie - Copie" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TIPE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/bdd.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -115,14 +136,16 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.astar" />
+      <item itemvalue="Python.bdd" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.transfo image" />
       <item itemvalue="Python.transfoimage" />
-      <item itemvalue="Python.astar" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.bdd" />
         <item itemvalue="Python.astar" />
         <item itemvalue="Python.transfoimage" />
         <item itemvalue="Python.transfo image" />
@@ -145,66 +168,58 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="223" y="87" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1613726079166" />
-    <state x="528" y="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1607074974621">
+    <state x="534" y="234" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1615577721370">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="528" y="302" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.864@0.0.1536.864" timestamp="1607074974621" />
+    <state x="534" y="234" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1615577721370" />
     <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1613759731674">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1613759731674" />
-    <state width="1514" height="150" key="GridCell.Tab.0.bottom" timestamp="1613920656837">
+    <state width="1514" height="150" key="GridCell.Tab.0.bottom" timestamp="1615895443418">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="150" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1613920656837" />
-    <state width="1514" height="150" key="GridCell.Tab.0.center" timestamp="1613920656837">
+    <state width="1514" height="150" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1615895443418" />
+    <state width="1514" height="150" key="GridCell.Tab.0.center" timestamp="1615895443418">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="150" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1613920656837" />
-    <state width="1514" height="150" key="GridCell.Tab.0.left" timestamp="1613920656837">
+    <state width="1514" height="150" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1615895443418" />
+    <state width="1514" height="150" key="GridCell.Tab.0.left" timestamp="1615895443418">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="150" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1613920656837" />
-    <state width="1514" height="150" key="GridCell.Tab.0.right" timestamp="1613920656837">
+    <state width="1514" height="150" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1615895443418" />
+    <state width="1514" height="150" key="GridCell.Tab.0.right" timestamp="1615895443418">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="150" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1613920656837" />
-    <state width="1514" height="300" key="GridCell.Tab.1.bottom" timestamp="1613919323859">
+    <state width="1514" height="150" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1615895443418" />
+    <state width="1514" height="300" key="GridCell.Tab.1.bottom" timestamp="1615894478547">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1613919323859" />
-    <state width="1514" height="300" key="GridCell.Tab.1.center" timestamp="1613919323859">
+    <state width="1514" height="300" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1615894478547" />
+    <state width="1514" height="300" key="GridCell.Tab.1.center" timestamp="1615894478547">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1613919323859" />
-    <state width="1514" height="300" key="GridCell.Tab.1.left" timestamp="1613919323859">
+    <state width="1514" height="300" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1615894478547" />
+    <state width="1514" height="300" key="GridCell.Tab.1.left" timestamp="1615894478547">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1613919323859" />
-    <state width="1514" height="300" key="GridCell.Tab.1.right" timestamp="1613919323859">
+    <state width="1514" height="300" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1615894478547" />
+    <state width="1514" height="300" key="GridCell.Tab.1.right" timestamp="1615894478547">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1613919323859" />
-    <state x="277" y="77" key="SettingsEditor" timestamp="1606476020790">
+    <state width="1514" height="300" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1615894478547" />
+    <state x="277" y="77" key="SettingsEditor" timestamp="1615579626006">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1606476020790" />
+    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1615579626006" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1613756819025">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1536.864@0.0.1536.864" timestamp="1613756819025" />
-    <state width="775" height="439" key="XDebugger.FullValuePopup" timestamp="1605867866508">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="775" height="439" key="XDebugger.FullValuePopup/0.0.1536.864@0.0.1536.864" timestamp="1605867866508" />
     <state x="-6" y="0" width="781" height="870" maximized="true" key="dock-window-1" timestamp="1613125092526">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="-6" y="0" width="781" height="870" maximized="true" key="dock-window-1/0.0.1536.864@0.0.1536.864" timestamp="1613125092526" />
-    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1606477273957">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="430" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1606477273957" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

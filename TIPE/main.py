@@ -2,27 +2,29 @@ import pygame as pg
 from entité import Player
 from grille import astar
 import random
-from transfoimage import transfoimage,pixelisation
+from transfoimage import transfoimage
 from PIL import Image
 import random
 import numpy as np
+from bdd import enregistrement
+from bdd import remisea0
+import sqlite3
 
-fichierimage = "assets/hallcarré.jpg"
+
+fichierimage = "assets/maquettehall1.jpg"
 imageSource = Image.open(fichierimage)
-(ImagePixellisé,MatriceImageP)=pixelisation(imageSource,120)
-print("ok")
-nbrpoint=20
+nbrpoint=2
 frequence = 20
 pg.init() #lancement pygame
 taillecarre = 6
-ecranx = ImagePixellisé.size[0]
+ecranx =720
 couleurcase = (100, 100, 100)
-distancesecu=10
+distancesecu=100
 
-pg.display.set_caption("Gros Fils de Pute ")
+pg.display.set_caption("Test")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
-imagefond = pg.image.load("assets/hallcarré.jpg") # choix image fond d'ecran
+imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 Pointactif =[]
 listeposcontact=[]
 #fonction créer rectangle à partir clique souris
@@ -44,6 +46,10 @@ def creation(n):
         print(i+1)
     return (Zonedep)
 
+
+
+
+
 nbrrect = input("Nombre de rect")
 
 
@@ -51,8 +57,9 @@ nbrrect = input("Nombre de rect")
 #création labi, obstacle
 labi =[]
 #labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
-labi = MatriceImageP
+labi = transfoimage(imageSource)
 
+remisea0()
 
 obstacle =[]
 coorddepart = []
@@ -86,20 +93,21 @@ def actualisation():
     for i in range(len(Point)):
         Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
         Point[i].centre[1] = Point[i].rect.y + Point[i].taille / 2
-    for i in range(nbrpoint):
+    for i in range (len(actif)):
     # cette notation permet d'obtenir la matrice de contact telle que l'on ne calcule pas deux fois la même distance et test entre pts différents
-           for j in range(i + 1, nbrpoint):
-                x1 = Point[i].rect.x
-                y1 = Point[i].rect.y
-                x2 = Point[j].rect.x
-                y2 = Point[j].rect.y
+           for j in range(i + 1, len(actif)):
+                x1 = Point[actif[i]].rect.x
+                y1 = Point[actif[i]].rect.y
+                x2 = Point[actif[j]].rect.x
+                y2 = Point[actif[j]].rect.y
                 if alertecovid(x1, y1, x2, y2):
                     if matricecontact[i,j]==0:
                         listeposcontact.append([(x1+x2)/2,(y1+y2)/2])
+                        enregistrement(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
                     matricecontact[i, j] = 1
                     matricecontact[j, i] = 1
 
-
+    
 
 
 
@@ -115,15 +123,13 @@ running = True
 def mouvementauto (M,point):
     pas = 1
 
-
-
-    if ((M[point.compteur+pas][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
-        point.rect.x -= pas
-    elif ((M[point.compteur+pas][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
+    if ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x < 0:
+        point.rect.x += -pas
+    elif ((M[point.compteur+1][0]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.x > 0:
         point.rect.x += pas
-    if ((M[point.compteur+pas][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
-        point.rect.y -= pas
-    elif ((M[point.compteur+pas ][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
+    if ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y < 0:
+        point.rect.y += -pas
+    elif ((M[point.compteur+1][1]*taillecarre + taillecarre/2) - point.taille /2)- point.rect.y > 0:
         point.rect.y += pas
     actualisation()
 

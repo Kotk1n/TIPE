@@ -13,7 +13,7 @@ import sqlite3
 
 fichierimage = "assets/maquettehall1.jpg"
 imageSource = Image.open(fichierimage)
-nbrpoint=2
+nbrpoint=20
 frequence = 20
 pg.init() #lancement pygame
 taillecarre = 6

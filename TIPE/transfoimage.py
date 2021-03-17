@@ -7,7 +7,7 @@ import numpy as np
 
 
  """
-fichierimage = "assets/maquettehall1.jpg"
+fichierimage = "assets/hallcarré.jpg"
 imageSource = Image.open(fichierimage)
 taillepixel = 120
 
@@ -73,24 +73,12 @@ def pixelisation(image, n):
 
                     elif ImageP[X][Y] == 1:
                         img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
-    img.show()
+    img = img.save("imagepixel.png")
     return (img,ImageP)
-
-'''
-# Imageshow=pixelisation(imageSource,120)
-Imageshow = transfoimage(imageSource)
-tailleimageshow = len(Imageshow)
-print(len(Imageshow))
-
-img = Image.new('RGB', (tailleimageshow, tailleimageshow), color='white')
-
-for X in range(tailleimageshow):
-    for Y in range(tailleimageshow):
-
-        if Imageshow[X][Y] == 0:
-            img.putpixel((X, Y), (0, 0, 0, 255))
-        elif Imageshow[X][Y] == 1:
-            img.putpixel((X, Y), (200, 200, 200, 255))
-
-img.show()
-'''
+"""
+lienimage="assets/hallcarré.jpg"
+(Imageshow,k)=pixelisation(imageSource,120)
+#Imageshow = transfoimage(imageSource)
+Imageshow=Image.open("imagepixel.png")
+Imageshow.show()
+"""

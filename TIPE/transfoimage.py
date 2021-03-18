@@ -74,7 +74,7 @@ def pixelisation(image, n):
                     elif ImageP[X][Y] == 1:
                         img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
     img = img.save("imagepixel.png")
-    return (img,ImageP)
+    return (ImageP)
 """
 lienimage="assets/hallcarré.jpg"
 (Imageshow,k)=pixelisation(imageSource,120)

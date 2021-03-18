@@ -13,10 +13,10 @@ import sqlite3
 
 fichierimage = "assets/hallcarré.png"
 imageSource = Image.open(fichierimage)
-(image,labi)=pixelisation(imageSource,120)
+labi=pixelisation(imageSource,120)
 
-
-image=pg.image.load("imagepixel.png")
+image=pg.image.load(fichierimage)
+imagep=pg.image.load("imagepixel.png")
 
 nbrpoint=5
 frequence = 20
@@ -45,6 +45,7 @@ def creerrect():
 
 #regroupement des zones
 def creation(n):
+
     Zonedep=[]
     for i in range(int(n)):
         Zonedep.append(creerrect())
@@ -148,10 +149,10 @@ while running:
     if defrect==False:
     #partie calcul
         ecran.blit(image, (0, 0))   #  affichage image blanche fond
-
+        """
         for i in range(len(obstacle)):
             pg.draw.rect(ecran, (0, 0, 0),(obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre)) # affichage obstacle
-
+        """
         pg.display.flip() #actualisation écran
         Point = []
         Zonedep = creation(nbrrect) #création des rect

@@ -18,13 +18,13 @@ labi=pixelisation(imageSource,120)
 image=pg.image.load(fichierimage)
 imagep=pg.image.load("imagepixel.png")
 
-nbrpoint=5
-frequence = 20
+nbrpoint=20
+frequence = 50
 pg.init() #lancement pygame
 taillecarre = 6
 ecranx =720
 couleurcase = (100, 100, 100)
-distancesecu=100
+distancesecu=30
 
 pg.display.set_caption("Test")
 
@@ -87,7 +87,7 @@ CoordDepArr=[]
 def alertecovid(x1,y1,x2,y2):
     global distancesecu,taillecarre
     contact=False
-    if np.sqrt(((x1-x2)**2)+((y1-y2)**2))<(taillecarre)+distancesecu:
+    if np.sqrt(((x1-x2)**2)+((y1-y2)**2))<((taillecarre)+distancesecu):
         contact=True
     return (contact)
 
@@ -112,8 +112,11 @@ def actualisation():
                         enregistrement(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
                     matricecontact[i, j] = 1
                     matricecontact[j, i] = 1
+                    if Point[actif[i]].infecte or Point[actif[j]].infecte:
+                        Point[actif[i]].infecte = True
+                        Point[actif[j]].infecte = True
 
-    
+
 
 
 
@@ -169,16 +172,18 @@ while running:
             x2 = random.randint(rectar[0], rectar[0] + rectar[2])
             y2 = random.randint(rectar[1], rectar[1] + rectar[3])
             Point.append(Player(x1, y1, x2, y2,taillecarre))
-
+        pointfait=0
+        pointtot=len(Point)
         path = []
         # définition du centre des points et on leur associe à tous un path grâce au A*
         for i in range(len(Point)):
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
-            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))]
-
+            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre),pointfait,pointtot)]
+            pointfait+=1
         Point[0].actif = True
+        Point[0].infecte = True
 
 
         defrect = True
@@ -213,8 +218,10 @@ while running:
                     Point[i].compteur += 1
             if Point[i].centre == [path[i][-1][0] * taillecarre + taillecarre / 2,path[i][-1][1] * taillecarre + taillecarre / 2]:
                 aretirer.append(i)
-
-            ecran.blit(Point[i].image, Point[i].rect)
+            if Point[i].infecte:
+                ecran.blit(Point[i].imageinf, Point[i].rect)
+            else:
+                ecran.blit(Point[i].image, Point[i].rect)
         pg.display.flip()
 
 

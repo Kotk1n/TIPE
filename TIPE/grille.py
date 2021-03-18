@@ -13,7 +13,7 @@ class Case():
         return self.position == other.position
 
 
-def astar(labi, debut, fin):
+def astar(labi, debut, fin,pointfait,pointot):
 
 
     # créer début fin
@@ -66,7 +66,7 @@ def astar(labi, debut, fin):
 
             # Vérifie que pas un obstacle
             if labi[case_pos[0]][case_pos[1]] ==0:
-                print("recherche du chemin")
+                print("recherche du chemin",pointfait,"sur",pointot)
 
                 continue
 

@@ -7,6 +7,7 @@ class Player(pg.sprite.Sprite):
         self.velocity = 1.5
         self.taille = 10
         self.image = pg.transform.scale(pg.image.load("assets/cercle.png"),(self.taille,self.taille))
+        self.imageinf = pg.transform.scale(pg.image.load("assets/cerclerouge.png"),(self.taille,self.taille))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -16,6 +17,8 @@ class Player(pg.sprite.Sprite):
         self.centre = [self.rect.x + self.taille/2,self.rect.y + self.taille/2]
         self.actif = (False,-1,-1)
         self.tempsactivite =[-1,-1]
+        self.infecte = False
+        self.tempsinf = [-1,-1]
 
 
     def move_right (self):

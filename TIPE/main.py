@@ -2,7 +2,7 @@ import pygame as pg
 from entité import Player
 from grille import astar
 import random
-from transfoimage import transfoimage
+from transfoimage import transfoimage,pixelisation
 from PIL import Image
 import random
 import numpy as np
@@ -11,9 +11,14 @@ from bdd import remisea0
 import sqlite3
 
 
-fichierimage = "assets/maquettehall1.jpg"
+fichierimage = "assets/hallcarré.png"
 imageSource = Image.open(fichierimage)
-nbrpoint=20
+labi=pixelisation(imageSource,120)
+
+image=pg.image.load(fichierimage)
+imagep=pg.image.load("imagepixel.png")
+
+nbrpoint=5
 frequence = 20
 pg.init() #lancement pygame
 taillecarre = 6
@@ -24,7 +29,7 @@ distancesecu=100
 pg.display.set_caption("Test")
 
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
-imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
+#imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
 Pointactif =[]
 listeposcontact=[]
 #fonction créer rectangle à partir clique souris
@@ -40,6 +45,7 @@ def creerrect():
 
 #regroupement des zones
 def creation(n):
+
     Zonedep=[]
     for i in range(int(n)):
         Zonedep.append(creerrect())
@@ -53,12 +59,12 @@ def creation(n):
 nbrrect = input("Nombre de rect")
 
 
-
+"""
 #création labi, obstacle
 labi =[]
 #labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
-labi = transfoimage(imageSource)
-
+labi = pixelisation(imagePixelisé)
+"""
 remisea0()
 
 obstacle =[]
@@ -142,11 +148,11 @@ while running:
 
     if defrect==False:
     #partie calcul
-        ecran.blit(imagefond, (0, 0))   #  affichage image blanche fond
-
+        ecran.blit(image, (0, 0))   #  affichage image blanche fond
+        """
         for i in range(len(obstacle)):
             pg.draw.rect(ecran, (0, 0, 0),(obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre)) # affichage obstacle
-
+        """
         pg.display.flip() #actualisation écran
         Point = []
         Zonedep = creation(nbrrect) #création des rect
@@ -179,18 +185,19 @@ while running:
     else:
     #partie affichage
 
-        ecran.blit(imagefond, (0, 0))
+        ecran.blit(image, (0, 0))
 
+        for i in range(len(Zonedep)):                                                          #affichage Zone de départ
+            pg.draw.rect(ecran,(255,255,0),Zonedep[i])
+        """
         for i in range(len(obstacle)):                                                       #affichage obstacle
             pg.draw.rect(ecran, (0, 0, 0),
                          (obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre))
-        for i in range(len(Zonedep)):                                                          #affichage Zone de départ
-            pg.draw.rect(ecran,(255,255,0),Zonedep[i])
-        '''
+
         for i in range (len(path)):                                                                   #affichage du chemin
             for j in range(len(path[i])):
                 pg.draw.circle(ecran, (255, 0, 255), (path[i][j][0] * taillecarre, path[i][j][1] * taillecarre), 2)
-        '''
+        """
         actif=[]
         for i in range(len(Point)):
             if Point[i].actif ==True:

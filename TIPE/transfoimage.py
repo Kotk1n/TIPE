@@ -16,7 +16,7 @@ def transfoimage(imageSource):
     # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     Image = imageSource.convert("L")
     (taille, taille) = Image.size
-    print("taille de l'image=", Image.size)
+
     MatriceImage = np.zeros((taille, taille))
     for X in range(taille):
         for Y in range(taille):
@@ -61,7 +61,7 @@ def pixelisation(image, n):
                 if ImageP[X + 1][Y - 1] == 0 or ImageP[X - 1][Y - 1] == 0:
                     ImageP[X][Y-1]=0
 
-    print (ImageP)
+
     img = Image.new('RGB', (tailleimage, tailleimage), color='white')
     for X in range(n):
         for Y in range(n):

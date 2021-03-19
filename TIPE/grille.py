@@ -87,15 +87,14 @@ def astar(labi, debut, fin,pointfait,pointot):
             # calcul h ,f ,g
             i.g = caseactuelle.g + 1
             i.h = ((i.position[0] - arrivee.position[0]) ** 2) + ((i.position[1] - arrivee.position[1]) ** 2)
-            i.f = i.g + i.h
+            i.f =  i.g + i.h
 
 
             for open_node in open_list:
                 if i == open_node and i.g > open_node.g:
                     continue
 
-            if i not in open_list:
-                open_list.append(i)
+            open_list.append(i)
 
 
 

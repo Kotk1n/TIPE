@@ -18,7 +18,7 @@ labi=pixelisation(imageSource,120)
 image=pg.image.load(fichierimage)
 imagep=pg.image.load("imagepixel.png")
 
-nbrpoint=20
+nbrpoint=5
 frequence = 50
 pg.init() #lancement pygame
 taillecarre = 6

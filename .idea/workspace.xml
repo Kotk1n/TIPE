@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eea5ed4c-a224-47b0-9350-be25451111ef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/TIPEcirculation - Copie - Copie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TIPEcirculation - Copie - Copie.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TIPE/grille.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/grille.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TIPE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/main.py" afterDir="false" />

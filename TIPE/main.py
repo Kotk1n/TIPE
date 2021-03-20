@@ -45,13 +45,20 @@ def creerrect():
 def creerfleches():
     tempo=True
     fleche=[]
+    dessiner = False
     while tempo:
         for event in pg.event.get():
-            if event.type == pg.MOUSEBUTTONUP:
-                point=pg.mouse.get_pos()
-                fleche.append(point)
-                if point in fleche:
+            if event.type == pg.MOUSEMOTION:
+                if dessiner==True:
+                    point=pg.mouse.get_pos()
+                    if point not in fleche:
+                        fleche.append(point)
+            if event.type == pg.MOUSEBUTTONUP :
+                if dessiner==False:
+                    dessiner=True
+                else:
                     tempo=False
+
     print(fleche)
     return(fleche)
 
@@ -69,7 +76,23 @@ def creationfleches(n):
     for i in range(int(n)):
         fleches.append(creerfleches())
         print(i+1)
+        for j in range(len(fleches[i])):
+            print("normalement ça print des cercles")
+            pg.draw.circle(ecran, (255, 0, 100), (fleches[i][j][0] , fleches[i][j][1]), 2)
+            pg.display.flip()
+
     return (fleches)
+def pixellisationfleches(fleches):
+#transforme la liste des fleches en la bonne résolution
+    for f in fleches:
+        for k in range(len((f))):
+            f[k]=(f[k][0]//taillecarre,f[k][1]//taillecarre)
+#enlever les fleches en double
+    for f in fleches:
+        f = list(set(f))
+    return (fleches)
+
+
 
 
 
@@ -193,31 +216,39 @@ while running:
             x2 = random.randint(rectar[0], rectar[0] + rectar[2])
             y2 = random.randint(rectar[1], rectar[1] + rectar[3])
             Point.append(Player(x1, y1, x2, y2,taillecarre))
-        pointfait=0
-        pointtot=len(Point)
+
+
+
+        defrect = True
+    elif deffleche==False:
+        print("dans deffleche")
+        ecran.blit(image, (0, 0))
+        for i in range(len(Zonedep)):                                                          #affichage Zone de départ
+            pg.draw.rect(ecran,(255,255,0),Zonedep[i])
+        pg.display.flip()
+        fleches=creationfleches(nbrfleche)
+        flechesP=pixellisationfleches(fleches)
+        print("flechesP",flechesP)
+        print("fini fleches")
+
+        deffleche=True
+        print("fini avec les fleches")
+        # partie calcul chemin
+        pointfait = 0
+        pointtot = len(Point)
         path = []
         # définition du centre des points et on leur associe à tous un path grâce au A*
         for i in range(len(Point)):
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
-            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre),pointfait,pointtot)]
-            pointfait+=1
+            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre),
+                                 (Point[i].arrivé[0] // taillecarre, Point[i].arrivé[1] // taillecarre), pointfait,
+                                 pointtot,flechesP)]
+            pointfait += 1
         Point[0].actif = True
         Point[0].infecte = True
 
-
-        defrect = True
-    elif deffleche==False:
-        ecran.blit(image, (0, 0))
-        for i in range(len(Zonedep)):                                                          #affichage Zone de départ
-            pg.draw.rect(ecran,(255,255,0),Zonedep[i])
-        fleches=creationfleches(nbrfleche)
-        for f in fleches:
-            for k in len(f):
-                pg.draw.rect(ecran, (255, 255, 100), fleches[k])
-        deffleche=True
-        # partie calcul
     else:
     #partie affichage
 

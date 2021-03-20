@@ -12,6 +12,16 @@ class Case():
     def __eq__(self, other):
         return self.position == other.position
 
+def fleche (départ,arrivé,fleches):#fleches est la liste de toutes les fleches dans la map
+    for i in fleches:
+        if arrivé in i:
+            if départ in i:
+                if i.index(départ)<i.index(arrivé):
+                    return(1)
+                else:
+                    return(-1)
+    return(0)
+
 
 def astar(labi, debut, fin,pointfait,pointot):
 
@@ -87,7 +97,9 @@ def astar(labi, debut, fin,pointfait,pointot):
             # calcul h ,f ,g
             i.g = caseactuelle.g + 1
             i.h = ((i.position[0] - arrivee.position[0]) ** 2) + ((i.position[1] - arrivee.position[1]) ** 2)
+            #i.arrow=
             i.f = i.g + i.h
+            #i.f = i.g + i.h+iarrow
 
 
             for open_node in open_list:

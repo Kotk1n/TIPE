@@ -42,6 +42,18 @@ def creerrect():
                 tempo.append(pg.mouse.get_pos())
     rect = pg.Rect(tempo[0][0],tempo[0][1],tempo[1][0]-tempo[0][0],tempo[1][1]-tempo[0][1])
     return(rect)
+def creerfleches():
+    tempo=True
+    fleche=[]
+    while tempo:
+        for event in pg.event.get():
+            if event.type == pg.MOUSEBUTTONUP:
+                point=pg.mouse.get_pos()
+                fleche.append(point)
+                if point in fleche:
+                    tempo=False
+    print(fleche)
+    return(fleche)
 
 #regroupement des zones
 def creation(n):
@@ -51,13 +63,20 @@ def creation(n):
         Zonedep.append(creerrect())
         print(i+1)
     return (Zonedep)
+def creationfleches(n):
+
+    fleches=[]
+    for i in range(int(n)):
+        fleches.append(creerfleches())
+        print(i+1)
+    return (fleches)
 
 
 
 
 
 nbrrect = input("Nombre de rect")
-
+nbrfleche=input("Nombre de fléches")
 
 """
 #création labi, obstacle
@@ -147,6 +166,8 @@ def mouvementauto (M,point):
 
 #boucle principal
 defrect = False
+deffleche=False
+defchemin=False
 while running:
 
     if defrect==False:
@@ -187,6 +208,16 @@ while running:
 
 
         defrect = True
+    elif deffleche==False:
+        ecran.blit(image, (0, 0))
+        for i in range(len(Zonedep)):                                                          #affichage Zone de départ
+            pg.draw.rect(ecran,(255,255,0),Zonedep[i])
+        fleches=creationfleches(nbrfleche)
+        for f in fleches:
+            for k in len(f):
+                pg.draw.rect(ecran, (255, 255, 100), fleches[k])
+        deffleche=True
+        # partie calcul
     else:
     #partie affichage
 

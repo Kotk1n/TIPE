@@ -1,4 +1,30 @@
 from math import *
+import time
+import sqlite3
+from transfoimage import transfoimage,pixelisation
+from PIL import Image
+
+
+fichierimage = "assets/hallcarré.png"
+imageSource = Image.open(fichierimage)
+labi=pixelisation(imageSource,120)
+con = sqlite3.connect('test2.db')
+cur = con.cursor()
+
+
+
+def remisea0 ():
+
+    cur.execute("delete from astar2")
+    con.commit()
+
+remisea0()
+
+def enregistrement(version2,duree):
+    cur.execute("insert into astar2 values (?,?)",(version2,duree))
+    con.commit()
+
+
 class Case():
 
     def __init__(self, parent=None, position=None):
@@ -13,8 +39,8 @@ class Case():
         return self.position == other.position
 
 
-def astar(labi, debut, fin,pointfait,pointot):
-    w=2
+def astar(labi, debut, fin, pointfait, pointot, version):
+    w = 2
 
     # créer début fin
     depart = Case(None, debut)
@@ -29,9 +55,8 @@ def astar(labi, debut, fin,pointfait,pointot):
     # rajoute départ à liste ouverte
     open_list.append(depart)
 
-#Boucle jusque case d'arrivée
+    # Boucle jusque case d'arrivée
     while len(open_list) > 0:
-
 
         caseactuelle = open_list[0]
         current_numero = 0
@@ -40,7 +65,7 @@ def astar(labi, debut, fin,pointfait,pointot):
                 caseactuelle = case
                 current_numero = numero
 
-        #Rajoute la case traitée à la closed liste
+        # Rajoute la case traitée à la closed liste
         open_list.pop(current_numero)
         closed_list.append(caseactuelle)
 
@@ -49,25 +74,24 @@ def astar(labi, debut, fin,pointfait,pointot):
             chemin = []
             current = caseactuelle
             while current is not None:
-                chemin.append(current.position) #remonte la liste des cases parcourues
+                chemin.append(current.position)  # remonte la liste des cases parcourues
                 current = current.parent
-            return chemin[::-1]  #retourne la liste
+            return chemin[::-1]  # retourne la liste
 
         # génère enfant
         enfant = []
-        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0),(1,1),(1,-1),(-1,-1),(-1,1)]: # cases à coté ,
-
+        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0), (1, 1), (1, -1), (-1, -1), (-1, 1)]:  # cases à coté ,
 
             case_pos = (caseactuelle.position[0] + new_position[0], caseactuelle.position[1] + new_position[1])
 
             # Vérification bien dans labi
-            if case_pos[0] > (len(labi) - 1) or case_pos[0] < 0 or case_pos[1] > (len(labi[len(labi) - 1]) - 1) or case_pos[1] < 0:
+            if case_pos[0] > (len(labi) - 1) or case_pos[0] < 0 or case_pos[1] > (len(labi[len(labi) - 1]) - 1) or \
+                    case_pos[1] < 0:
                 continue
 
             # Vérifie que pas un obstacle
-            if labi[case_pos[0]][case_pos[1]] ==0:
+            if labi[case_pos[0]][case_pos[1]] == 0:
                 print("recherche du chemin",pointfait,"sur",pointot)
-
                 continue
 
             # crée nouveau noeud
@@ -88,51 +112,69 @@ def astar(labi, debut, fin,pointfait,pointot):
             i.g = caseactuelle.g + 1
             i.h = ((i.position[0] - arrivee.position[0]) ** 2) + ((i.position[1] - arrivee.position[1]) ** 2)
 
-            if i.g<(2*w-1)*i.h:
-                i.f=i.g+i.h                       # W* pwXU
+            if version == "XDP":
+                i.f = (1 / 2 * w) * (i.g + (2 * w - 1) * i.h + sqrt((i.g - i.h) * 2 + 4 * w * i.g * i.h))
+            elif version== "XUP":
+                i.f= (1/2*w)*(i.g+i.h+sqrt((i.g+i.h)**2 +4*w*(w-1)*i.h**2))
+            elif version == "PWXD":
+                if i.h > i.g:
+                    i.f = i.g + i.h  # W* pwXD
+                else:
+                    i.f = (i.g + 2 * (w - 1) * i.h) / w
             else:
-                i.f=(i.g+i.h)/w
+                if i.g < (2 * w - 1) * i.h:
+                    i.f = i.g + i.h  # W* pwXU
+                else:
+                    i.f = (i.g + i.h) / w
             '''
             (1/2*w)*(i.g+(2*w-1)*i.h+sqrt((i.g-i.h)*2+4*w*i.g*i.h)) W* XDP
             (1/2*w)*(i.g+i.h+sqrt((i.g+i.h)**2 +4*w*(w-1)*i.h**2)) W* XUP
-            
+
             if i.h>i.g:
                 i.f=i.g+i.h                       # W* pwXD
             else:
                 i.f=(i.g+2*(w-1)*i.h)/w
-                
+
             if i.g<(2*w-1)*i.h:
                 i.f=i.g+i.h                       # W* pwXU
             else:
                 i.f=(i.g+i.h)/w
-                
-            
-            
-            
             '''
+
+
+
+            
             for open_node in open_list:
                 if i == open_node and i.g > open_node.g:
                     continue
             if i not in open_list:
                 open_list.append(i)
+'''
+(106, 94) (6, 36)
+(105, 92) (4, 37)
+(5, 36) (106, 94)
+(6, 36) (106, 90)
+(105, 94) (3, 37)
 
 
+(6, 36) (7, 71)
 
+'''
+version = ["XUP","XDP","PWXD","PWXU"]
+duree=[]
 
+listetraj =[[(106, 94),(6, 36)],[(105, 92), (4, 37)],[(5, 36), (106, 94)]]
+for j in range (len(version)):
+    for i in range (len(listetraj)):
+        t1=time.time()
+        astar(labi,listetraj[i][0],listetraj[i][1],i,len(listetraj),version[j])
+        t2=time.time()
+        duree.append(t2-t1)
 
+    enregistrement(version[j],sum(duree)/len(duree))
+    duree=[]
+con.close()
 
-
-
-
-
-def main():
-    global path
-    path =[]
-
-
-
-
-
-if __name__ == '__main__':
-    main()
-
+print("fait")
+def moyenne(liste):
+    return somme(liste)/len(liste)

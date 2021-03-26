@@ -180,6 +180,7 @@ while running:
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
+            print((Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))
             path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre),pointfait,pointtot)]
             pointfait+=1
         Point[0].actif = True

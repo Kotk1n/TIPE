@@ -29,7 +29,7 @@
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.comparaison astar">
     <configuration name="astar" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -72,6 +72,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="comparaison astar" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TIPEcirculation - Copie - Copie" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TIPE" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/comparaison astar.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -85,27 +106,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="transfo image" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="TIPEcirculation - Copie - Copie" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TIPE" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/transfo image.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -139,16 +139,16 @@
       <item itemvalue="Python.astar" />
       <item itemvalue="Python.bdd" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.transfo image" />
       <item itemvalue="Python.transfoimage" />
+      <item itemvalue="Python.comparaison astar" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.comparaison astar" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.astar" />
         <item itemvalue="Python.bdd" />
         <item itemvalue="Python.transfoimage" />
-        <item itemvalue="Python.transfo image" />
       </list>
     </recent_temporary>
   </component>
@@ -176,22 +176,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1613759731674" />
-    <state width="1514" height="256" key="GridCell.Tab.0.bottom" timestamp="1616752701029">
+    <state width="1514" height="256" key="GridCell.Tab.0.bottom" timestamp="1616755928307">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="256" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1616752701029" />
-    <state width="1514" height="256" key="GridCell.Tab.0.center" timestamp="1616752701029">
+    <state width="1514" height="256" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1616755928307" />
+    <state width="1514" height="256" key="GridCell.Tab.0.center" timestamp="1616755928307">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="256" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1616752701029" />
-    <state width="1514" height="256" key="GridCell.Tab.0.left" timestamp="1616752701029">
+    <state width="1514" height="256" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1616755928307" />
+    <state width="1514" height="256" key="GridCell.Tab.0.left" timestamp="1616755928307">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="256" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1616752701029" />
-    <state width="1514" height="256" key="GridCell.Tab.0.right" timestamp="1616752701029">
+    <state width="1514" height="256" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1616755928307" />
+    <state width="1514" height="256" key="GridCell.Tab.0.right" timestamp="1616755928307">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1514" height="256" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1616752701029" />
+    <state width="1514" height="256" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1616755928307" />
     <state width="1514" height="300" key="GridCell.Tab.1.bottom" timestamp="1616752700858">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

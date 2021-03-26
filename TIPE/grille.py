@@ -1,4 +1,4 @@
-
+from math import *
 class Case():
 
     def __init__(self, parent=None, position=None):
@@ -14,7 +14,7 @@ class Case():
 
 
 def astar(labi, debut, fin,pointfait,pointot):
-
+    w=2
 
     # créer début fin
     depart = Case(None, debut)
@@ -87,14 +87,33 @@ def astar(labi, debut, fin,pointfait,pointot):
             # calcul h ,f ,g
             i.g = caseactuelle.g + 1
             i.h = ((i.position[0] - arrivee.position[0]) ** 2) + ((i.position[1] - arrivee.position[1]) ** 2)
-            i.f =  i.g + i.h
-
-
+            if i.g<(2*w-1)*i.h:
+                i.f=i.g+i.h                       # W* pwXU
+            else:
+                i.f=(i.g+i.h)/w
+            '''
+            (1/2*w)*(i.g+(2*w-1)*i.h+sqrt((i.g-i.h)*2+4*w*i.g*i.h)) W* XDP
+            (1/2*w)*(i.g+i.h+sqrt((i.g+i.h)**2 +4*w*(w-1)*i.h**2)) W* XUP
+            
+            if i.h>i.g:
+                i.f=i.g+i.h                       # W* pwXD
+            else:
+                i.f=(i.g+2*(w-1)*i.h)/w
+                
+            if i.g<(2*w-1)*i.h:
+                i.f=i.g+i.h                       # W* pwXU
+            else:
+                i.f=(i.g+i.h)/w
+                
+            
+            
+            
+            '''
             for open_node in open_list:
                 if i == open_node and i.g > open_node.g:
                     continue
-
-            open_list.append(i)
+            if i not in open_list:
+                open_list.append(i)
 
 
 

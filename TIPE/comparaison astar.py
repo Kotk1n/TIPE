@@ -20,8 +20,8 @@ def remisea0 ():
 
 remisea0()
 
-def enregistrement(version2,duree):
-    cur.execute("insert into astar2 values (?,?)",(version2,duree))
+def enregistrement(version2,duree,w):
+    cur.execute("insert into astar2 values (?,?,?)",(version2,duree,w))
     con.commit()
 
 
@@ -39,8 +39,7 @@ class Case():
         return self.position == other.position
 
 
-def astar(labi, debut, fin, pointfait, pointot, version):
-    w = 2
+def astar(labi, debut, fin, pointfait, pointot, version,w):
 
     # créer début fin
     depart = Case(None, debut)
@@ -91,7 +90,7 @@ def astar(labi, debut, fin, pointfait, pointot, version):
 
             # Vérifie que pas un obstacle
             if labi[case_pos[0]][case_pos[1]] == 0:
-                print("recherche du chemin",pointfait,"sur",pointot)
+                print("recherche du chemin",pointfait,"sur",pointot, "version", version, "w",w)
                 continue
 
             # crée nouveau noeud
@@ -157,24 +156,33 @@ def astar(labi, debut, fin, pointfait, pointot, version):
 (105, 94) (3, 37)
 
 
-(6, 36) (7, 71)
+(8, 72) (7, 36)
+(6, 37) (8, 72)
+(8, 71) (7, 37)
+(8, 71) (6, 35)
+(9, 71) (8, 37)
+
+
+
+
+
 
 '''
-version = ["XUP","XDP","PWXD","PWXU"]
+version = ["XDP","PWXD","PWXU"]
 duree=[]
 
-listetraj =[[(106, 94),(6, 36)],[(105, 92), (4, 37)],[(5, 36), (106, 94)]]
-for j in range (len(version)):
-    for i in range (len(listetraj)):
-        t1=time.time()
-        astar(labi,listetraj[i][0],listetraj[i][1],i,len(listetraj),version[j])
-        t2=time.time()
-        duree.append(t2-t1)
+listetraj =[[(8, 72) ,(7, 36)],[(6, 37) ,(8, 72)],[(8, 71) ,(7, 37)],[(8, 71), (6, 35)],[(9, 71) ,(8, 37)]]
+for k in range (1,10):
+    for j in range (len(version)):
+        for i in range (len(listetraj)):
+            t1=time.time()
 
-    enregistrement(version[j],sum(duree)/len(duree))
-    duree=[]
+            astar(labi,listetraj[i][0],listetraj[i][1],i,len(listetraj),version[j],k)
+            t2=time.time()
+            duree.append(t2-t1)
+            #enregistrement(version[j],t2-t1)
+        enregistrement(version[j],sum(duree)/len(duree),k)
+        duree=[]
 con.close()
 
 print("fait")
-def moyenne(liste):
-    return somme(liste)/len(liste)

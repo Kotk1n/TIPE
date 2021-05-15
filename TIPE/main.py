@@ -6,33 +6,50 @@ from transfoimage import transfoimage,pixelisation
 from PIL import Image
 import random
 import numpy as np
-from bdd import enregistrement
+from bdd import enregistrement_contact,enregistrement_durée,analyse_essai
 from bdd import remisea0
 import sqlite3
 
-
+#import de la "carte"
 fichierimage = "assets/hallcarré.png"
+#transformation de l'image au format de PIL
 imageSource = Image.open(fichierimage)
+#renvoi un tableau representant la carte avec 1 si la case est libre et 0 si la case est un obstacle
 labi=pixelisation(imageSource,120)
 
+#transformation de l'image au format de pygame
 image=pg.image.load(fichierimage)
 imagep=pg.image.load("imagepixel.png")
 
-nbrpoint=5
+#nombre d'individus simulés
+nbrpoint=50
+#la distance à laquelle deux individus risque une infection
+distancesecu=30
+#la fréquence d'apparition d'individu
 frequence = 50
+
 pg.init() #lancement pygame
+#la taille du carré qui représente un individu
 taillecarre = 6
+#on choisira une image en 720*720
 ecranx =720
 couleurcase = (100, 100, 100)
-distancesecu=30
 
-pg.display.set_caption("Test")
 
+
+#donne le nom de la fenétre
+pg.display.set_caption("Simulation épidémiologique")
+
+#renvoi la dimension de l'écran
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
-#imagefond = pg.image.load("assets/blanc.jpg") # choix image fond d'ecran
+
+# choix image fond d'ecran
+'''imagefond = pg.image.load("assets/blanc.jpg") '''
+
+
 Pointactif =[]
 listeposcontact=[]
-#fonction créer rectangle à partir clique souris
+#fonction qui créer des rectangles pygame à partir des cliques de la souris
 def creerrect():
     tempo = []
     while len(tempo)!=2:
@@ -42,8 +59,9 @@ def creerrect():
                 tempo.append(pg.mouse.get_pos())
     rect = pg.Rect(tempo[0][0],tempo[0][1],tempo[1][0]-tempo[0][0],tempo[1][1]-tempo[0][1])
     return(rect)
+#(possible que c'est rect soit fait automatiquement à l'aide d'un code couleur pour l'image )
 
-#regroupement des zones
+#fonction qui créer les n zones de départs duquel les individus proviennent.
 def creation(n):
 
     Zonedep=[]
@@ -56,21 +74,17 @@ def creation(n):
 
 
 
-nbrrect = input("Nombre de rect")
+nbrrect = input("Veuillez indiquer le nombre de zones de départs à créer")
 
+#réinitialise la base de données SQL
 
-"""
-#création labi, obstacle
-labi =[]
-#labi =[[0 for j in range (ecranx // taillecarre)] for i in range (ecranx // taillecarre)]
-labi = pixelisation(imagePixelisé)
-"""
 remisea0()
+
 
 obstacle =[]
 coorddepart = []
 
-#détection obstable labi
+#détection des obstables (murs et zones impratiquable) provenant de labi créer au dessus.
 for i in range(len(labi)):
     for j in range(len(labi)):
         if labi[i][j] == 0:
@@ -78,23 +92,24 @@ for i in range(len(labi)):
 
 
 
-
-compteur =0
-#création liste point
+#initialise le compteur , qui sera l'indicateur du "temps" dans notre simulation
+compteur = 0
+#création de la liste des point et de leurs coordonnées d'arrivées respectives.
 Point = []
 CoordDepArr=[]
 
+#alerte covid est la fonction qui renvoi si deux individus sont trop proche signifiant un contact dangereux.
 def alertecovid(x1,y1,x2,y2):
     global distancesecu,taillecarre
     contact=False
     if np.sqrt(((x1-x2)**2)+((y1-y2)**2))<((taillecarre)+distancesecu):
         contact=True
     return (contact)
-
+#créer la matrice qui representera les intéractions entre les points . 1 si il y a eux intéraction et 0 sinon.
 matricecontact=np.zeros((nbrpoint,nbrpoint))
 
 
-#actualiser position points
+#fonction qui actualise la position des individus sur la representation pygame.
 def actualisation():
     for i in range(len(Point)):
         Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
@@ -109,7 +124,7 @@ def actualisation():
                 if alertecovid(x1, y1, x2, y2):
                     if matricecontact[i,j]==0:
                         listeposcontact.append([(x1+x2)/2,(y1+y2)/2])
-                        enregistrement(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
+                        enregistrement_contact(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
                     matricecontact[i, j] = 1
                     matricecontact[j, i] = 1
                     if Point[actif[i]].infecte or Point[actif[j]].infecte:
@@ -126,9 +141,12 @@ def actualisation():
 
 
 pressed = True
+
+
 #lancement fenêtre
 running = True
-#fonction permettant le pouvement de chaque point
+
+#fonction permettant le mouvement de chaque point
 def mouvementauto (M,point):
     pas = 1
 
@@ -191,6 +209,7 @@ while running:
     else:
     #partie affichage
 
+
         ecran.blit(image, (0, 0))
 
         for i in range(len(Zonedep)):                                                          #affichage Zone de départ
@@ -208,6 +227,11 @@ while running:
         for i in range(len(Point)):
             if Point[i].actif ==True:
                 actif.append(i)
+        if len(actif) == 0:
+            print(matricecontact)
+            print(listeposcontact)
+            analyse_essai()
+            pg.quit()
 
         aretirer=[]
         for i in actif:                                                                 #mouvement des points
@@ -229,12 +253,14 @@ while running:
 
         compteur = compteur + 1
 
+
         if compteur%frequence==0 and compteur//frequence<len(Point) :
             Point[compteur//frequence].actif= True
             Point[compteur // frequence].tempsactivite[0]=compteur
         for i in aretirer:
             Point[i].actif = False
             Point[i].tempsactivite[1]=compteur
+            enregistrement_durée(i,Point[i].tempsactivite)
 
 
 
@@ -243,6 +269,7 @@ while running:
                 running = False
                 print(matricecontact)
                 print(listeposcontact)
+                analyse_essai()
                 pg.quit()
 
 

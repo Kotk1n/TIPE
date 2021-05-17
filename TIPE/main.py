@@ -6,8 +6,10 @@ from transfoimage import transfoimage,pixelisation
 from PIL import Image
 import random
 import numpy as np
+"""
 from bdd import enregistrement_contact,enregistrement_durée,analyse_essai
 from bdd import remisea0
+"""
 import sqlite3
 
 #import de la "carte"
@@ -62,24 +64,49 @@ def creerrect():
 #(possible que c'est rect soit fait automatiquement à l'aide d'un code couleur pour l'image )
 
 #fonction qui créer les n zones de départs duquel les individus proviennent.
-def creation(n):
+def creation_porte(n):
 
     Zonedep=[]
     for i in range(int(n)):
         Zonedep.append(creerrect())
-        print(i+1)
+        print("la zone de départ",i+1,"a été créer")
     return (Zonedep)
 
+def creation_fleche(n):
+    Zonefleches = []
+    for i in range(int(n)):
+        fleche=creerrect()
+        print("la fleche", i + 1, "a été créer")
 
+        print("indiquer la direction de la zone fléchées")
+        direction=int(input())
+        Zonefleches.append((fleche,direction))
+    return(Zonefleches)
+
+
+
+def regroupement(i,j):
+    p=0.8
+    result = random.random()
+    if result < p:
+        tempspause = random.randint(4,40)*frequence
+        Point[i].pause = (True,compteur+tempspause)
+        Point[j].pause = (True,compteur+tempspause)
+        
+def testpause():
+    for i in range(len(Point)):
+        if compteur == Point[i].pause[1]:
+            Point[i].pause[0]=False
+            actif.append(i)
 
 
 
 nbrrect = input("Veuillez indiquer le nombre de zones de départs à créer")
-
+"""
 #réinitialise la base de données SQL
 
 remisea0()
-
+"""
 
 obstacle =[]
 coorddepart = []
@@ -90,7 +117,7 @@ for i in range(len(labi)):
         if labi[i][j] == 0:
             obstacle.append((i, j))
 
-
+nbrfleche=input("Veuillez indiquer le nombre de fléches à créer")
 
 #initialise le compteur , qui sera l'indicateur du "temps" dans notre simulation
 compteur = 0
@@ -114,6 +141,7 @@ def actualisation():
     for i in range(len(Point)):
         Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
         Point[i].centre[1] = Point[i].rect.y + Point[i].taille / 2
+    print(actif)
     for i in range (len(actif)):
     # cette notation permet d'obtenir la matrice de contact telle que l'on ne calcule pas deux fois la même distance et test entre pts différents
            for j in range(i + 1, len(actif)):
@@ -124,7 +152,9 @@ def actualisation():
                 if alertecovid(x1, y1, x2, y2):
                     if matricecontact[i,j]==0:
                         listeposcontact.append([(x1+x2)/2,(y1+y2)/2])
+                        """
                         enregistrement_contact(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
+                        """
                     matricecontact[i, j] = 1
                     matricecontact[j, i] = 1
                     if Point[actif[i]].infecte or Point[actif[j]].infecte:
@@ -165,6 +195,7 @@ def mouvementauto (M,point):
 
 #boucle principal
 defrect = False
+defleche = False
 while running:
 
     if defrect==False:
@@ -176,10 +207,10 @@ while running:
         """
         pg.display.flip() #actualisation écran
         Point = []
-        Zonedep = creation(nbrrect) #création des rect
+        Zonedep = creation_porte(nbrrect) #création des rect
 
 
-        #choix des coordonnées de dep et arr parmi les rects
+        #choix des coordonnées de depart et d'arrivées de chaque points parmi les rects
         for i in range(nbrpoint):
             rectdep = random.choice(Zonedep)
             x1 = random.randint(rectdep[0], rectdep[0] + rectdep[2])
@@ -198,14 +229,22 @@ while running:
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
-            print((Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))
+            print("les coordonnées de départ du point",i+1, "sont",(Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre),"et les coordonnées du point d'arrivée sont", (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))
             path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre),pointfait,pointtot)]
             pointfait+=1
+        #établi que la première personne est infécted
         Point[0].actif = True
         Point[0].infecte = True
 
 
         defrect = True
+    #créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
+        if defleche==False :
+            Zonefleches=creation_fleche(nbrfleche)
+
+
+
+
     else:
     #partie affichage
 
@@ -229,11 +268,10 @@ while running:
                 actif.append(i)
         if len(actif) == 0:
             print(matricecontact)
-            print(listeposcontact)
-            analyse_essai()
+            print("les coordonnées des points où il y a eu des contacts sont",listeposcontact)
             pg.quit()
 
-        aretirer=[]
+        pointaretirer=[]
         for i in actif:                                                                 #mouvement des points
             if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
                 mouvementauto(path[i], Point[i])
@@ -242,7 +280,7 @@ while running:
                 if Point[i].compteur + 2 < len(path[i]):
                     Point[i].compteur += 1
             if Point[i].centre == [path[i][-1][0] * taillecarre + taillecarre / 2,path[i][-1][1] * taillecarre + taillecarre / 2]:
-                aretirer.append(i)
+                pointaretirer.append(i)
             if Point[i].infecte:
                 ecran.blit(Point[i].imageinf, Point[i].rect)
             else:
@@ -257,10 +295,18 @@ while running:
         if compteur%frequence==0 and compteur//frequence<len(Point) :
             Point[compteur//frequence].actif= True
             Point[compteur // frequence].tempsactivite[0]=compteur
-        for i in aretirer:
+        for i in pointaretirer:
             Point[i].actif = False
             Point[i].tempsactivite[1]=compteur
+        for i in actif:
+            if Point[i].pause[0] == True:
+                actif.remove(i)
+
+
+
+            """
             enregistrement_durée(i,Point[i].tempsactivite)
+            """
 
 
 
@@ -268,8 +314,10 @@ while running:
             if event.type == pg.QUIT:
                 running = False
                 print(matricecontact)
-                print(listeposcontact)
+                print("les coordonnées des points où il y a eu des contacts sont",listeposcontact)
+                """
                 analyse_essai()
+                """
                 pg.quit()
 
 

@@ -92,6 +92,7 @@ def astar(labi, debut, fin,pointfait,pointot):
                 i.f=i.g+i.h                       # W* pwXU
             else:
                 i.f=(i.g+i.h)/w
+            print(i.f)
             '''
             (1/2*w)*(i.g+(2*w-1)*i.h+sqrt((i.g-i.h)*2+4*w *i.g*i.h)) W* XDP
             (1/2*w)*(i.g+i.h+sqrt((i.g+i.h)**2 +4*w*(w-1)*i.h**2)) W* XUP

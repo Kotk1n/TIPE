@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eea5ed4c-a224-47b0-9350-be25451111ef" name="Default Changelist" comment="" />
+    <list default="true" id="eea5ed4c-a224-47b0-9350-be25451111ef" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TIPE/comparaison astar.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/comparaison astar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TIPE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TIPE/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/test.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TIPE/test2.db" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/test2.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TIPE/transfoimage.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/transfoimage.py" afterDir="false" />
+    </list>
+    <list id="6aab8e10-51e5-4e7f-a602-76f67a54d727" name="Changes by teyze" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,13 +31,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.comparaison astar">
     <configuration name="astar" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -144,11 +153,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.comparaison astar" />
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.transfoimage" />
         <item itemvalue="Python.astar" />
         <item itemvalue="Python.bdd" />
-        <item itemvalue="Python.transfoimage" />
       </list>
     </recent_temporary>
   </component>
@@ -162,64 +171,6 @@
       <updated>1603124594706</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="223" y="87" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1613726079166">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="223" y="87" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1613726079166" />
-    <state x="534" y="234" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1615577721370">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="534" y="234" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.864@0.0.1536.864" timestamp="1615577721370" />
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1617206167380">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1617206167380" />
-    <state width="1514" height="243" key="GridCell.Tab.0.bottom" timestamp="1616862724975">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="243" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1616862724975" />
-    <state width="1514" height="243" key="GridCell.Tab.0.center" timestamp="1616862724975">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="243" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1616862724975" />
-    <state width="1514" height="243" key="GridCell.Tab.0.left" timestamp="1616862724975">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="243" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1616862724975" />
-    <state width="1514" height="243" key="GridCell.Tab.0.right" timestamp="1616862724975">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="243" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1616862724975" />
-    <state width="1514" height="300" key="GridCell.Tab.1.bottom" timestamp="1616756009278">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1616756009278" />
-    <state width="1514" height="300" key="GridCell.Tab.1.center" timestamp="1616756009278">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1616756009278" />
-    <state width="1514" height="300" key="GridCell.Tab.1.left" timestamp="1616756009278">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1616756009278" />
-    <state width="1514" height="300" key="GridCell.Tab.1.right" timestamp="1616756009278">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="1514" height="300" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1616756009278" />
-    <state x="277" y="77" key="SettingsEditor" timestamp="1615579626006">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1615579626006" />
-    <state width="498" height="446" key="SwitcherDM" timestamp="1613756819025">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state width="498" height="446" key="SwitcherDM/0.0.1536.864@0.0.1536.864" timestamp="1613756819025" />
-    <state x="-6" y="0" width="781" height="870" maximized="true" key="dock-window-1" timestamp="1613125092526">
-      <screen x="0" y="0" width="1536" height="864" />
-    </state>
-    <state x="-6" y="0" width="781" height="870" maximized="true" key="dock-window-1/0.0.1536.864@0.0.1536.864" timestamp="1613125092526" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

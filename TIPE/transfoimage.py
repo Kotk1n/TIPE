@@ -7,7 +7,7 @@ import numpy as np
 
 
  """
-fichierimage = "assets/hallcarré.jpg"
+fichierimage = "assets/hallcarré.png"
 imageSource = Image.open(fichierimage)
 taillepixel = 120
 
@@ -75,10 +75,11 @@ def pixelisation(image, n):
                         img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
     img = img.save("imagepixel.png")
     return (ImageP)
-"""
-lienimage="assets/hallcarré.jpg"
-(Imageshow,k)=pixelisation(imageSource,120)
+'''
+lienimage="assets/hallcarré.png"
+(Imageshow)=pixelisation(imageSource,120)
 #Imageshow = transfoimage(imageSource)
 Imageshow=Image.open("imagepixel.png")
 Imageshow.show()
-"""
+'''
+

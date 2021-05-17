@@ -1,27 +1,26 @@
 from math import *
 import time
 import sqlite3
-from transfoimage import transfoimage,pixelisation
+from transfoimage import transfoimage, pixelisation
 from PIL import Image
-
 
 fichierimage = "assets/hallcarré.png"
 imageSource = Image.open(fichierimage)
-labi=pixelisation(imageSource,120)
+labi = pixelisation(imageSource, 120)
 con = sqlite3.connect('test2.db')
 cur = con.cursor()
 
 
-
-def remisea0 ():
-
+def remisea0():
     cur.execute("delete from astar2")
     con.commit()
 
+
 remisea0()
 
-def enregistrement(version2,duree,w):
-    cur.execute("insert into astar2 values (?,?,?)",(version2,duree,w))
+
+def enregistrement(version2, duree, w):
+    cur.execute("insert into astar2 values (?,?,?)", (version2, duree, w))
     con.commit()
 
 
@@ -39,8 +38,7 @@ class Case():
         return self.position == other.position
 
 
-def astar(labi, debut, fin, pointfait, pointot, version,w):
-
+def astar(labi, debut, fin, pointfait, pointot, version, w):
     # créer début fin
     depart = Case(None, debut)
     depart.g = depart.h = depart.f = 0
@@ -90,7 +88,7 @@ def astar(labi, debut, fin, pointfait, pointot, version,w):
 
             # Vérifie que pas un obstacle
             if labi[case_pos[0]][case_pos[1]] == 0:
-                print("recherche du chemin",pointfait,"sur",pointot, "version", version, "w",w)
+                print("recherche du chemin", pointfait, "sur", pointot, "version", version, "w", w)
                 continue
 
             # crée nouveau noeud
@@ -113,8 +111,8 @@ def astar(labi, debut, fin, pointfait, pointot, version,w):
 
             if version == "XDP":
                 i.f = (1 / 2 * w) * (i.g + (2 * w - 1) * i.h + sqrt((i.g - i.h) * 2 + 4 * w * i.g * i.h))
-            elif version== "XUP":
-                i.f= (1/2*w)*(i.g+i.h+sqrt((i.g+i.h)**2 +4*w*(w-1)*i.h**2))
+            elif version == "XUP":
+                i.f = (1 / 2 * w) * (i.g + i.h + sqrt((i.g + i.h) ** 2 + 4 * w * (w - 1) * i.h ** 2))
             elif version == "PWXD":
                 if i.h > i.g:
                     i.f = i.g + i.h  # W* pwXD
@@ -128,61 +126,51 @@ def astar(labi, debut, fin, pointfait, pointot, version,w):
             '''
             (1/2*w)*(i.g+(2*w-1)*i.h+sqrt((i.g-i.h)*2+4*w*i.g*i.h)) W* XDP
             (1/2*w)*(i.g+i.h+sqrt((i.g+i.h)**2 +4*w*(w-1)*i.h**2)) W* XUP
-
             if i.h>i.g:
                 i.f=i.g+i.h                       # W* pwXD
             else:
                 i.f=(i.g+2*(w-1)*i.h)/w
-
             if i.g<(2*w-1)*i.h:
                 i.f=i.g+i.h                       # W* pwXU
             else:
                 i.f=(i.g+i.h)/w
             '''
 
-
-
-            
             for open_node in open_list:
                 if i == open_node and i.g > open_node.g:
                     continue
             if i not in open_list:
                 open_list.append(i)
+
+
 '''
 (106, 94) (6, 36)
 (105, 92) (4, 37)
 (5, 36) (106, 94)
 (6, 36) (106, 90)
 (105, 94) (3, 37)
-
-
 (8, 72) (7, 36)
 (6, 37) (8, 72)
 (8, 71) (7, 37)
 (8, 71) (6, 35)
 (9, 71) (8, 37)
-
-
-
-
-
-
 '''
-version = ["XDP","PWXD","PWXU"]
-duree=[]
+version = ["XDP", "PWXD", "PWXU"]
+duree = []
 
-listetraj =[[(8, 72) ,(7, 36)],[(6, 37) ,(8, 72)],[(8, 71) ,(7, 37)],[(8, 71), (6, 35)],[(9, 71) ,(8, 37)]]
-for k in range (1,10):
-    for j in range (len(version)):
-        for i in range (len(listetraj)):
-            t1=time.time()
+listetraj = [[(72, 74), (65, 48)], [(71, 74), (64, 49)], [(61, 51), (59, 74)], [(73, 50), (67, 73)], [(65, 48), (78, 74)]]
 
-            astar(labi,listetraj[i][0],listetraj[i][1],i,len(listetraj),version[j],k)
-            t2=time.time()
-            duree.append(t2-t1)
-            #enregistrement(version[j],t2-t1)
-        enregistrement(version[j],sum(duree)/len(duree),k)
-        duree=[]
+for k in range(1, 10):
+    for j in range(len(version)):
+        for i in range(len(listetraj)):
+            t1 = time.time()
+
+            astar(labi, listetraj[i][0], listetraj[i][1], i, len(listetraj), version[j], k)
+            t2 = time.time()
+            duree.append(t2 - t1)
+            # enregistrement(version[j],t2-t1)
+        enregistrement(version[j], sum(duree) / len(duree), k)
+        duree = []
 con.close()
 
 print("fait")

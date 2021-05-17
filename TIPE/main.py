@@ -41,6 +41,7 @@ def creerrect():
             if event.type == pg.MOUSEBUTTONUP:
                 tempo.append(pg.mouse.get_pos())
     rect = pg.Rect(tempo[0][0],tempo[0][1],tempo[1][0]-tempo[0][0],tempo[1][1]-tempo[0][1])
+
     return(rect)
 
 #regroupement des zones
@@ -160,7 +161,7 @@ while running:
         Point = []
         Zonedep = creation(nbrrect) #création des rect
 
-
+        copie=[]
         #choix des coordonnées de dep et arr parmi les rects
         for i in range(nbrpoint):
             rectdep = random.choice(Zonedep)
@@ -172,6 +173,9 @@ while running:
             x2 = random.randint(rectar[0], rectar[0] + rectar[2])
             y2 = random.randint(rectar[1], rectar[1] + rectar[3])
             Point.append(Player(x1, y1, x2, y2,taillecarre))
+            copie+=[[(Point[i].rect.x//6,Point[i].rect.y//6),(Point[i].arrivé[0]//6,Point[i].arrivé[1]//6)]]
+        print(copie)
+
         pointfait=0
         pointtot=len(Point)
         path = []

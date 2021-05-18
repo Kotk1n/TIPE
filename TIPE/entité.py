@@ -15,12 +15,11 @@ class Player(pg.sprite.Sprite):
         self.compteur = 0
         self.carré = (0,0)
         self.centre = [self.rect.x + self.taille/2,self.rect.y + self.taille/2]
-        self.actif = (False,-1,-1)
         self.tempsactivite =[-1,-1]
         self.infecte = False
         self.tempsinf = [-1,-1]
-
-
+        self.pause = [False,-1,20]
+        self.apparition= -1
     def move_right (self):
         self.rect.x += self.velocity
 

@@ -3,10 +3,17 @@
   <component name="ChangeListManager">
     <list default="true" id="eea5ed4c-a224-47b0-9350-be25451111ef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/TIPE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TIPE/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/test.db" afterDir="false" />
     </list>
     <list id="6aab8e10-51e5-4e7f-a602-76f67a54d727" name="Changes by teyze" comment="" />
+=======
+      <change beforePath="$PROJECT_DIR$/TIPE/entité.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/entité.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TIPE/grille.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/grille.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TIPE/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/TIPE/main.py" afterDir="false" />
+    </list>
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +40,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
+<<<<<<< Updated upstream
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+=======
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+>>>>>>> Stashed changes
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="astar" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -120,25 +131,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="transfoimage" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="pytest for main.testpause" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
       <module name="TIPEcirculation - Copie - Copie" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TIPE" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TIPE/transfoimage.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_parameters" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;main.testpause&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <list>
@@ -146,11 +152,12 @@
       <item itemvalue="Python.bdd" />
       <item itemvalue="Python.comparaison astar" />
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.transfoimage" />
+      <item itemvalue="Python tests.pytest for main.testpause" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python tests.pytest for main.testpause" />
         <item itemvalue="Python.comparaison astar" />
         <item itemvalue="Python.transfoimage" />
         <item itemvalue="Python.astar" />

@@ -25,7 +25,7 @@ image = pg.image.load(fichierimage)
 imagep = pg.image.load("imagepixel.png")
 
 # nombre d'individus simulés
-nbrpoint = 30
+nbrpoint = 100
 # la distance à laquelle deux individus risque une infection
 distancesecu = 30
 # la fréquence d'apparition d'individu
@@ -60,7 +60,7 @@ def creerrect():
             if event.type == pg.MOUSEBUTTONUP:
                 tempo.append(pg.mouse.get_pos())
     rect = pg.Rect(tempo[0][0], tempo[0][1], tempo[1][0] - tempo[0][0], tempo[1][1] - tempo[0][1])
-    return rect
+    return (rect)
 
 
 # (possible que c'est rect soit fait automatiquement à l'aide d'un code couleur pour l'image )
@@ -79,44 +79,45 @@ def creation_porte(n):
     for i in range(int(n)):
         Zonedep.append(creerrect())
         print("la zone de départ", i + 1, "a été créer")
-    return Zonedep
+    return (Zonedep)
 
 
 def creation_fleche(nbrefleche):
     zonefleches = []
     for k in range(int(nbrefleche)):
         print("veuillez cliquer sur le sommet haut-gauche puis bas droit de la flèche voulant être créé")
-        #récolte la position du clic au format de la fenêtre
-        clic1=prendposition()[0]
-        #transforme la position du clic au format de l'image "pixellisé"
-        point1=[clic1[0]//6,clic1[1]//6]
-        clic2=prendposition()[0]
-        point2=[clic2[0]//6,clic2[1]//6]
-        fleche=[]
-        for x in range(int(point1[0]),int(point2[0])):
-            for y in range(int(point1[1]),int(point2[1])):
-                fleche.append((x,y))
+        # récolte la position du clic au format de la fenêtre
+        clic1 = prendposition()[0]
+        # transforme la position du clic au format de l'image "pixellisé"
+        point1 = [clic1[0] // 6, clic1[1] // 6]
+        clic2 = prendposition()[0]
+        point2 = [clic2[0] // 6, clic2[1] // 6]
+        fleche = []
+        for x in range(int(point1[0]), int(point2[0])):
+            for y in range(int(point1[1]), int(point2[1])):
+                fleche.append((x, y))
         print("la fleche", k + 1, "a été créer")
-        print("Veuillez indiquer la direction de la zone fléchées(nord,nord-est,est,sud-est,sud,sud-ouest,ouest,nord-ouest")
-        direction=str(input())
+        print(
+            "Veuillez indiquer la direction de la zone fléchées(nord,nord-est,est,sud-est,sud,sud-ouest,ouest,nord-ouest")
+        direction = str(input())
         zonefleches.append([fleche, direction])
     return (zonefleches)
 
 
 def regroupement(i, j):
-    p = 0.0005
+    p = 0.8
     result = random.random()
     if result < p:
-        tempspause1 = random.randint(10, 200)
-        tempspause2 = random.randint(10, 30)
-        Point[i].pause = [True, compteur + tempspause1, compteur + tempspause1 + 20]
-        Point[j].pause = [True, compteur + tempspause1, compteur + tempspause1 + 20]
+        tempspause = random.randint(4, 40) * frequence
+        Point[i].pause = (True, compteur + tempspause)
+        Point[j].pause = (True, compteur + tempspause)
 
 
 def testpause():
     for i in range(len(Point)):
-        if compteur >= Point[i].pause[1]:
+        if compteur == Point[i].pause[1]:
             Point[i].pause[0] = False
+            actif.append(i)
 
 
 nbrrect = input("Veuillez indiquer le nombre de zones de départs à créer")
@@ -171,20 +172,17 @@ def actualisation():
             x2 = Point[actif[j]].rect.x
             y2 = Point[actif[j]].rect.y
             if alertecovid(x1, y1, x2, y2):
-                '''
                 if matricecontact[i, j] == 0:
                     listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2])
                     """
-                        enregistrement_contact(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
-                        """
+                    enregistrement_contact(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
+                    """
                 matricecontact[i, j] = 1
                 matricecontact[j, i] = 1
-                '''
-                if Point[actif[i]].etat == "infecte" or Point[actif[j]].etat == "infecte":
-                    Point[actif[i]].etat = "infecte"
-                    Point[actif[j]].etat = "infecte"
-                if Point[actif[i]].pause[2] < compteur and Point[actif[j]].pause[2] < compteur:
-                    regroupement(actif[i], actif[j])
+                if Point[actif[i]].infecte or Point[actif[j]].infecte:
+                    Point[actif[i]].infecte = True
+                    Point[actif[j]].infecte = True
+            regroupement(actif[i], actif[j])
 
 
 pressed = True
@@ -211,7 +209,7 @@ def mouvementauto(M, point):
 # boucle principal
 defrect = False
 defleche = False
-defchemin=False
+defchemin = False
 while running:
 
     if defrect == False:
@@ -224,29 +222,28 @@ while running:
         pg.display.flip()  # actualisation écran
         Point = []
         Zonedep = creation_porte(nbrrect)  # création des rect
-
         defrect = True
-        # créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
-        if defleche == False:
-            if nbrfleche == 0:
-                defleche = True
-            else:
-                zonefleches = creation_fleche(nbrfleche)
-                pg.display.flip()  # actualisation écran
-                print(zonefleches)
-                defleche = True
-        if defchemin == False:
-            # choix des coordonnées de depart et d'arrivées de chaque points parmi les rects
-            for i in range(nbrpoint):
-                rectdep = random.choice(Zonedep)
-                x1 = random.randint(rectdep[0], rectdep[0] + rectdep[2])
-                y1 = random.randint(rectdep[1], rectdep[1] + rectdep[3])
+    # créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
+    if defleche == False:
+        if nbrfleche == 0:
+            defleche = True
+        else:
+            zonefleches = creation_fleche(nbrfleche)
+            pg.display.flip()  # actualisation écran
+            print(zonefleches)
+            defleche = True
+    if defchemin == False:
+        # choix des coordonnées de depart et d'arrivées de chaque points parmi les rects
+        for i in range(nbrpoint):
+            rectdep = random.choice(Zonedep)
+            x1 = random.randint(rectdep[0], rectdep[0] + rectdep[2])
+            y1 = random.randint(rectdep[1], rectdep[1] + rectdep[3])
+            rectar = random.choice(Zonedep)
+            while rectar == rectdep:
                 rectar = random.choice(Zonedep)
-                while rectar == rectdep:
-                    rectar = random.choice(Zonedep)
-                x2 = random.randint(rectar[0], rectar[0] + rectar[2])
-                y2 = random.randint(rectar[1], rectar[1] + rectar[3])
-                Point.append(Player(x1, y1, x2, y2, taillecarre))
+            x2 = random.randint(rectar[0], rectar[0] + rectar[2])
+            y2 = random.randint(rectar[1], rectar[1] + rectar[3])
+            Point.append(Player(x1, y1, x2, y2, taillecarre))
 
         pointfait = 0
         pointtot = len(Point)
@@ -264,18 +261,10 @@ while running:
                                  (Point[i].arrivé[0] // taillecarre, Point[i].arrivé[1] // taillecarre), pointfait,
                                  pointtot, zonefleches)]
             pointfait += 1
+        # établi que la première personne est infécted
+        Point[0].actif = True
+        Point[0].infecte = True
 
-        defchemin=True
-        for i in range(len(Point)):
-            tempsapparition = random.randint(10, 500)
-            Point[i].apparition = tempsapparition
-
-        actif = []
-        actif.append(0)
-        Point[0].etat = "infecte"
-        defrect = True
-
-        # créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
 
 
 
@@ -295,11 +284,15 @@ while running:
             for j in range(len(path[i])):
                 pg.draw.circle(ecran, (255, 0, 255), (path[i][j][0] * taillecarre, path[i][j][1] * taillecarre), 2)
 
+        actif = []
+        for i in range(len(Point)):
+            if Point[i].actif == True:
+                actif.append(i)
+
         pointaretirer = []
         for i in actif:  # mouvement des points
             if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,
-                                   path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2] and \
-                    Point[i].pause[0] == False:
+                                   path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
                 mouvementauto(path[i], Point[i])
 
             elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,
@@ -309,7 +302,7 @@ while running:
             if Point[i].centre == [path[i][-1][0] * taillecarre + taillecarre / 2,
                                    path[i][-1][1] * taillecarre + taillecarre / 2]:
                 pointaretirer.append(i)
-            if Point[i].etat == "infecte":
+            if Point[i].infecte:
                 ecran.blit(Point[i].imageinf, Point[i].rect)
             else:
                 ecran.blit(Point[i].image, Point[i].rect)
@@ -317,13 +310,16 @@ while running:
 
         compteur = compteur + 1
         testpause()
-        print(compteur)
-        for i in range(len(Point)):
-            if compteur == Point[i].apparition:
-                actif.append(i)
 
+        if compteur % frequence == 0 and compteur // frequence < len(Point):
+            Point[compteur // frequence].actif = True
+            Point[compteur // frequence].tempsactivite[0] = compteur
         for i in pointaretirer:
-            actif.remove(i)
+            Point[i].actif = False
+            Point[i].tempsactivite[1] = compteur
+        for i in actif:
+            if Point[i].pause[0] == True:
+                actif.remove(i)
 
             """
             enregistrement_durée(i,Point[i].tempsactivite)
@@ -338,3 +334,9 @@ while running:
                 analyse_essai()
                 """
                 pg.quit()
+
+
+
+
+
+

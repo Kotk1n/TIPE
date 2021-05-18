@@ -160,9 +160,7 @@ def astar(labi, debut, fin,pointfait,pointot,zonefleches):
 
             indsens = sens(caseactuelle.position, i.position, zonefleches)
 
-            print(indsens)
-            print(i.f)
-            print(type(i.f))
+
             if indsens == True:
                 i.f =i.f * 0.1
             elif indsens == False:

@@ -2,8 +2,10 @@ import pygame as pg
 
 class Player(pg.sprite.Sprite):
 
-    def __init__(self,x,y,a,b,c):
+    def __init__(self, x, y, a, b, c, *groups):
 
+        super().__init__(*groups)
+        self.apparition = None
         self.velocity = 1.5
         self.taille = 10
         self.image = pg.transform.scale(pg.image.load("assets/cercle.png"),(self.taille,self.taille))
@@ -11,9 +13,9 @@ class Player(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.arrivé = (a,b)
+        self.arrive = (a, b)
         self.compteur = 0
-        self.carré = (0,0)
+        self.carre = (0, 0)
         self.centre = [self.rect.x + self.taille/2,self.rect.y + self.taille/2]
         self.actif = (False,-1,-1)
         self.tempsactivite =[-1,-1]

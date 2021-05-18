@@ -17,8 +17,9 @@ class Player(pg.sprite.Sprite):
         self.centre = [self.rect.x + self.taille/2,self.rect.y + self.taille/2]
         self.actif = (False,-1,-1)
         self.tempsactivite =[-1,-1]
-        self.infecte = False
+        self.etat = "sain"
         self.tempsinf = [-1,-1]
+        self.pause = [False,-1,-1] #pause[1] = temps de fin de pause
 
 
     def move_right (self):

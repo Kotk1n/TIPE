@@ -154,7 +154,6 @@ def alertecovid(x1, y1, x2, y2):
 # créer la matrice qui representera les intéractions entre les points . 1 si il y a eux intéraction et 0 sinon.
 matricecontact = np.zeros((nbrpoint, nbrpoint))
 
-
 # fonction qui actualise la position des individus sur la representation pygame.
 def actualisation():
     for i in range(len(Point)):
@@ -178,9 +177,9 @@ def actualisation():
                 matricecontact[i, j] = 1
                 matricecontact[j, i] = 1
                 '''
-                if Point[actif[i]].infecte or Point[actif[j]].infecte:
-                    Point[actif[i]].infecte = True
-                    Point[actif[j]].infecte = True
+                if Point[actif[i]].etat=="infecte" or Point[actif[j]].etat=="infecte":
+                    Point[actif[i]].etat = "infecte"
+                    Point[actif[j]].etat = "infecte"
                 if Point[actif[i]].pause[2]<compteur and Point[actif[j]].pause[2]<compteur:
                     regroupement(actif[i],actif[j])
 
@@ -257,7 +256,7 @@ while running:
 
         actif = []
         actif.append(0)
-        Point[0].infecte = True
+        Point[0].etat = "infecte"
         defrect = True
 
         # créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
@@ -300,7 +299,7 @@ while running:
             if Point[i].centre == [path[i][-1][0] * taillecarre + taillecarre / 2,
                                    path[i][-1][1] * taillecarre + taillecarre / 2]:
                 pointaretirer.append(i)
-            if Point[i].infecte:
+            if Point[i].etat=="infecte":
                 ecran.blit(Point[i].imageinf, Point[i].rect)
             else:
                 ecran.blit(Point[i].image, Point[i].rect)

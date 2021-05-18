@@ -24,7 +24,7 @@ image=pg.image.load(fichierimage)
 imagep=pg.image.load("imagepixel.png")
 
 #nombre d'individus simulés
-nbrpoint=50
+nbrpoint=100
 #la distance à laquelle deux individus risque une infection
 distancesecu=30
 #la fréquence d'apparition d'individu
@@ -82,17 +82,20 @@ def creation_fleche(nbrefleche):
     zonefleches = []
     for k in range(int(nbrefleche)):
         print("veuillez cliquer sur le sommet haut-gauche puis bas droit de la flèche voulant être créé")
-        point1=prendposition()
-        point2=prendposition()
+        #récolte la position du clic au format de la fenêtre
+        clic1=prendposition()[0]
+        #transforme la position du clic au format de l'image "pixellisé"
+        point1=[clic1[0]//6,clic1[1]//6]
+        clic2=prendposition()[0]
+        point2=[clic2[0]//6,clic2[1]//6]
         fleche=[]
-        print(point1)
         for x in range(int(point1[0]),int(point2[0])):
             for y in range(int(point1[1]),int(point2[1])):
                 fleche.append((x,y))
         print("la fleche", k + 1, "a été créer")
-        print("Veuillez indiquer la direction de la zone fléchées")
-        direction=int(input())
-        zonefleches.append((fleche, direction))
+        print("Veuillez indiquer la direction de la zone fléchées(nord,nord-est,est,sud-est,sud,sud-ouest,ouest,nord-ouest")
+        direction=str(input())
+        zonefleches.append([fleche, direction])
     return (zonefleches)
 
 
@@ -176,7 +179,7 @@ def actualisation():
                     if Point[actif[i]].infecte or Point[actif[j]].infecte:
                         Point[actif[i]].infecte = True
                         Point[actif[j]].infecte = True
-
+                regroupement(actif[i],actif[j])
 
 
 
@@ -212,6 +215,7 @@ def mouvementauto (M,point):
 #boucle principal
 defrect = False
 defleche = False
+defchemin=False
 while running:
 
     if defrect==False:
@@ -224,9 +228,18 @@ while running:
         pg.display.flip() #actualisation écran
         Point = []
         Zonedep = creation_porte(nbrrect) #création des rect
-
-
-        #choix des coordonnées de depart et d'arrivées de chaque points parmi les rects
+        defrect = True
+    #créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
+    if defleche==False :
+        if nbrfleche==0:
+            defleche=True
+        else:
+            zonefleches=creation_fleche(nbrfleche)
+            pg.display.flip()  # actualisation écran
+            print(zonefleches)
+            defleche=True
+    if defchemin==False:
+        # choix des coordonnées de depart et d'arrivées de chaque points parmi les rects
         for i in range(nbrpoint):
             rectdep = random.choice(Zonedep)
             x1 = random.randint(rectdep[0], rectdep[0] + rectdep[2])
@@ -236,38 +249,23 @@ while running:
                 rectar = random.choice(Zonedep)
             x2 = random.randint(rectar[0], rectar[0] + rectar[2])
             y2 = random.randint(rectar[1], rectar[1] + rectar[3])
-            Point.append(Player(x1, y1, x2, y2,taillecarre))
+            Point.append(Player(x1, y1, x2, y2, taillecarre))
 
-
-
-        pointfait=0
-        pointtot=len(Point)
+        pointfait = 0
+        pointtot = len(Point)
         path = []
         # définition du centre des points et on leur associe à tous un path grâce au A*
         for i in range(len(Point)):
             carréx = Point[i].centre[0] // taillecarre
             carréy = Point[i].centre[1] // taillecarre
             Point[i].carré = (carréx, carréy)
-            print("les coordonnées de départ du point",i+1, "sont",(Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre),"et les coordonnées du point d'arrivée sont", (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre))
-            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre), (Point[i].arrivé[0]//taillecarre,Point[i].arrivé[1]//taillecarre),pointfait,pointtot)]
-            pointfait+=1
-        #établi que la première personne est infécted
+            print("les coordonnées de départ du point", i + 1, "sont",(Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre),"et les coordonnées du point d'arrivée sont",(Point[i].arrivé[0] // taillecarre, Point[i].arrivé[1] // taillecarre))
+            path = path + [astar(labi, (Point[i].rect.x // taillecarre, Point[i].rect.y // taillecarre),(Point[i].arrivé[0] // taillecarre, Point[i].arrivé[1] // taillecarre), pointfait, pointtot,zonefleches)]
+            pointfait += 1
+        # établi que la première personne est infécted
         Point[0].actif = True
         Point[0].infecte = True
-        defrect=True
-
-
-
-    #créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
-        if defleche==False :
-            if nbrfleche==0:
-                defleche=True
-            else:
-                zonefleches=creation_fleche(nbrfleche)
-                pg.display.flip()  # actualisation écran
-                print(zonefleches)
-                defleche=True
-
+        defchemin=True
 
 
 
@@ -292,14 +290,11 @@ while running:
         for i in range(len(Point)):
             if Point[i].actif ==True:
                 actif.append(i)
-        if len(actif) == 0:
-            print(matricecontact)
-            print("les coordonnées des points où il y a eu des contacts sont",listeposcontact)
-            pg.quit()
+
 
         pointaretirer=[]
         for i in actif:                                                                 #mouvement des points
-            if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2]:
+            if Point[i].centre != [path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2] :
                 mouvementauto(path[i], Point[i])
 
             elif Point[i].centre == list((path[i][Point[i].compteur + 1][0] * taillecarre + taillecarre / 2,path[i][Point[i].compteur + 1][1] * taillecarre + taillecarre / 2)):
@@ -316,6 +311,7 @@ while running:
 
 
         compteur = compteur + 1
+        testpause()
 
 
         if compteur%frequence==0 and compteur//frequence<len(Point) :

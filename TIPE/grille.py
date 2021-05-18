@@ -13,18 +13,72 @@ class Case():
         return self.position == other.position
 #il faut transformer les blocs en les point de pixelisation .
 
-
-
+#fonction qui retourne True si l'individu se dirige dans le bon sens , False si l'individu se dirige à contre-sens , None sinon.
 def sens(caseparent,caseenfant,zonefleches):
-    for i in range(zonefleches):
-        if caseenfant in zonefleches(i)[0]:
-            direction=zonefleches(i)[1]
-            if direction==1:
-                #vérifier le format de case.
+
+    for i in range(len(zonefleches)):
+        if caseenfant in zonefleches[i][0]:
+            direction=zonefleches[i][1]
+
+            if direction=="nord":
+                if (caseenfant[0],caseenfant[1])==(caseparent[0],caseparent[1]-1):
+                    return True
+                elif caseenfant[1]==caseparent[1]+1:
+                    return False
+                else:
+                    return None
+            elif direction=="Nord-est":
+                if (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]-1):
+                    return True
+
+                elif (caseenfant[0],caseenfant[1])==(caseparent[0]-1,caseparent[1]) or (caseenfant[0],caseenfant[1])==(caseparent[0]-1,caseparent[1]+1) or (caseenfant[0],caseenfant[1])==(caseparent[0],caseparent[1]+1):
+                    return False
+                else:
+                    return None
+            elif direction=="est":
                 if (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]):
-                    sens=True
-                """..."""
-def astar(labi, debut, fin,pointfait,pointot):
+                    return(True)
+                elif caseenfant[0]==caseparent[0]-1:
+                    return (False)
+                else:return None
+            elif direction=="sud-est":
+                if (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]+1):
+                    return True
+                elif (caseenfant[0],caseenfant[1])==(caseparent[0]-1,caseparent[1]) or (caseenfant[0],caseenfant[1])==(caseparent[0]-1,caseparent[1]-1) or (caseenfant[0],caseenfant[1])==(caseparent[0],caseparent[1]-1):
+                    return False
+                else:return None
+            elif direction=="sud":
+                if (caseenfant[0],caseenfant[1])==(caseparent[0],caseparent[1]+1):
+                    return(True)
+                elif caseenfant[1]==caseparent[1]-1:
+                    return (False)
+                else: return None
+            elif direction=="sud-ouest":
+                if (caseenfant[0],caseenfant[1])==(caseparent[0]-1,caseparent[1]+1):
+                    return True
+                elif (caseenfant[0],caseenfant[1])==(caseparent[0],caseparent[1]-1) or (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]-1) or (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]):
+                    return False
+                else:
+                    return None
+            elif direction=="ouest":
+                if (caseenfant[0],caseenfant[1])==(caseparent[0]-1,caseparent[1]):
+                    return True
+                elif caseenfant[0]== caseparent[0]+1:
+                    return False
+                else: return None
+            elif direction=="nord-ouest":
+                if (caseenfant[0],caseenfant[1])==(caseparent[0]-1,caseparent[1]-1):
+                    return True
+                elif (caseenfant[0],caseenfant[1])==(caseparent[0],caseparent[1]+1) or (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]+1) or (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]):
+                    return False
+                else: return None
+            else:
+                print("problème avec la direction")
+                return None
+
+
+
+def astar(labi, debut, fin,pointfait,pointot,zonefleches):
     w=2
 
     # créer début fin
@@ -98,12 +152,24 @@ def astar(labi, debut, fin,pointfait,pointot):
             # calcul h ,f ,g
             i.g = caseactuelle.g + 1
             i.h = ((i.position[0] - arrivee.position[0]) ** 2) + ((i.position[1] - arrivee.position[1]) ** 2)
-            #i.fleche
+
             if i.g<(2*w-1)*i.h:
                 i.f=i.g+i.h                       # W* pwXU
             else:
                 i.f=(i.g+i.h)/w
+
+            indsens = sens(caseactuelle.position, i.position, zonefleches)
+
+            print(indsens)
             print(i.f)
+            print(type(i.f))
+            if indsens == True:
+                i.f =i.f * 0.1
+            elif indsens == False:
+                i.f = i.f*10
+
+
+
             '''
             (1/2*w)*(i.g+(2*w-1)*i.h+sqrt((i.g-i.h)*2+4*w *i.g*i.h)) W* XDP
             (1/2*w)*(i.g+i.h+sqrt((i.g+i.h)**2 +4*w*(w-1)*i.h**2)) W* XUP

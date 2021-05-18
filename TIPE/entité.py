@@ -19,6 +19,7 @@ class Player(pg.sprite.Sprite):
         self.tempsactivite =[-1,-1]
         self.infecte = False
         self.tempsinf = [-1,-1]
+        self.pause = (False,-1) #pause[1] = temps de fin de pause
 
 
     def move_right (self):

@@ -11,8 +11,19 @@ class Case():
 
     def __eq__(self, other):
         return self.position == other.position
+#il faut transformer les blocs en les point de pixelisation .
 
 
+
+def sens(caseparent,caseenfant,zonefleches):
+    for i in range(zonefleches):
+        if caseenfant in zonefleches(i)[0]:
+            direction=zonefleches(i)[1]
+            if direction==1:
+                #vérifier le format de case.
+                if (caseenfant[0],caseenfant[1])==(caseparent[0]+1,caseparent[1]):
+                    sens=True
+                """..."""
 def astar(labi, debut, fin,pointfait,pointot):
     w=2
 

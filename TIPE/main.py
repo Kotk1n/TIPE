@@ -62,7 +62,13 @@ def creerrect():
     rect = pg.Rect(tempo[0][0],tempo[0][1],tempo[1][0]-tempo[0][0],tempo[1][1]-tempo[0][1])
     return(rect)
 #(possible que c'est rect soit fait automatiquement à l'aide d'un code couleur pour l'image )
-
+def prendposition():
+    tempo = []
+    while len(tempo)!=1:
+        for event in pg.event.get():
+            if event.type == pg.MOUSEBUTTONDOWN:
+                tempo.append(pg.mouse.get_pos())
+    return(tempo)
 #fonction qui créer les n zones de départs duquel les individus proviennent.
 def creation_porte(n):
 
@@ -72,16 +78,26 @@ def creation_porte(n):
         print("la zone de départ",i+1,"a été créer")
     return (Zonedep)
 
-def creation_fleche(n):
-    Zonefleches = []
-    for i in range(int(n)):
-        fleche=creerrect()
-        print("la fleche", i + 1, "a été créer")
-
-        print("indiquer la direction de la zone fléchées")
+def creation_fleche(nbrefleche):
+    zonefleches = []
+    for k in range(int(nbrefleche)):
+        print("veuillez cliquer sur le sommet haut-gauche puis bas droit de la flèche voulant être créé")
+        point1=prendposition()
+        point2=prendposition()
+        fleche=[]
+        print(point1)
+        for x in range(int(point1[0]),int(point2[0])):
+            for y in range(int(point1[1]),int(point2[1])):
+                fleche.append((x,y))
+        print("la fleche", k + 1, "a été créer")
+        print("Veuillez indiquer la direction de la zone fléchées")
         direction=int(input())
-        Zonefleches.append((fleche,direction))
-    return(Zonefleches)
+        zonefleches.append((fleche, direction))
+    return (zonefleches)
+
+
+
+
 
 
 
@@ -221,6 +237,9 @@ while running:
             x2 = random.randint(rectar[0], rectar[0] + rectar[2])
             y2 = random.randint(rectar[1], rectar[1] + rectar[3])
             Point.append(Player(x1, y1, x2, y2,taillecarre))
+
+
+
         pointfait=0
         pointtot=len(Point)
         path = []
@@ -235,12 +254,19 @@ while running:
         #établi que la première personne est infécted
         Point[0].actif = True
         Point[0].infecte = True
+        defrect=True
 
 
-        defrect = True
+
     #créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
         if defleche==False :
-            Zonefleches=creation_fleche(nbrfleche)
+            if nbrfleche==0:
+                defleche=True
+            else:
+                zonefleches=creation_fleche(nbrfleche)
+                pg.display.flip()  # actualisation écran
+                print(zonefleches)
+                defleche=True
 
 
 

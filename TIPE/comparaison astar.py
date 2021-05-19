@@ -20,7 +20,7 @@ remisea0()
 
 
 def enregistrement(version2, duree, w):
-    cur.execute("insert into astar2 values (?,?,?)", (version2, duree, w))
+    cur.execute("insert into astar2 values (?,?,?,?)", (version2, duree, w,essai))
     con.commit()
 
 
@@ -38,7 +38,7 @@ class Case():
         return self.position == other.position
 
 
-def astar(labi, debut, fin, pointfait, pointot, version, w):
+def astar(labi, debut, fin, pointfait, pointot, version, w,essai):
     # créer début fin
     depart = Case(None, debut)
     depart.g = depart.h = depart.f = 0
@@ -88,7 +88,7 @@ def astar(labi, debut, fin, pointfait, pointot, version, w):
 
             # Vérifie que pas un obstacle
             if labi[case_pos[0]][case_pos[1]] == 0:
-                print("recherche du chemin", pointfait, "sur", pointot, "version", version, "w", w)
+                print("recherche du chemin", pointfait, "sur", pointot, "version", version, "w", w,"essai",essai)
                 continue
 
             # crée nouveau noeud
@@ -157,20 +157,23 @@ def astar(labi, debut, fin, pointfait, pointot, version, w):
 '''
 version = ["XDP", "PWXD", "PWXU"]
 duree = []
+listetraj1 = [[(106, 92), (4, 37)], [(105, 93), (6, 36)], [(105, 92), (3, 36)], [(104, 91), (4, 36)], [(4, 36), (105, 92)]]
+listetraj2 = [[(9, 74), (5, 36)], [(3, 72), (4, 36)], [(6, 73), (4, 39)], [(4, 36), (7, 71)], [(6, 72), (5, 39)]]
+listetraj3 = [[(72, 74), (65, 48)], [(71, 74), (64, 49)], [(61, 51), (59, 74)], [(73, 50), (67, 73)], [(65, 48), (78, 74)]]
+nbressai=20
+listetraj=listetraj1
+for essai in range(1,nbressai+1):
+    for k in range(1, 10):
+        for j in range(len(version)):
+            for i in range(len(listetraj)):
+                t1 = time.time()
 
-listetraj = [[(72, 74), (65, 48)], [(71, 74), (64, 49)], [(61, 51), (59, 74)], [(73, 50), (67, 73)], [(65, 48), (78, 74)]]
-
-for k in range(1, 10):
-    for j in range(len(version)):
-        for i in range(len(listetraj)):
-            t1 = time.time()
-
-            astar(labi, listetraj[i][0], listetraj[i][1], i, len(listetraj), version[j], k)
-            t2 = time.time()
-            duree.append(t2 - t1)
-            # enregistrement(version[j],t2-t1)
-        enregistrement(version[j], sum(duree) / len(duree), k)
-        duree = []
+                astar(labi, listetraj[i][0], listetraj[i][1], i, len(listetraj), version[j], k,essai)
+                t2 = time.time()
+                duree.append(t2 - t1)
+                # enregistrement(version[j],t2-t1)
+            enregistrement(version[j], sum(duree) / len(duree), k)
+            duree = []
 con.close()
 
 print("fait")

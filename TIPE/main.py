@@ -25,13 +25,14 @@ image = pg.image.load(fichierimage)
 imagep = pg.image.load("imagepixel.png")
 
 # nombre d'individus simulés
-nbrpoint = 10
+nbrpoint = 5
 
 # la distance à laquelle deux individus risque une infection
 distancesecu = 30
 # la fréquence d'apparition d'individu
 frequence = 50
-
+propagation = True
+probaconta = 0.05
 pg.init()  # lancement pygame
 # la taille du carré qui représente un individu
 taillecarre = 6
@@ -51,7 +52,14 @@ ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 Pointactif = []
 listeposcontact = []
 
+def infection():
+    nbreinfecte = int(nbrpoint*(15/100))
+    L=[i for i in range(nbrpoint)]
 
+    for i in range(nbreinfecte):
+        elu=random.choice(L)
+        Point[elu].etat="infecte"
+        L.remove(elu)
 # fonction qui créer des rectangles pygame à partir des cliques de la souris
 def creerrect():
     tempo = []
@@ -106,7 +114,7 @@ def creation_fleche(nbrefleche):
 
 
 def regroupement(point1, point2):
-    p = 0.0005
+    p = 0.05
     result = random.random()
     if result < p:
         tempspause1 = random.randint(10, 200)
@@ -173,7 +181,9 @@ def actualisation():
             x2 = Point[actif[j]].rect.x
             y2 = Point[actif[j]].rect.y
             if alertecovid(x1, y1, x2, y2):
-                '''
+                if Point[actif[nbr]].pause[2] < compteur and Point[actif[j]].pause[2] < compteur and matricecontact[i, j] == 0 :
+                    regroupement(actif[nbr], actif[j])
+
                 if matricecontact[i, j] == 0:
                     listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2])
                     """
@@ -181,12 +191,10 @@ def actualisation():
                         """
                 matricecontact[i, j] = 1
                 matricecontact[j, i] = 1
-                '''
-                if Point[actif[nbr]].etat == "infecte" or Point[actif[j]].etat == "infecte":
+
+                if propagation and random.random()<probaconta and compteur%80==0 and (Point[actif[nbr]].etat == "infecte" or Point[actif[j]].etat == "infecte"):
                     Point[actif[nbr]].etat = "infecte"
                     Point[actif[j]].etat = "infecte"
-                if Point[actif[nbr]].pause[2] < compteur and Point[actif[j]].pause[2] < compteur:
-                    regroupement(actif[nbr], actif[j])
 
 
 pressed = True
@@ -224,7 +232,7 @@ while running:
         pg.display.flip()  # actualisation écran
         Point = []
         Zonedep = creation_porte(nbrrect)  # création des rect
-
+        coord=[]
         defrect = True
         # créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
         if not defleche:
@@ -247,7 +255,8 @@ while running:
                 x2 = random.randint(rectar[0], rectar[0] + rectar[2])
                 y2 = random.randint(rectar[1], rectar[1] + rectar[3])
                 Point.append(Player(x1, y1, x2, y2, taillecarre))
-
+                coord.append([(x1//taillecarre, y1//taillecarre), (x2//taillecarre, y2//taillecarre)])
+            print("coord",coord)
         pointfait = 0
         pointtot = len(Point)
         path = []
@@ -267,11 +276,11 @@ while running:
 
         defchemin = True
         for i in range(len(Point)):
-            tempsapparition = random.randint(10, 500)
+            tempsapparition = random.randint(10, 60*nbrpoint)
             Point[i].apparition = tempsapparition
 
         actif = [0]
-        Point[0].etat = "infecte"
+        infection()
         defrect = True
 
         # créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.

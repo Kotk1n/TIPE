@@ -1,12 +1,19 @@
+import math
 import random
 
 import numpy as np
 import pygame as pg
 from PIL import Image
-
+import matplotlib.pyplot as plt
 from entité import Player
 from grille import astar
 from transfoimage import pixelisation
+import numpy as np
+import seaborn as sns
+import matplotlib.pylab as plt
+
+
+
 
 """
 from bdd import enregistrement_contact,enregistrement_durée,analyse_essai
@@ -25,12 +32,12 @@ image = pg.image.load(fichierimage)
 imagep = pg.image.load("imagepixel.png")
 
 # nombre d'individus simulés
-nbrpoint = 5
+nbrpoint = 400
 
 # la distance à laquelle deux individus risque une infection
 distancesecu = 30
 # la fréquence d'apparition d'individu
-frequence = 50
+frequence = 10*nbrpoint
 propagation = True
 probaconta = 0.05
 pg.init()  # lancement pygame
@@ -135,6 +142,17 @@ nbrrect = input("Veuillez indiquer le nombre de zones de départs à créer")
 remisea0()
 """
 
+def cartethermique():
+    matrice = np.zeros((ecranx//taillecarre, ecranx//taillecarre))
+    for i in range (len(listeposcontact)):
+        matrice[int(listeposcontact[i][1]//taillecarre),int(listeposcontact[i][0]//taillecarre)]+=1/len(listeposcontact)
+    plt.imshow(matrice, cmap="coolwarm", interpolation='nearest')
+    plt.show()
+
+
+
+
+
 obstacle = []
 coorddepart = []
 
@@ -176,8 +194,7 @@ def actualisation():
         # cette notation permet d'obtenir la matrice de contact telle que l'on ne calcule pas deux fois la même
         # distance et test entre pts différents
         for j in range(nbr , len(actif)):
-            print('i,j',nbr,j)
-            print("len",actif)
+
             x1 = Point[actif[nbr]].rect.x
             y1 = Point[actif[nbr]].rect.y
             x2 = Point[actif[j]].rect.x
@@ -258,7 +275,7 @@ while running:
                 y2 = random.randint(rectar[1], rectar[1] + rectar[3])
                 Point.append(Player(x1, y1, x2, y2, taillecarre))
                 coord.append([(x1//taillecarre, y1//taillecarre), (x2//taillecarre, y2//taillecarre)])
-            print("coord",coord)
+
         pointfait = 0
         pointtot = len(Point)
         path = []
@@ -278,7 +295,7 @@ while running:
 
         defchemin = True
         for i in range(len(Point)):
-            tempsapparition = random.randint(10, 60*nbrpoint)
+            tempsapparition = random.randint(10, frequence)
             Point[i].apparition = tempsapparition
 
         actif = [0]
@@ -346,3 +363,5 @@ while running:
                 analyse_essai()
                 """
                 pg.quit()
+
+cartethermique()

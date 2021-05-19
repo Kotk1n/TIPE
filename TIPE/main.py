@@ -6,6 +6,7 @@ from transfoimage import transfoimage, pixelisation
 from PIL import Image
 import random
 import numpy as np
+import math
 
 """
 from bdd import enregistrement_contact,enregistrement_durée,analyse_essai
@@ -25,7 +26,7 @@ image = pg.image.load(fichierimage)
 imagep = pg.image.load("imagepixel.png")
 
 # nombre d'individus simulés
-nbrpoint = 30
+nbrpoint = 50
 # la distance à laquelle deux individus risque une infection
 distancesecu = 30
 # la fréquence d'apparition d'individu
@@ -60,6 +61,8 @@ def creerrect():
             if event.type == pg.MOUSEBUTTONUP:
                 tempo.append(pg.mouse.get_pos())
     rect = pg.Rect(tempo[0][0], tempo[0][1], tempo[1][0] - tempo[0][0], tempo[1][1] - tempo[0][1])
+    pg.draw.rect(ecran, (255, 255, 0), rect)
+    pg.display.update(rect)
     return rect
 
 
@@ -68,18 +71,19 @@ def prendposition():
     tempo = []
     while len(tempo) != 1:
         for event in pg.event.get():
-            if event.type == pg.MOUSEBUTTONDOWN:
+            if event.type == pg.MOUSEBUTTONUP:
                 tempo.append(pg.mouse.get_pos())
     return (tempo)
 
 
 # fonction qui créer les n zones de départs duquel les individus proviennent.
 def creation_porte(n):
-    Zonedep = []
+    zonedep = []
     for i in range(int(n)):
-        Zonedep.append(creerrect())
+        zonedep.append(creerrect())
         print("la zone de départ", i + 1, "a été créer")
-    return Zonedep
+    pg.display.flip()
+    return zonedep
 
 
 def creation_fleche(nbrefleche):
@@ -92,6 +96,9 @@ def creation_fleche(nbrefleche):
         point1=[clic1[0]//6,clic1[1]//6]
         clic2=prendposition()[0]
         point2=[clic2[0]//6,clic2[1]//6]
+        rect = pg.Rect(clic1[0],clic1[1] , clic2[0] - clic1[0], clic2[1] - clic1[1])
+        pg.draw.rect(ecran,(0,100,255),rect,width=1)
+        pg.display.update()
         fleche=[]
         for x in range(int(point1[0]),int(point2[0])):
             for y in range(int(point1[1]),int(point2[1])):
@@ -101,7 +108,6 @@ def creation_fleche(nbrefleche):
         direction=str(input())
         zonefleches.append([fleche, direction])
     return (zonefleches)
-
 
 def regroupement(i, j):
     p = 0.0005
@@ -155,6 +161,7 @@ def alertecovid(x1, y1, x2, y2):
 
 # créer la matrice qui representera les intéractions entre les points . 1 si il y a eux intéraction et 0 sinon.
 matricecontact = np.zeros((nbrpoint, nbrpoint))
+matricestockage=np.zeros((nbrpoint,nbrpoint))
 
 
 # fonction qui actualise la position des individus sur la representation pygame.
@@ -162,7 +169,6 @@ def actualisation():
     for i in range(len(Point)):
         Point[i].centre[0] = Point[i].rect.x + Point[i].taille / 2
         Point[i].centre[1] = Point[i].rect.y + Point[i].taille / 2
-    print(actif)
     for i in range(len(actif)):
         # cette notation permet d'obtenir la matrice de contact telle que l'on ne calcule pas deux fois la même distance et test entre pts différents
         for j in range(i + 1, len(actif)):
@@ -171,20 +177,31 @@ def actualisation():
             x2 = Point[actif[j]].rect.x
             y2 = Point[actif[j]].rect.y
             if alertecovid(x1, y1, x2, y2):
-                '''
+                matricestockage[i,j]+=1
+                matricestockage[j,i]+=1
                 if matricecontact[i, j] == 0:
-                    listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2])
+
                     """
                         enregistrement_contact(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
                         """
-                matricecontact[i, j] = 1
-                matricecontact[j, i] = 1
-                '''
+                    matricecontact[i, j] = 1
+                    matricecontact[j, i] = 1
+
                 if Point[actif[i]].etat == "infecte" or Point[actif[j]].etat == "infecte":
                     Point[actif[i]].etat = "infecte"
                     Point[actif[j]].etat = "infecte"
                 if Point[actif[i]].pause[2] < compteur and Point[actif[j]].pause[2] < compteur:
                     regroupement(actif[i], actif[j])
+            else:
+                #obligé de prendre int à cause des approximations
+
+                poidscontact = math.floor(matricestockage[i, j])
+                if poidscontact !=0:
+                    #poidscontact est le nombre de frame durant laquel le contact a eu lieu
+
+                    matricestockage[i,j]=0.
+                    listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2,poidscontact])
+
 
 
 pressed = True
@@ -216,14 +233,14 @@ while running:
 
     if defrect == False:
         # partie calcul
-        ecran.blit(image, (0, 0))  # affichage image blanche fond
+        ecran.blit(imagep, (0, 0))  # affichage image blanche fond
         """
         for i in range(len(obstacle)):
             pg.draw.rect(ecran, (0, 0, 0),(obstacle[i][0] * taillecarre, obstacle[i][1] * taillecarre, taillecarre, taillecarre)) # affichage obstacle
         """
         pg.display.flip()  # actualisation écran
         Point = []
-        Zonedep = creation_porte(nbrrect)  # création des rect
+        zonedep = creation_porte(nbrrect)  # création des rect
 
         defrect = True
         # créer les zones fléchées sous formes de blocs rectangulaires auquels leurs sont associées une direction.
@@ -233,17 +250,17 @@ while running:
             else:
                 zonefleches = creation_fleche(nbrfleche)
                 pg.display.flip()  # actualisation écran
-                print(zonefleches)
+                print("flecheslycee=", zonefleches)
                 defleche = True
         if defchemin == False:
             # choix des coordonnées de depart et d'arrivées de chaque points parmi les rects
             for i in range(nbrpoint):
-                rectdep = random.choice(Zonedep)
+                rectdep = random.choice(zonedep)
                 x1 = random.randint(rectdep[0], rectdep[0] + rectdep[2])
                 y1 = random.randint(rectdep[1], rectdep[1] + rectdep[3])
-                rectar = random.choice(Zonedep)
+                rectar = random.choice(zonedep)
                 while rectar == rectdep:
-                    rectar = random.choice(Zonedep)
+                    rectar = random.choice(zonedep)
                 x2 = random.randint(rectar[0], rectar[0] + rectar[2])
                 y2 = random.randint(rectar[1], rectar[1] + rectar[3])
                 Point.append(Player(x1, y1, x2, y2, taillecarre))
@@ -282,10 +299,11 @@ while running:
     else:
         # partie affichage
 
-        ecran.blit(image, (0, 0))
+        ecran.blit(imagep, (0, 0))
+        for j in range (len(zonedep)):
+            pg.draw.rect(ecran, (255, 255,0),zonedep[j])
 
-        for i in range(len(Zonedep)):  # affichage Zone de départ
-            pg.draw.rect(ecran, (255, 255, 0), Zonedep[i])
+
         """
         for i in range(len(obstacle)):                                                       #affichage obstacle
             pg.draw.rect(ecran, (0, 0, 0),
@@ -317,7 +335,7 @@ while running:
 
         compteur = compteur + 1
         testpause()
-        print(compteur)
+        """print(compteur)"""
         for i in range(len(Point)):
             if compteur == Point[i].apparition:
                 actif.append(i)

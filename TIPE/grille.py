@@ -79,7 +79,7 @@ def sens(caseparent,caseenfant,zonefleches):
 
 
 def astar(labi, debut, fin,pointfait,pointot,zonefleches):
-    w=2
+    w=1
 
     # créer début fin
     depart = Case(None, debut)
@@ -153,10 +153,7 @@ def astar(labi, debut, fin,pointfait,pointot,zonefleches):
             i.g = caseactuelle.g + 1
             i.h = ((i.position[0] - arrivee.position[0]) ** 2) + ((i.position[1] - arrivee.position[1]) ** 2)
 
-            if i.g<(2*w-1)*i.h:
-                i.f=i.g+i.h                       # W* pwXU
-            else:
-                i.f=(i.g+i.h)/w
+            i.f=(1/2*w)*(i.g+(2*w-1)*i.h+sqrt((i.g-i.h)*2+4*w *i.g*i.h))
 
             indsens = sens(caseactuelle.position, i.position, zonefleches)
 

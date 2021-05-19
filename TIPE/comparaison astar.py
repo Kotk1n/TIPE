@@ -161,7 +161,7 @@ listetraj1 = [[(106, 92), (4, 37)], [(105, 93), (6, 36)], [(105, 92), (3, 36)], 
 listetraj2 = [[(9, 74), (5, 36)], [(3, 72), (4, 36)], [(6, 73), (4, 39)], [(4, 36), (7, 71)], [(6, 72), (5, 39)]]
 listetraj3 = [[(72, 74), (65, 48)], [(71, 74), (64, 49)], [(61, 51), (59, 74)], [(73, 50), (67, 73)], [(65, 48), (78, 74)]]
 nbressai=20
-listetraj=listetraj1
+listetraj=listetraj2
 for essai in range(1,nbressai+1):
     for k in range(1, 10):
         for j in range(len(version)):

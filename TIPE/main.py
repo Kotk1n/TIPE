@@ -175,22 +175,24 @@ def actualisation():
     for nbr in range(len(actif)):
         # cette notation permet d'obtenir la matrice de contact telle que l'on ne calcule pas deux fois la même
         # distance et test entre pts différents
-        for j in range(nbr + 1, len(actif)):
+        for j in range(nbr , len(actif)):
+            print('i,j',nbr,j)
+            print("len",actif)
             x1 = Point[actif[nbr]].rect.x
             y1 = Point[actif[nbr]].rect.y
             x2 = Point[actif[j]].rect.x
             y2 = Point[actif[j]].rect.y
             if alertecovid(x1, y1, x2, y2):
-                if Point[actif[nbr]].pause[2] < compteur and Point[actif[j]].pause[2] < compteur and matricecontact[i, j] == 0 :
+                if Point[actif[nbr]].pause[2] < compteur and Point[actif[j]].pause[2] < compteur  and matricecontact[nbr, j] == 0 :
                     regroupement(actif[nbr], actif[j])
 
-                if matricecontact[i, j] == 0:
+                if matricecontact[nbr, j] == 0:
                     listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2])
                     """
                         enregistrement_contact(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
                         """
-                matricecontact[i, j] = 1
-                matricecontact[j, i] = 1
+                matricecontact[nbr, j] = 1
+                matricecontact[j, nbr] = 1
 
                 if propagation and random.random()<probaconta and compteur%80==0 and (Point[actif[nbr]].etat == "infecte" or Point[actif[j]].etat == "infecte"):
                     Point[actif[nbr]].etat = "infecte"
@@ -325,7 +327,7 @@ while running:
         testpause()
         print(compteur)
         for i in range(len(Point)):
-            if compteur == Point[i].apparition:
+            if compteur == Point[i].apparition and i not in actif:
                 actif.append(i)
 
         for i in pointaretirer:

@@ -2,7 +2,7 @@ import pygame as pg
 from entité import Player
 from grille import astar
 import random
-from transfoimage import transfoimage, pixelisation
+from transfoimage import transfoimage, pixelisation,correction
 from PIL import Image
 import random
 import numpy as np
@@ -51,6 +51,9 @@ ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 Pointactif = []
 listeposcontact = []
 
+# créer la matrice qui representera les intéractions entre les points . 1 si il y a eux intéraction et 0 sinon.
+matricecontact = np.zeros((nbrpoint, nbrpoint))
+matricestockage=np.zeros((nbrpoint,nbrpoint))
 
 # fonction qui créer des rectangles pygame à partir des cliques de la souris
 def creerrect():
@@ -159,10 +162,6 @@ def alertecovid(x1, y1, x2, y2):
     return (contact)
 
 
-# créer la matrice qui representera les intéractions entre les points . 1 si il y a eux intéraction et 0 sinon.
-matricecontact = np.zeros((nbrpoint, nbrpoint))
-matricestockage=np.zeros((nbrpoint,nbrpoint))
-
 
 # fonction qui actualise la position des individus sur la representation pygame.
 def actualisation():
@@ -201,15 +200,6 @@ def actualisation():
 
                     matricestockage[i,j]=0.
                     listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2,poidscontact])
-
-
-
-pressed = True
-
-# lancement fenêtre
-running = True
-
-
 # fonction permettant le mouvement de chaque point
 def mouvementauto(M, point):
     pas = 1
@@ -224,6 +214,11 @@ def mouvementauto(M, point):
         point.rect.y += pas
     actualisation()
 
+
+
+
+# lancement fenêtre
+running = True
 
 # boucle principal
 defrect = False

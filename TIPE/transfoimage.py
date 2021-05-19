@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+import pygame as pg
 
 """ 
 
@@ -29,7 +30,20 @@ def transfoimage(imageSource):
 
 
     return (MatriceImage)
+#fonction qui à partir de la matrice representant la carte renvoi une image avec les dimensions voulu.
+def creation_image(tailleimage,taillepixel,ImageP):
+    img = Image.new('RGB', (tailleimage, tailleimage), color='white')
+    for X in range(n):
+        for Y in range(n):
+            for k in range(taillepixel):
+                for l in range(taillepixel):
+                    if ImageP[X][Y] == 0:
+                        img.putpixel((k + X * taillepixel, l + Y * taillepixel), (0, 0, 0, 255))
 
+
+                    elif ImageP[X][Y] == 1:
+                        img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
+    img = img.save("imagepixel.png")
 
 def pixelisation(image, n):
     # image, et taille des nouveaux "pixels" attention , n doit être un multiple de la taille de l'image.
@@ -62,19 +76,37 @@ def pixelisation(image, n):
                     ImageP[X][Y-1]=0
 
 
-    img = Image.new('RGB', (tailleimage, tailleimage), color='white')
-    for X in range(n):
-        for Y in range(n):
-            for k in range(taillepixel):
-                for l in range(taillepixel):
-                    if ImageP[X][Y] == 0:
-                        img.putpixel((k + X * taillepixel, l + Y * taillepixel), (0, 0, 0, 255))
 
-
-                    elif ImageP[X][Y] == 1:
-                        img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
-    img = img.save("imagepixel.png")
     return (ImageP)
+
+
+#fonction qui à partir d'une image pixellisé en 1 matrice renvoi la matrice avec les corrections voulant être apportés manuellement (obstacle,terraforming)
+def correction(ImageP):
+    image = pg.image.load("imagepixel.png")
+    running=True
+    gauche=1
+    droit=3
+    ecran = pg.display.set_mode((720,720))
+    while running:
+        ecran.blit(image, (0, 0))
+        for event in pg.event.get():
+            if event.type == pg.MOUSEBUTTONUP:
+                clic=event.button
+                pos=pg.mouse.get_pos()
+                if event.button==gauche:
+                    ImageP[pos[0]//6][pos[1]//6]=1
+                if event.button==droit:
+                    ImageP[pos[0]//6][pos[1]//6]=0
+            if event.type == pg.QUIT:
+                running = False
+    pg.quit()
+    return(ImageP)
+
+
+
+
+
+
 '''
 lienimage="assets/hallcarré.png"
 (Imageshow)=pixelisation(imageSource,120)

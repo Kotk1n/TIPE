@@ -2,7 +2,7 @@ import pygame as pg
 from entité import Player
 from grille import astar
 import random
-from transfoimage import transfoimage, pixelisation,correction
+from transfoimage import pixelisation
 from PIL import Image
 import random
 import numpy as np
@@ -19,7 +19,7 @@ fichierimage = "assets/hallcarré.png"
 # transformation de l'image au format de PIL
 imageSource = Image.open(fichierimage)
 # renvoi un tableau representant la carte avec 1 si la case est libre et 0 si la case est un obstacle
-labi = pixelisation(imageSource, 120)
+labi = pixelisation(imageSource)
 
 # transformation de l'image au format de pygame
 image = pg.image.load(fichierimage)
@@ -51,9 +51,6 @@ ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 Pointactif = []
 listeposcontact = []
 
-# créer la matrice qui representera les intéractions entre les points . 1 si il y a eux intéraction et 0 sinon.
-matricecontact = np.zeros((nbrpoint, nbrpoint))
-matricestockage=np.zeros((nbrpoint,nbrpoint))
 
 # fonction qui créer des rectangles pygame à partir des cliques de la souris
 def creerrect():
@@ -162,6 +159,10 @@ def alertecovid(x1, y1, x2, y2):
     return (contact)
 
 
+# créer la matrice qui representera les intéractions entre les points . 1 si il y a eux intéraction et 0 sinon.
+matricecontact = np.zeros((nbrpoint, nbrpoint))
+matricestockage=np.zeros((nbrpoint,nbrpoint))
+
 
 # fonction qui actualise la position des individus sur la representation pygame.
 def actualisation():
@@ -215,10 +216,10 @@ def mouvementauto(M, point):
     actualisation()
 
 
-
-
 # lancement fenêtre
 running = True
+
+
 
 # boucle principal
 defrect = False

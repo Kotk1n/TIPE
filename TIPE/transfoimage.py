@@ -8,11 +8,7 @@ import pygame as pg
 
 
  """
-fichierimage = "assets/hallcarré.png"
-imageSource = Image.open(fichierimage)
-taillepixel = 120
-
-
+#permet d'obtenir une matrice representant la carte
 def transfoimage(imageSource):
     # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     Image = imageSource.convert("L")
@@ -28,8 +24,20 @@ def transfoimage(imageSource):
             else:
                 MatriceImage[X,Y] = 0
 
-
     return (MatriceImage)
+
+#permet de transformer les zones grises en des zones de départs
+def depart(imageSource):
+    # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
+    Image = imageSource.convert("L")
+    (taille, taille) = Image.size
+    zonedep=[]
+    for X in range(taille):
+        for Y in range(taille):
+            #une zone grise sera considéré comme entrées possible.
+            if 50<Image.getpixel((X, Y))<205:
+                zonedep.append(X//6,Y//6)
+    return(zonedep)
 #fonction qui à partir de la matrice representant la carte renvoi une image avec les dimensions voulu.
 def creation_image(tailleimage,taillepixel,ImageP):
     img = Image.new('RGB', (tailleimage, tailleimage), color='white')
@@ -44,9 +52,10 @@ def creation_image(tailleimage,taillepixel,ImageP):
                     elif ImageP[X][Y] == 1:
                         img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
     img = img.save("imagepixel.png")
-
-def pixelisation(image, n):
+#à partir d'une image en 720 par 720 , renvoi une image en 720 par 720 mais qui a été pixelisé en 1 pour 6 .
+def pixelisation(image):
     # image, et taille des nouveaux "pixels" attention , n doit être un multiple de la taille de l'image.
+    n=120
     ImageP = np.zeros((n, n))
 
     # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
@@ -79,7 +88,6 @@ def pixelisation(image, n):
 
     return (ImageP)
 
-
 #fonction qui à partir d'une image pixellisé en 1 matrice renvoi la matrice avec les corrections voulant être apportés manuellement (obstacle,terraforming)
 def correction(ImageP):
     image = pg.image.load("imagepixel.png")
@@ -101,10 +109,11 @@ def correction(ImageP):
                 running = False
     pg.quit()
     return(ImageP)
-
-
-
-
+"""
+fichierimage = "assets/hallcarré.png"
+imageSource = Image.open(fichierimage)
+taillepixel = 120
+"""
 
 
 '''

@@ -116,6 +116,11 @@ taillepixel = 120
 """
 
 
+fichierimage = "hallcarré.png"
+imageSource = Image.open(fichierimage)
+
+ImageP=pixelisation(imageSource)
+correction(ImageP)
 '''
 lienimage="assets/hallcarré.png"
 (Imageshow)=pixelisation(imageSource,120)

@@ -9,7 +9,7 @@ import pygame as pg
 
  """
 #permet d'obtenir une matrice representant la carte
-def transfoimage(imageSource):
+def transfimage(imageSource):
     # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     Image = imageSource.convert("L")
     (taille, taille) = Image.size
@@ -41,6 +41,7 @@ def depart(imageSource):
 #fonction qui à partir de la matrice representant la carte renvoi une image avec les dimensions voulu.
 def creation_image(tailleimage,taillepixel,ImageP):
     img = Image.new('RGB', (tailleimage, tailleimage), color='white')
+    n=len(ImageP)
     for X in range(n):
         for Y in range(n):
             for k in range(taillepixel):
@@ -107,6 +108,7 @@ def correction(ImageP):
                     ImageP[pos[0]//6][pos[1]//6]=0
             if event.type == pg.QUIT:
                 running = False
+        pg.display.flip()
     pg.quit()
     return(ImageP)
 """
@@ -114,13 +116,6 @@ fichierimage = "assets/hallcarré.png"
 imageSource = Image.open(fichierimage)
 taillepixel = 120
 """
-
-
-fichierimage = "hallcarré.png"
-imageSource = Image.open(fichierimage)
-
-ImageP=pixelisation(imageSource)
-correction(ImageP)
 '''
 lienimage="assets/hallcarré.png"
 (Imageshow)=pixelisation(imageSource,120)
@@ -128,4 +123,3 @@ lienimage="assets/hallcarré.png"
 Imageshow=Image.open("imagepixel.png")
 Imageshow.show()
 '''
-

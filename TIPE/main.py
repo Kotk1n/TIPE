@@ -2,7 +2,7 @@ import pygame as pg
 from entité import Player
 from grille import astar
 import random
-from transfoimage import pixelisation
+from transfoimage import pixelisation,correction,creation_image
 from PIL import Image
 import random
 import numpy as np
@@ -13,7 +13,7 @@ from bdd import enregistrement_contact,enregistrement_durée,analyse_essai
 from bdd import remisea0
 """
 import sqlite3
-
+"""
 # import de la "carte"
 fichierimage = "assets/hallcarré.png"
 # transformation de l'image au format de PIL
@@ -24,7 +24,16 @@ labi = pixelisation(imageSource)
 # transformation de l'image au format de pygame
 image = pg.image.load(fichierimage)
 imagep = pg.image.load("imagepixel.png")
-
+"""
+n=0
+fichierimage = "imagepixel.png"
+imageSource = Image.open(fichierimage)
+ImageP = pixelisation(imageSource)
+while n<10:
+    ImageP=correction(ImageP)
+    creation_image(720,6,ImageP)
+    n+=1
+'''
 # nombre d'individus simulés
 nbrpoint = 50
 # la distance à laquelle deux individus risque une infection
@@ -45,8 +54,6 @@ pg.display.set_caption("Simulation épidémiologique")
 # renvoi la dimension de l'écran
 ecran = pg.display.set_mode((ecranx + taillecarre, ecranx + taillecarre))
 
-# choix image fond d'ecran
-'''imagefond = pg.image.load("assets/blanc.jpg") '''
 
 Pointactif = []
 listeposcontact = []
@@ -352,3 +359,4 @@ while running:
                 analyse_essai()
                 """
                 pg.quit()
+'''

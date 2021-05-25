@@ -9,7 +9,7 @@ import pygame as pg
 
  """
 #permet d'obtenir une matrice representant la carte
-def transfimage(imageSource):
+def transfoimage(imageSource):
     # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     Image = imageSource.convert("L")
     (taille, taille) = Image.size
@@ -53,11 +53,11 @@ def creation_image(tailleimage,taillepixel,ImageP):
                     elif ImageP[X][Y] == 1:
                         img.putpixel((k + X * taillepixel, l + Y * taillepixel), (250, 250, 250, 255))
     img = img.save("imagepixel.png")
-#à partir d'une image en 720 par 720 , renvoi une image en 720 par 720 mais qui a été pixelisé en 1 pour 6 .
+#à partir d'une image en 720 par 720 , renvoi une matrice en 120 par 120.
 def pixelisation(image):
     # image, et taille des nouveaux "pixels" attention , n doit être un multiple de la taille de l'image.
     n=120
-    ImageP = np.zeros((n, n))
+    ImageP = [[0 for i in range(120)]for i in range(120)]
 
     # on prend l'image est on la convertie dans un système de couleur 8 bits adapté à pillow
     image = image.convert("L")

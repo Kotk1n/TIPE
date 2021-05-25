@@ -1,4 +1,5 @@
 from math import *
+import time
 class Case():
 
     def __init__(self, parent=None, position=None):
@@ -79,6 +80,7 @@ def sens(caseparent,caseenfant,zonefleches):
 
 
 def astar(labi, debut, fin,pointfait,pointot,zonefleches):
+    print(debut, fin)
     w=2
 
     # créer début fin
@@ -96,6 +98,7 @@ def astar(labi, debut, fin,pointfait,pointot,zonefleches):
 
 #Boucle jusque case d'arrivée
     while len(open_list) > 0:
+
 
 
         caseactuelle = open_list[0]
@@ -153,18 +156,15 @@ def astar(labi, debut, fin,pointfait,pointot,zonefleches):
             i.g = caseactuelle.g + 1
             i.h = ((i.position[0] - arrivee.position[0]) ** 2) + ((i.position[1] - arrivee.position[1]) ** 2)
 
-            if i.g<(2*w-1)*i.h:
-                i.f=i.g+i.h                       # W* pwXU
-            else:
-                i.f=(i.g+i.h)/w
+            i.f=(1/2*w)*(i.g+(2*w-1)*i.h+sqrt((i.g-i.h)*2+4*w *i.g*i.h)) #W* XDP
 
             indsens = sens(caseactuelle.position, i.position, zonefleches)
 
 
             if indsens == True:
-                i.f =i.f * 0.5
+                i.f =i.f
             elif indsens == False:
-                i.f = i.f*2
+                i.f = i.f
 
 
 

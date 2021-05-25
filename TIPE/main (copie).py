@@ -211,7 +211,30 @@ def actualisation():
             x2 = Point[actif[j]].rect.x
             y2 = Point[actif[j]].rect.y
             if alertecovid(x1, y1, x2, y2):
-                listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2,1])
+                matricestockage[i,j]+=1
+                matricestockage[j,i]+=1
+                if matricecontact[i, j] == 0:
+
+                    """
+                        enregistrement_contact(compteur,i,j,(x1+x2)/2,(y1+y2)/2)
+                        """
+                    matricecontact[i, j] = 1
+                    matricecontact[j, i] = 1
+
+                if Point[actif[i]].etat == "infecte" or Point[actif[j]].etat == "infecte":
+                    Point[actif[i]].etat = "infecte"
+                    Point[actif[j]].etat = "infecte"
+                if Point[actif[i]].pause[2] < compteur and Point[actif[j]].pause[2] < compteur:
+                    regroupement(actif[i], actif[j])
+            else:
+                #obligé de prendre int à cause des approximations
+
+                poidscontact = math.floor(matricestockage[i, j])
+                if poidscontact !=0:
+                    #poidscontact est le nombre de frame durant laquel le contact a eu lieu
+
+                    matricestockage[i,j]=0.
+                    listeposcontact.append([(x1 + x2) / 2, (y1 + y2) / 2,poidscontact])
 # fonction permettant le mouvement de chaque point
 def mouvementauto(M, point):
     pas = 1
@@ -341,7 +364,7 @@ while running:
         pg.display.flip()
 
         compteur = compteur + 1
-
+        testpause()
         """print(compteur)"""
         for i in range(len(Point)):
             if compteur == Point[i].apparition:
